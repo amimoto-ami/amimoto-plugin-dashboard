@@ -6,6 +6,7 @@
  *
  * @author hideokamoto <hide.okamoto@digitalcube.jp>
  * @package Amimoto-plugin-dashboard
+ * @since 0.0.1
  */
 class Amimoto_Dash_Admin extends Amimoto_Dash_Component {
 	private static $instance;
@@ -21,6 +22,13 @@ class Amimoto_Dash_Admin extends Amimoto_Dash_Component {
 		self::$text_domain = Amimoto_Dash_Base::text_domain();
 	}
 
+	/**
+	 * Get Instance Class
+	 *
+	 * @return Amimoto_Dash_Admin
+	 * @since 0.0.1
+	 * @access public
+	 */
 	public static function get_instance() {
 		if ( ! isset( self::$instance ) ) {
 			$c = __CLASS__;
@@ -38,6 +46,7 @@ class Amimoto_Dash_Admin extends Amimoto_Dash_Component {
 	 * @access private
 	 * @param none
 	 * @return array
+	 * @since 0.0.1
 	 */
 	private function _get_activated_plugin_list() {
 		$active_plugin_urls = get_option('active_plugins');
@@ -58,6 +67,7 @@ class Amimoto_Dash_Admin extends Amimoto_Dash_Component {
 	 * @access private
 	 * @param none
 	 * @return array
+	 * @since 0.0.1
 	 */
 	private function _get_amimoto_plugin_list() {
 		foreach ( $this->amimoto_plugins as $plugin_name => $plugin_url ) {
@@ -77,6 +87,7 @@ class Amimoto_Dash_Admin extends Amimoto_Dash_Component {
 	 * @access private
 	 * @param none
 	 * @return string(HTML)
+	 * @since 0.0.1
 	 */
 	private function _get_amimoto_plugin_html() {
 		$html = '';
@@ -113,6 +124,7 @@ class Amimoto_Dash_Admin extends Amimoto_Dash_Component {
 	 * @access public
 	 * @param none
 	 * @return none
+	 * @since 0.0.1
 	 */
 	public function init_panel() {
 		$this->show_panel_html();
@@ -124,6 +136,7 @@ class Amimoto_Dash_Admin extends Amimoto_Dash_Component {
 	 * @access public
 	 * @param none
 	 * @return string(HTML)
+	 * @since 0.0.1
 	 */
 	public function get_content_html() {
 		$html = '';

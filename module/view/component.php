@@ -1,4 +1,13 @@
 <?php
+/**
+ * Amimoto_Dash_Component
+ *
+ * Define AMMIMOTO Dashboard plugin's common comnponents
+ *
+ * @author hideokamoto <hide.okamoto@digitalcube.jp>
+ * @package Amimoto-plugin-dashboard
+ * @since 0.0.1
+ */
 class Amimoto_Dash_Component extends Amimoto_Dash_Base {
 	private static $instance;
 	private static $text_domain;
@@ -7,6 +16,13 @@ class Amimoto_Dash_Component extends Amimoto_Dash_Base {
 		self::$text_domain = Amimoto_Dash_Base::text_domain();
 	}
 
+	/**
+	 * Get Instance Class
+	 *
+	 * @return Amimoto_Dash_Component
+	 * @since 0.0.1
+	 * @access public
+	 */
 	public static function get_instance() {
 		if ( ! isset( self::$instance ) ) {
 			$c = __CLASS__;
@@ -15,13 +31,28 @@ class Amimoto_Dash_Component extends Amimoto_Dash_Base {
 		return self::$instance;
 	}
 
+	/**
+	 *  Show AMIMOTO Dashboard Plugin admin page html
+	 *
+	 * @access public
+	 * @param none
+	 * @since 0.0.1
+	 */
 	public function show_panel_html() {
 		$content = $this->get_content_html();
 		$html = $this->get_layout_html( $content );
 		echo $html;
 	}
 
-	public function get_header() {
+	/**
+	 *  Create AMIMOTO Dashboard Plugin's admin page header
+	 *
+	 * @access private
+	 * @param none
+	 * @return string(HTML)
+	 * @since 0.0.1
+	 */
+	private function _get_header() {
 		$html  = "<header>";
 		$html .= '<h1>' . __( 'AMIMOTO Plugin Dashboard', self::$text_domain ) . '</h1>';
 		$html .= '<hr/>';
@@ -29,9 +60,17 @@ class Amimoto_Dash_Component extends Amimoto_Dash_Base {
 		return $html;
 	}
 
+	/**
+	 *  Create AMIMOTO Dashboard Plugin's admin page html
+	 *
+	 * @access public
+	 * @param none
+	 * @return string(HTML)
+	 * @since 0.0.1
+	 */
 	public function get_layout_html( $content ) {
 		$html  = "<div class='wrap'>";
-		$html .= $this->get_header();
+		$html .= $this->_get_header();
 		$html .= '<h2>'. get_admin_page_title(). '</h2>';
 		$html .= $content;
 		//$html .= '</div>';

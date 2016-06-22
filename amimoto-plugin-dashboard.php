@@ -19,6 +19,15 @@ require_once( 'module/includes.php' );
  $Amimoto_Dash = Amimoto_Dash::get_instance();
  $Amimoto_Dash->init();
 
+ /**
+  * Amimoto_Dash
+  *
+  * Root Class of this plugin
+  *
+  * @author hideokamoto <hide.okamoto@digitalcube.jp>
+  * @package Amimoto-plugin-dashboard
+  * @since 0.0.1
+  */
 class Amimoto_Dash {
 	private $Base;
 	private static $instance;
@@ -27,6 +36,13 @@ class Amimoto_Dash {
 	private function __construct() {
 	}
 
+	/**
+	 * Get Instance Class
+	 *
+	 * @return Amimoto_Dash
+	 * @since 0.0.1
+	 * @access public
+	 */
 	public static function get_instance() {
 		if ( ! isset( self::$instance ) ) {
 			$c = __CLASS__;
@@ -35,6 +51,14 @@ class Amimoto_Dash {
 		return self::$instance;
 	}
 
+	/**
+	 *  Initialize Plugin
+	 *
+	 * @access public
+	 * @param none
+	 * @return none
+	 * @since 0.0.1
+	 */
 	public function init() {
 		$this->Base = Amimoto_Dash_Base::get_instance();
 		$Menu = Amimoto_Dash_Menus::get_instance();

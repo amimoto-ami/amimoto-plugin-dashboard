@@ -1,4 +1,13 @@
 <?php
+/**
+ * Amimoto_Dash_Menus
+ *
+ * Define AMMIMOTO Dashboard plugin's admin page menus
+ *
+ * @author hideokamoto <hide.okamoto@digitalcube.jp>
+ * @package Amimoto-plugin-dashboard
+ * @since 0.0.1
+ */
 class Amimoto_Dash_Menus extends Amimoto_Dash_Base {
 	private static $instance;
 	private static $text_domain;
@@ -13,6 +22,13 @@ class Amimoto_Dash_Menus extends Amimoto_Dash_Base {
 		'nephila-clavata',
 	);
 
+	/**
+	 * Get Instance Class
+	 *
+	 * @return Amimoto_Dash_Menus
+	 * @since 0.0.1
+	 * @access public
+	 */
 	public static function get_instance() {
 		if ( ! isset( self::$instance ) ) {
 			$c = __CLASS__;
@@ -20,16 +36,38 @@ class Amimoto_Dash_Menus extends Amimoto_Dash_Base {
 		}
 		return self::$instance;
 	}
+
+	/**
+	 *  Init plugin menu.
+	 *
+	 * @access public
+	 * @param none
+	 * @since 0.0.1
+	 */
 	public function init() {
-		add_action( 'admin_menu',    array( $this, 'define_menus' ) );
+		add_action( 'admin_menu', array( $this, 'define_menus' ) );
 		add_action( 'admin_bar_init', array( $this, 'remove_menus' ) );
 	}
 
+	/**
+	 *  Remove AMIMOTO's plugin default menus controller
+	 *
+	 * @access public
+	 * @param none
+	 * @since 0.0.1
+	 */
 	public function remove_menus() {
 		$this->_remove_top_menu();
 		$this->_remove_submenu();
 	}
 
+	/**
+	 *  Remove AMIMOTO's plugin default submenu
+	 *
+	 * @access private
+	 * @param none
+	 * @since 0.0.1
+	 */
 	private function _remove_submenu() {
 		global $submenu;
 		foreach ( $submenu['options-general.php'] as $key => $array ) {
@@ -42,6 +80,13 @@ class Amimoto_Dash_Menus extends Amimoto_Dash_Base {
 		}
 	}
 
+	/**
+	 *  Remove AMIMOTO's plugin default menu
+	 *
+	 * @access private
+	 * @param none
+	 * @since 0.0.1
+	 */
 	private function _remove_top_menu() {
 		global $menu;
 		foreach ( $menu as $key => $array ) {
@@ -54,6 +99,13 @@ class Amimoto_Dash_Menus extends Amimoto_Dash_Base {
 		}
 	}
 
+	/**
+	 *  Define AMIMOTO Dashboard plugin menus
+	 *
+	 * @access public
+	 * @param none
+	 * @since 0.0.1
+	 */
 	public function define_menus() {
 		$Base = Amimoto_Dash_Admin::get_instance();
 		add_menu_page(

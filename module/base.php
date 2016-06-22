@@ -1,4 +1,13 @@
 <?php
+/**
+ * Amimoto_Dash_Base
+ *
+ * Define AMMIMOTO Dashboard plugin's basic function and parameters
+ *
+ * @author hideokamoto <hide.okamoto@digitalcube.jp>
+ * @package Amimoto-plugin-dashboard
+ * @since 0.0.1
+ */
 class Amimoto_Dash_Base {
 	private static $instance;
 	private static $text_domain;
@@ -7,7 +16,6 @@ class Amimoto_Dash_Base {
 	//Panel key
 	const PANEL_ROOT = 'amimoto_dash_root';
 
-
 	// Action key
 	const PLUGIN_SETTING = 'amimoto_setting';
 	const PLUGIN_ACTIVATION = 'amimoto_activation';
@@ -15,6 +23,13 @@ class Amimoto_Dash_Base {
 	private function __construct() {
 	}
 
+	/**
+	 * Get Instance Class
+	 *
+	 * @return Amimoto_Dash_Base
+	 * @since 0.0.1
+	 * @access public
+	 */
 	public static function get_instance() {
 		if ( ! isset( self::$instance ) ) {
 			$c = __CLASS__;
@@ -23,6 +38,12 @@ class Amimoto_Dash_Base {
 		return self::$instance;
 	}
 
+	/**
+	 * Get Plugin version
+	 *
+	 * @return string
+	 * @since 0.1.0
+	 */
 	public static function version() {
 		static $version;
 
@@ -33,6 +54,12 @@ class Amimoto_Dash_Base {
 		return $version;
 	}
 
+	/**
+	 * Get Plugin text_domain
+	 *
+	 * @return string
+	 * @since 0.1.0
+	 */
 	public static function text_domain() {
 		static $text_domain;
 
