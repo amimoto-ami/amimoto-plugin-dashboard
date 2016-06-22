@@ -24,7 +24,7 @@ class Amimoto_Dash_Admin extends Amimoto_Dash_Component {
 		'C3 Cloudfront Cache Controller' => 'c3-cloudfront-clear-cache/c3-cloudfront-clear-cache.php',
 		'Nephila clavata' => 'nephila-clavata/plugin.php',
 		'Nginx Cache Controller on GitHub' => 'nginx-cache-controller/nginx-champuru.php',
-		'Nginx Cache Controller on WP.org' => 'nginx-champuru/nginx-champuru.php'
+		'Nginx Cache Controller on WP.org' => 'nginx-champuru/nginx-champuru.php',
 	);
 
 	private function __construct() {
@@ -58,7 +58,7 @@ class Amimoto_Dash_Admin extends Amimoto_Dash_Component {
 	 * @since 0.0.1
 	 */
 	private function _get_activated_plugin_list() {
-		$active_plugin_urls = get_option('active_plugins');
+		$active_plugin_urls = get_option( 'active_plugins' );
 		foreach ( $active_plugin_urls as $plugin_url ) {
 			if ( ! array_search( $plugin_url , $this->amimoto_plugins ) ) {
 				continue;
@@ -81,8 +81,8 @@ class Amimoto_Dash_Admin extends Amimoto_Dash_Component {
 	private function _get_amimoto_plugin_list() {
 		foreach ( $this->amimoto_plugins as $plugin_name => $plugin_url ) {
 			$plugin_file_path = path_join( ABSPATH . 'wp-content/plugins', $plugin_url );
-			if( ! file_exists( $plugin_file_path ) ) {
-				unset($this->amimoto_plugins[ $plugin_name ] );
+			if ( ! file_exists( $plugin_file_path ) ) {
+				unset( $this->amimoto_plugins[ $plugin_name ] );
 				continue;
 			}
 			$plugins[ $plugin_url ] = get_plugin_data( $plugin_file_path, false );

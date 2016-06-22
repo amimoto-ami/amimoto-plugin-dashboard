@@ -12,24 +12,24 @@
  */
 
 require_once( 'module/includes.php' );
- define( 'AMI_DASH_PATH', plugin_dir_path( __FILE__ ) );
- define( 'AMI_DASH_URL', plugin_dir_url( __FILE__ ) );
- define( 'AMI_DASH_ROOT', __FILE__ );
+define( 'AMI_DASH_PATH', plugin_dir_path( __FILE__ ) );
+define( 'AMI_DASH_URL', plugin_dir_url( __FILE__ ) );
+define( 'AMI_DASH_ROOT', __FILE__ );
 
- $Amimoto_Dash = Amimoto_Dash::get_instance();
- $Amimoto_Dash->init();
+$amimoto_dash = Amimoto_Dash::get_instance();
+$amimoto_dash->init();
 
- /**
-  * Amimoto_Dash
-  *
-  * Root Class of this plugin
-  *
-  * @author hideokamoto <hide.okamoto@digitalcube.jp>
-  * @package Amimoto-plugin-dashboard
-  * @since 0.0.1
-  */
+/**
+ * Amimoto_Dash
+ *
+ * Root Class of this plugin
+ *
+ * @author hideokamoto <hide.okamoto@digitalcube.jp>
+ * @package Amimoto-plugin-dashboard
+ * @since 0.0.1
+ */
 class Amimoto_Dash {
-	private $Base;
+	private $base;
 	private static $instance;
 	private static $text_domain;
 
@@ -60,8 +60,8 @@ class Amimoto_Dash {
 	 * @since 0.0.1
 	 */
 	public function init() {
-		$this->Base = Amimoto_Dash_Base::get_instance();
-		$Menu = Amimoto_Dash_Menus::get_instance();
-		$Menu->init();
+		$this->base = Amimoto_Dash_Base::get_instance();
+		$menu = Amimoto_Dash_Menus::get_instance();
+		$menu->init();
 	}
 }

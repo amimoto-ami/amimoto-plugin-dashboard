@@ -78,5 +78,4 @@ class Amimoto_Dash_Base {
 		}
 		return $text_domain;
 	}
-
 }

@@ -81,8 +81,8 @@ class Amimoto_Dash_Menus extends Amimoto_Dash_Base {
 		global $submenu;
 		foreach ( $submenu['options-general.php'] as $key => $array ) {
 			foreach ( $this->amimoto_plugin_submenu as $plugin ) {
-				if( array_search( $plugin, $array ) ) {
-					unset($submenu['options-general.php'][ $key ] );
+				if ( array_search( $plugin, $array ) ) {
+					unset( $submenu['options-general.php'][ $key ] );
 					break;
 				}
 			}
@@ -100,8 +100,8 @@ class Amimoto_Dash_Menus extends Amimoto_Dash_Base {
 		global $menu;
 		foreach ( $menu as $key => $array ) {
 			foreach ( $this->amimoto_plugin_menu as $plugin ) {
-				if( array_search( $plugin, $array ) ) {
-					unset($menu[ $key ] );
+				if ( array_search( $plugin, $array ) ) {
+					unset( $menu[ $key ] );
 					break;
 				}
 			}
@@ -116,16 +116,15 @@ class Amimoto_Dash_Menus extends Amimoto_Dash_Base {
 	 * @since 0.0.1
 	 */
 	public function define_menus() {
-		$Base = Amimoto_Dash_Admin::get_instance();
+		$base = Amimoto_Dash_Admin::get_instance();
 		add_menu_page(
 			__( 'Welcome to AMIMOTO Plugin Dashboard', self::$text_domain ),
 			__( 'AMIMOTO', self::$text_domain ),
 			'administrator',
 			self::PANEL_ROOT,
-			array( $Base, 'init_panel' ),
+			array( $base, 'init_panel' ),
 			'dashicons-admin-settings',
 			3
 		);
 	}
-
 }
