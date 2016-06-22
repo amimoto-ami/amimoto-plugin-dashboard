@@ -7,6 +7,11 @@ class Amimoto_Dash_Base {
 	//Panel key
 	const PANEL_ROOT = 'amimoto_dash_root';
 
+
+	// Action key
+	const PLUGIN_SETTING = 'amimoto_setting';
+	const PLUGIN_ACTIVATION = 'amimoto_activation';
+
 	private function __construct() {
 	}
 

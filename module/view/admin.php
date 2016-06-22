@@ -66,9 +66,45 @@ class Amimoto_Dash_Admin extends Amimoto_Dash_Component {
 				unset($this->amimoto_plugins[ $plugin_name ] );
 				continue;
 			}
-			$plugins[] = get_plugin_data( $plugin_file_path, false );
+			$plugins[ $plugin_url ] = get_plugin_data( $plugin_file_path, false );
 		}
 		return $plugins;
+	}
+
+	/**
+	 *  Create AMIMOTO Plugin List HTML
+	 *
+	 * @access private
+	 * @param none
+	 * @return string(HTML)
+	 */
+	private function _get_amimoto_plugin_html() {
+		$html = '';
+		$plugins = $this->_get_amimoto_plugin_list();
+		$active_plugin_urls = $this->_get_activated_plugin_list();
+		$html .= "<table class='wp-list-table widefat plugins'>";
+		$html .= '<tbody>';
+		foreach ( $plugins as $plugin_url => $plugin ) {
+			$action = $plugin['TextDomain'];
+			if ( array_search( $plugin_url, $active_plugin_urls ) !== false ) {
+				$stat = 'active';
+				$btn_text = __( 'Setting Plugin' , self::$text_domain );
+				$nonce = self::PLUGIN_SETTING;
+			} else {
+				$stat = 'inactive';
+				$btn_text = __( 'Activate Plugin' , self::$text_domain );
+				$nonce = self::PLUGIN_ACTIVATION;
+			}
+			$html .= "<tr class={$stat}><td>";
+			$html .= "<h2>{$plugin['Name']}</h2>";
+			$html .= "<p>{$plugin['Description']}</p>";
+			$html .= "<form method='post' action='{$action}'>";
+			$html .= get_submit_button( $btn_text );
+			$html .= wp_nonce_field( $nonce , $nonce , true , false );
+			$html .= '</form></td></tr>';
+		}
+		$html .= '</tbody></table>';
+		return $html;
 	}
 
 	/**
@@ -90,8 +126,8 @@ class Amimoto_Dash_Admin extends Amimoto_Dash_Component {
 	 * @return string(HTML)
 	 */
 	public function get_content_html() {
-		$html = "hoge";
-		$plugins = $this->_get_amimoto_plugin_list();
+		$html = '';
+		$html .= $this->_get_amimoto_plugin_html();
 		$activate_plugins = $this->_get_activated_plugin_list();
 		return $html;
 	}
