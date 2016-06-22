@@ -126,5 +126,35 @@ class Amimoto_Dash_Menus extends Amimoto_Dash_Base {
 			'dashicons-admin-settings',
 			3
 		);
+
+		$c3 = Amimoto_Dash_Cloudfront::get_instance();
+		add_submenu_page(
+			self::PANEL_ROOT,
+			__( 'C3 Cloudfront Cache Controller', self::$text_domain ),
+			__( 'CloudFront', self::$text_domain ),
+			'administrator',
+			self::PANEL_C3,
+			array( $c3, 'init_panel' )
+		);
+
+		$s3 = Amimoto_Dash_S3::get_instance();
+		add_submenu_page(
+			self::PANEL_ROOT,
+			__( 'Nephila clavata', self::$text_domain ),
+			__( 'Amazon S3', self::$text_domain ),
+			'administrator',
+			self::PANEL_S3,
+			array( $s3, 'init_panel' )
+		);
+
+		$ncc = Amimoto_Dash_Ncc::get_instance();
+		add_submenu_page(
+			self::PANEL_ROOT,
+			__( 'Nginx Cache Controller', self::$text_domain ),
+			__( 'Nginx Reverse Proxy', self::$text_domain ),
+			'administrator',
+			self::PANEL_NCC,
+			array( $ncc, 'init_panel' )
+		);
 	}
 }

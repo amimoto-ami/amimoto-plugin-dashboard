@@ -47,7 +47,7 @@ class Amimoto_Dash_Ncc extends Amimoto_Dash_Component {
 	 * @return none
 	 * @since 0.0.1
 	 */
-	public function ncc_panel() {
+	public function init_panel() {
 		$this->show_panel_html();
 	}
 
