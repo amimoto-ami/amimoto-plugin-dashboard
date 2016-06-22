@@ -1,8 +1,6 @@
 <?php
 /**
- * Amimoto_Dash_Admin
- *
- * Amimoto Plugin Dashboard admin page scripts
+ * Amimoto_Dash_Admin Class file
  *
  * @author hideokamoto <hide.okamoto@digitalcube.jp>
  * @package Amimoto-plugin-dashboard
@@ -13,6 +11,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
+/**
+ * Amimoto Plugin Dashboard admin page scripts
+ *
+ * @classA mimoto_Dash_Admin
+ * @since 0.0.1
+ */
 class Amimoto_Dash_Admin extends Amimoto_Dash_Component {
 	private static $instance;
 	private static $text_domain;

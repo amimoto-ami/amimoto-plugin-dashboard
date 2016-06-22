@@ -2,8 +2,6 @@
 /**
  * Amimoto_Dash_Menus
  *
- * Define AMMIMOTO Dashboard plugin's admin page menus
- *
  * @author hideokamoto <hide.okamoto@digitalcube.jp>
  * @package Amimoto-plugin-dashboard
  * @since 0.0.1
@@ -13,6 +11,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
+/**
+ * Define AMMIMOTO Dashboard plugin's admin page menus
+ *
+ * @class Amimoto_Dash_Menus
+ * @since 0.0.1
+ */
 class Amimoto_Dash_Menus extends Amimoto_Dash_Base {
 	private static $instance;
 	private static $text_domain;

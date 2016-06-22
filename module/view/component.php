@@ -1,8 +1,6 @@
 <?php
 /**
- * Amimoto_Dash_Component
- *
- * Define AMMIMOTO Dashboard plugin's common comnponents
+ * Amimoto_Dash_Component Class file
  *
  * @author hideokamoto <hide.okamoto@digitalcube.jp>
  * @package Amimoto-plugin-dashboard
@@ -13,6 +11,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
+/**
+ * Define AMMIMOTO Dashboard plugin's common comnponents
+ *
+ * @class Amimoto_Dash_Component
+ * @since 0.0.1
+ */
 class Amimoto_Dash_Component extends Amimoto_Dash_Base {
 	private static $instance;
 	private static $text_domain;
