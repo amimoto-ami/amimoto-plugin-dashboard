@@ -4,6 +4,9 @@ class Amimoto_Dash_Base {
 	private static $text_domain;
 	private static $version;
 
+	//Panel key
+	const PANEL_ROOT = 'amimoto_dash_root';
+
 	private function __construct() {
 	}
 
