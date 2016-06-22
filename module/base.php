@@ -8,6 +8,11 @@
  * @package Amimoto-plugin-dashboard
  * @since 0.0.1
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
+
 class Amimoto_Dash_Base {
 	private static $instance;
 	private static $text_domain;
