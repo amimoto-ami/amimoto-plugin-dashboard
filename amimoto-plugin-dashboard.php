@@ -10,3 +10,8 @@
  * Domain Path: /languages
  * @package Amimoto-plugin-dashboard
  */
+
+require_once( 'includes.php' );
+ define( 'AMI_DASH_PATH', plugin_dir_path( __FILE__ ) );
+ define( 'AMI_DASH_URL', plugin_dir_url( __FILE__ ) );
+ define( 'AMI_DASH_ROOT', __FILE__ );
