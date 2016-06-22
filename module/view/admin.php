@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Amimoto Plugin Dashboard admin page scripts
  *
- * @classA mimoto_Dash_Admin
+ * @class Amimoto_Dash_Admin
  * @since 0.0.1
  */
 class Amimoto_Dash_Admin extends Amimoto_Dash_Component {
