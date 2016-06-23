@@ -32,6 +32,8 @@ class Amimoto_Dash_Base {
 	const PLUGIN_SETTING = 'amimoto_setting';
 	const PLUGIN_ACTIVATION = 'amimoto_activation';
 	const PLUGIN_DEACTIVATION = 'amimoto_deactivation';
+	const CLOUDFRONT_SETTINGS = 'amimoto_cf_setting';
+	const CLOUDFRONT_INVALIDATION = 'amimoto_cf_invalidation';
 
 	private function __construct() {
 	}
