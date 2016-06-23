@@ -153,7 +153,7 @@ class Amimoto_Dash_Admin extends Amimoto_Dash_Component {
 		$html  = '';
 		foreach ( $this->amimoto_uninstalled_plugins as $plugin_name => $plugin_url ) {
 			if ( 'Nginx Cache Controller on WP.org' == $plugin_name ) {
-				if ( $this->is_activated_ncc() ) {
+				if ( $this->is_exists_ncc() ) {
 					continue;
 				}
 				$plugin_name = 'Nginx Cache Controller';

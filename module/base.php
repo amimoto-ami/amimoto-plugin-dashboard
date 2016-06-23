@@ -130,4 +130,20 @@ class Amimoto_Dash_Base {
 		}
 		return false;
 	}
+
+	/**
+	 * Check is Nginx Cache Controller file exists
+	 *
+	 * @return boolean
+	 * @since 0.0.1
+	 * @access public
+	 */
+	public function is_exists_ncc() {
+		$amimoto_plugins = $this->get_amimoto_plugin_file_list();
+		if ( file_exists( path_join( ABSPATH . 'wp-content/plugins', $amimoto_plugins['Nginx Cache Controller on GitHub'] ) ) ||
+			 file_exists( path_join( ABSPATH . 'wp-content/plugins', $amimoto_plugins['Nginx Cache Controller on WP.org'] ) ) ) {
+			return true;
+		}
+		return false;
+	}
 }
