@@ -82,4 +82,32 @@ class Amimoto_Dash_Base {
 		}
 		return $text_domain;
 	}
+
+	/**
+	 * Get AMIMOTO plugin file path list
+	 *
+	 * @return array
+	 * @since 0.0.1
+	 * @access public
+	 */
+	public function get_amimoto_plugin_file_list() {
+		$amimoto_plugins = array(
+			'C3 Cloudfront Cache Controller' => 'c3-cloudfront-clear-cache/c3-cloudfront-clear-cache.php',
+			'Nephila clavata' => 'nephila-clavata/plugin.php',
+			'Nginx Cache Controller on GitHub' => 'nginx-cache-controller/nginx-champuru.php',
+			'Nginx Cache Controller on WP.org' => 'nginx-champuru/nginx-champuru.php',
+		);
+		return $amimoto_plugins;
+	}
+
+	/**
+	 * Check is multisite
+	 *
+	 * @return boolean
+	 * @since 0.0.1
+	 * @access public
+	 */
+	public function is_multisite() {
+		return function_exists('is_multisite') && is_multisite();
+	}
 }

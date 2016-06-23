@@ -3,6 +3,8 @@ require_once( 'base.php' );
 require_once( 'view/component.php' );
 
 // Model
+require_once( 'model/plugin_status.php' );
+require_once( 'model/ncc.php' );
 
 
 // View

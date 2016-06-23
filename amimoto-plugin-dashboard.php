@@ -79,15 +79,21 @@ class Amimoto_Dash {
 		if ( empty( $_POST ) ) {
 			return;
 		}
-
+		$plugin_stat = Amimoto_Dash_Stat::get_instance();
 		if ( $this->is_trust_post_param( Amimoto_Dash_Base::PLUGIN_SETTING ) ) {
 
 		}
+
 		if ( $this->is_trust_post_param( Amimoto_Dash_Base::PLUGIN_ACTIVATION ) ) {
-
+			if ( isset( $_POST['plugin_type'] ) && $_POST['plugin_type'] ) {
+				$result = $plugin_stat->activate( esc_attr( $_POST['plugin_type'] ) );
+			}
 		}
-		if ( $this->is_trust_post_param( Amimoto_Dash_Base::PLUGIN_DEACTIVATION ) ) {
 
+		if ( $this->is_trust_post_param( Amimoto_Dash_Base::PLUGIN_DEACTIVATION ) ) {
+			if ( isset( $_POST['plugin_type'] ) && $_POST['plugin_type'] ) {
+				$result = $plugin_stat->deactivate( esc_attr( $_POST['plugin_type'] ) );
+			}
 		}
 	}
 
