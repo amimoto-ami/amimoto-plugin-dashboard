@@ -6,6 +6,7 @@ require_once( 'view/component.php' );
 require_once( 'model/plugin_status.php' );
 require_once( 'model/ncc.php' );
 require_once( 'model/c3.php' );
+require_once( 'model/nephila-clavata.php' );
 
 
 // View

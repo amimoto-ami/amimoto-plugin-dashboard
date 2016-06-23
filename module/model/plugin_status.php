@@ -58,6 +58,8 @@ class Amimoto_Dash_Stat extends Amimoto_Dash_Base {
 				break;
 
 			case 'nephila-clavata':
+				$s3 = Amimoto_S3::get_instance();
+				$result = $s3->activate( $this->amimoto_plugins );
 				break;
 
 			case 'nginxchampuru':
@@ -88,6 +90,8 @@ class Amimoto_Dash_Stat extends Amimoto_Dash_Base {
 				break;
 
 			case 'nephila-clavata':
+				$s3 = Amimoto_S3::get_instance();
+				$result = $s3->deactivate( $this->amimoto_plugins );
 				break;
 
 			case 'nginxchampuru':
