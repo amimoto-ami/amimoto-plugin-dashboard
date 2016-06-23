@@ -78,6 +78,13 @@ class Amimoto_Dash {
 		if ( empty( $_POST ) ) {
 			return;
 		}
+
+		// For Nginx Cache Controller
+		if ( isset( $_POST['expires'] ) && $_POST['expires'] ) {
+			wp_redirect( admin_url( 'admin.php?page=nginx-champuru&message=true' ) );
+		}
+
+		$result = false;
 		$plugin_stat = Amimoto_Dash_Stat::get_instance();
 		if ( $this->is_trust_post_param( Amimoto_Dash_Base::PLUGIN_SETTING ) ) {
 
