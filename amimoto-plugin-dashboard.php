@@ -63,5 +63,48 @@ class Amimoto_Dash {
 		$this->base = Amimoto_Dash_Base::get_instance();
 		$menu = Amimoto_Dash_Menus::get_instance();
 		$menu->init();
+		add_action( 'admin_init',    array( $this, 'update_settings' ) );
+	}
+
+	/**
+	 *  Update Plugin Setting
+	 *
+	 * @access public
+	 * @param none
+	 * @return none
+	 * @since 0.0.1
+	 */
+	public function update_settings() {
+		var_dump($_POST);
+		if ( empty( $_POST ) ) {
+			return;
+		}
+
+		if ( $this->is_trust_post_param( Amimoto_Dash_Base::PLUGIN_SETTING ) ) {
+
+		}
+		if ( $this->is_trust_post_param( Amimoto_Dash_Base::PLUGIN_ACTIVATION ) ) {
+
+		}
+		if ( $this->is_trust_post_param( Amimoto_Dash_Base::PLUGIN_DEACTIVATION ) ) {
+
+		}
+	}
+
+	/**
+	 *  Check plugin nonce key
+	 *
+	 * @access public
+	 * @param none
+	 * @return none
+	 * @since 0.0.1
+	 */
+	private function is_trust_post_param( $key ) {
+		if ( isset( $_POST[ $key ] ) && $_POST[ $key ] ) {
+			if ( check_admin_referer( $key, $key ) ) {
+				return true;
+			}
+		}
+		return false;
 	}
 }

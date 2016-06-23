@@ -31,6 +31,7 @@ class Amimoto_Dash_Base {
 	// Action key
 	const PLUGIN_SETTING = 'amimoto_setting';
 	const PLUGIN_ACTIVATION = 'amimoto_activation';
+	const PLUGIN_DEACTIVATION = 'amimoto_deactivation';
 
 	private function __construct() {
 	}

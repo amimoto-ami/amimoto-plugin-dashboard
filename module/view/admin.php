@@ -108,8 +108,8 @@ class Amimoto_Dash_Admin extends Amimoto_Dash_Component {
 			$action = $plugin['TextDomain'];
 			if ( array_search( $plugin_url, $active_plugin_urls ) !== false ) {
 				$stat = 'active';
-				$btn_text = __( 'Setting Plugin' , self::$text_domain );
-				$nonce = self::PLUGIN_SETTING;
+				$btn_text = __( 'Deactivate Plugin' , self::$text_domain );
+				$nonce = self::PLUGIN_DEACTIVATION;
 			} else {
 				$stat = 'inactive';
 				$btn_text = __( 'Activate Plugin' , self::$text_domain );
@@ -118,10 +118,19 @@ class Amimoto_Dash_Admin extends Amimoto_Dash_Component {
 			$html .= "<tr class={$stat}><td>";
 			$html .= "<h2>{$plugin['Name']}</h2>";
 			$html .= "<p>{$plugin['Description']}</p>";
-			$html .= "<form method='post' action='{$action}'>";
+			$html .= "<form method='post' action=''>";
 			$html .= get_submit_button( $btn_text );
 			$html .= wp_nonce_field( $nonce , $nonce , true , false );
-			$html .= '</form></td></tr>';
+			$html .= "<input type='hidden' name='plugin_type' value={$action} />";
+			$html .= '</form>';
+			if ( 'active' === $stat ) {
+				$html .= "<form method='post' action=''>";
+				$html .= get_submit_button( __( 'Setting Plugin' , self::$text_domain ) );
+				$html .= wp_nonce_field( self::PLUGIN_SETTING , self::PLUGIN_SETTING , true , false );
+				$html .= "<input type='hidden' name='plugin_type' value={$action} />";
+				$html .= '</form>';
+			}
+			$html .= '</td></tr>';
 		}
 		$html .= '</tbody></table>';
 		return $html;
