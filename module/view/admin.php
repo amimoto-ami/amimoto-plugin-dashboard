@@ -117,7 +117,7 @@ class Amimoto_Dash_Admin extends Amimoto_Dash_Component {
 				$btn_text = __( 'Activate Plugin' , self::$text_domain );
 				$nonce = self::PLUGIN_ACTIVATION;
 			}
-			$for_use = $this->_get_amimoto_plugin_for_use( $plugin['Name'] );
+			$for_use = $this->_get_amimoto_plugin_for_use( $plugin['TextDomain'] );
 			$html .= "<tr class={$stat}><td>";
 			$html .= "<h2>{$plugin['Name']}</h2>";
 			$html .= '<dl><dt><b>'. __( 'For use:', self::$text_domain ). "</b></dt><dd>{$for_use}</dd>";
@@ -214,14 +214,17 @@ class Amimoto_Dash_Admin extends Amimoto_Dash_Component {
 	 */
 	private function _get_amimoto_plugin_for_use( $plugin_name ) {
 		switch ( $plugin_name ) {
+			case 'nginxchampuru':
 			case 'Nginx Cache Controller':
 				$description  = __( 'Nginx Reverse Proxy Cache', self::$text_domain );
 				break;
 
+			case 'nephila-clavata':
 			case 'Nephila clavata':
 				$description  = __( 'Amazon S3', self::$text_domain );
 				break;
 
+			case 'c3-cloudfront-clear-cache':
 			case 'C3 Cloudfront Cache Controller':
 				$description  = __( 'Amazon CloudFront', self::$text_domain );
 				break;
