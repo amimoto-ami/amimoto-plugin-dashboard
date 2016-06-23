@@ -158,16 +158,18 @@ class Amimoto_Dash_Menus extends Amimoto_Dash_Base {
 			if ( ! file_exists( $plugin_file_path ) ) {
 				$plugin_file_path = path_join( ABSPATH , 'wp-content/plugins/nginx-cache-controller/includes/admin.class.php' );
 			}
-			require_once( $plugin_file_path );
-			$nginxchampuru_admin = NginxChampuru_Admin::get_instance();
-			add_submenu_page(
-				self::PANEL_ROOT,
-				__( 'Nginx Cache Controller', self::$text_domain ),
-				__( 'Nginx Reverse Proxy', self::$text_domain ),
-				'administrator',
-				self::PANEL_NCC,
-				array( $nginxchampuru_admin, "admin_panel")
-			);
+			if ( file_exists( $plugin_file_path ) ) {
+				require_once( $plugin_file_path );
+				$nginxchampuru_admin = NginxChampuru_Admin::get_instance();
+				add_submenu_page(
+					self::PANEL_ROOT,
+					__( 'Nginx Cache Controller', self::$text_domain ),
+					__( 'Nginx Reverse Proxy', self::$text_domain ),
+					'administrator',
+					self::PANEL_NCC,
+					array( $nginxchampuru_admin, "admin_panel")
+				);
+			}
 		}
 	}
 }
