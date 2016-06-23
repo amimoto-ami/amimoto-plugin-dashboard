@@ -18,6 +18,11 @@
 .amimoto-dash-side .hndle {
 	cursor: auto!important;
 }
+.amimoto-dash-main form {
+	display: inline-block;
+	margin-top: 5px;
+	margin-right: 10px;
+}
 
 @media only screen and (max-width: 850px) {
 	#amimoto-dashboard > div {

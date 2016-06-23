@@ -124,7 +124,7 @@ class Amimoto_Dash_Admin extends Amimoto_Dash_Component {
 			$html .= '<dl><dt><b>'. __( 'Plugin Description:', self::$text_domain ). "</b></dt><dd>{$plugin['Description']}</dd>";
 			$html .= '</dl>';
 			$html .= "<form method='post' action=''>";
-			$html .= get_submit_button( $btn_text );
+			$html .= get_submit_button( $btn_text, 'primary large' );
 			$html .= wp_nonce_field( $nonce , $nonce , true , false );
 			$html .= "<input type='hidden' name='plugin_type' value={$plugin_type} />";
 			$redirect_page = self::PANEL_ROOT;
@@ -133,7 +133,7 @@ class Amimoto_Dash_Admin extends Amimoto_Dash_Component {
 			if ( 'active' === $stat ) {
 				$action = $this->_get_action_type( $plugin_type );
 				$html .= "<form method='post' action='./admin.php?page={$action}'>";
-				$html .= get_submit_button( __( 'Setting Plugin' , self::$text_domain ) );
+				$html .= get_submit_button( __( 'Setting Plugin' , self::$text_domain ), 'primary large' );
 				$html .= wp_nonce_field( self::PLUGIN_SETTING , self::PLUGIN_SETTING , true , false );
 				$html .= "<input type='hidden' name='plugin_type' value={$plugin_type} />";
 				$html .= '</form>';
