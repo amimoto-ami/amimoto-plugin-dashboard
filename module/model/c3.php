@@ -106,6 +106,9 @@ class Amimoto_C3 extends Amimoto_Dash_Base {
 			$c3 = CloudFront_Clear_Cache::get_instance();
 			$result = $c3->c3_invalidation();
 		}
+		if ( is_wp_error( $result ) ) {
+			return $result;
+		}
 		return true;
 	}
 
