@@ -101,7 +101,7 @@ class Amimoto_Dash_Admin extends Amimoto_Dash_Component {
 		$html .= "<table class='wp-list-table widefat plugins'>";
 		$html .= '<tbody>';
 		foreach ( $plugins as $plugin_url => $plugin ) {
-			$action = $plugin['TextDomain'];
+			$plugin_type = $plugin['TextDomain'];
 			if ( array_search( $plugin_url, $active_plugin_urls ) !== false ) {
 				$stat = 'active';
 				$btn_text = __( 'Deactivate Plugin' , self::$text_domain );
@@ -117,19 +117,50 @@ class Amimoto_Dash_Admin extends Amimoto_Dash_Component {
 			$html .= "<form method='post' action=''>";
 			$html .= get_submit_button( $btn_text );
 			$html .= wp_nonce_field( $nonce , $nonce , true , false );
-			$html .= "<input type='hidden' name='plugin_type' value={$action} />";
+			$html .= "<input type='hidden' name='plugin_type' value={$plugin_type} />";
 			$html .= '</form>';
 			if ( 'active' === $stat ) {
-				$html .= "<form method='post' action=''>";
+				$action = $this->_get_action_type( $plugin_type );
+				$html .= "<form method='post' action='./admin.php?page={$action}'>";
 				$html .= get_submit_button( __( 'Setting Plugin' , self::$text_domain ) );
 				$html .= wp_nonce_field( self::PLUGIN_SETTING , self::PLUGIN_SETTING , true , false );
-				$html .= "<input type='hidden' name='plugin_type' value={$action} />";
+				$html .= "<input type='hidden' name='plugin_type' value={$plugin_type} />";
 				$html .= '</form>';
 			}
 			$html .= '</td></tr>';
 		}
 		$html .= '</tbody></table>';
 		return $html;
+	}
+
+	/**
+	 *  Get form action type
+	 *
+	 * @access private
+	 * @param (string) $plugin_type
+	 * @return string
+	 * @since 0.0.1
+	 */
+	private function _get_action_type( $plugin_type ) {
+		switch ( $plugin_type ) {
+			case 'c3-cloudfront-clear-cache':
+				$action = self::PANEL_C3;
+				break;
+
+			case 'nephila-clavata':
+				$action = self::PANEL_S3;
+				break;
+
+			case 'nginxchampuru':
+				$action = self::PANEL_NCC;
+				break;
+
+			default:
+				$action = '';
+				break;
+		}
+		return $action;
+
 	}
 
 	/**
