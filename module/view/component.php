@@ -78,7 +78,7 @@ class Amimoto_Dash_Component extends Amimoto_Dash_Base {
 	 * @since 0.0.1
 	 */
 	public function get_layout_html( $content ) {
-		$html  = "<div class='wrap'>";
+		$html  = "<div class='wrap' id='amimoto-dashboard'>";
 		$html .= $this->_get_header();
 		$html .= '<h2>'. get_admin_page_title(). '</h2>';
 		$html .= $content;

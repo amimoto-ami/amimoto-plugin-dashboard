@@ -66,6 +66,11 @@ class Amimoto_Dash {
 		$menu = Amimoto_Dash_Menus::get_instance();
 		$menu->init();
 		add_action( 'admin_init',    array( $this, 'update_settings' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'admin_theme_style' ) );
+	}
+
+	public function admin_theme_style() {
+		wp_enqueue_style( 'amimoto-admin-style',  path_join( AMI_DASH_URL, 'assets/admin.css' ) );
 	}
 
 	/**
