@@ -79,7 +79,7 @@ class Amimoto_Dash_Menus extends Amimoto_Dash_Base {
 	 */
 	private function _remove_submenu() {
 		global $submenu;
-		foreach ( $submenu['options-general.php'] as $key => $array ) {
+		foreach ( (array) $submenu['options-general.php'] as $key => $array ) {
 			foreach ( $this->amimoto_plugin_submenu as $plugin ) {
 				if ( array_search( $plugin, $array ) ) {
 					unset( $submenu['options-general.php'][ $key ] );
@@ -98,7 +98,7 @@ class Amimoto_Dash_Menus extends Amimoto_Dash_Base {
 	 */
 	private function _remove_top_menu() {
 		global $menu;
-		foreach ( $menu as $key => $array ) {
+		foreach ( (array) $menu as $key => $array ) {
 			foreach ( $this->amimoto_plugin_menu as $plugin ) {
 				if ( array_search( $plugin, $array ) ) {
 					unset( $menu[ $key ] );
