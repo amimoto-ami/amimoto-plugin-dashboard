@@ -15,7 +15,9 @@
 	text-align: center;
 	display: block;
 }
-
+.amimoto-dash-side .hndle {
+	cursor: auto!important;
+}
 
 @media only screen and (max-width: 850px) {
 	#amimoto-dashboard > div {

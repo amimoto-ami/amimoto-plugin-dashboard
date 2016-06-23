@@ -70,7 +70,7 @@ class Amimoto_Dash {
 	}
 
 	public function admin_theme_style() {
-		wp_enqueue_style( 'amimoto-admin-style',  path_join( AMI_DASH_URL, 'assets/admin.css' ) );
+		wp_enqueue_style( 'amimoto-admin-style',  path_join( AMI_DASH_URL, 'assets/admin.css' ) , array() , '2016062300' );
 	}
 
 	/**
