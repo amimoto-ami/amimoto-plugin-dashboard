@@ -25,7 +25,7 @@ class Amimoto_Dash_Base {
 	//Panel key
 	const PANEL_ROOT = 'amimoto_dash_root';
 	const PANEL_C3 = 'amimoto_dash_c3';
-	const PANEL_S3 = 'amimoto_dash_s3';
+	const PANEL_S3 = 'nephila-clavata';
 	const PANEL_NCC = 'nginx-champuru';
 
 	// Action key

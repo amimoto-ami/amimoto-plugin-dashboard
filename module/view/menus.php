@@ -149,7 +149,7 @@ class Amimoto_Dash_Menus extends Amimoto_Dash_Base {
 				__( 'Nephila clavata', self::$text_domain ),
 				__( 'Amazon S3', self::$text_domain ),
 				'administrator',
-				'nephila-clavata',
+				self::PANEL_S3,
 				array( $nephila_clavata_admin, 'options_page' )
 			);
 			add_filter('nephila_clavata_admin_url',function(){ return 'admin.php'; } );
