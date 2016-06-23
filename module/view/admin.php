@@ -21,6 +21,7 @@ class Amimoto_Dash_Admin extends Amimoto_Dash_Component {
 	private static $instance;
 	private static $text_domain;
 	public $amimoto_plugins = array();
+	public $amimoto_uninstalled_plugins = array();
 
 	private function __construct() {
 		self::$text_domain = Amimoto_Dash_Base::text_domain();
@@ -76,9 +77,13 @@ class Amimoto_Dash_Admin extends Amimoto_Dash_Component {
 	 * @since 0.0.1
 	 */
 	private function _get_amimoto_plugin_list() {
+		$plugins = array();
 		foreach ( $this->amimoto_plugins as $plugin_name => $plugin_url ) {
 			$plugin_file_path = path_join( ABSPATH . 'wp-content/plugins', $plugin_url );
 			if ( ! file_exists( $plugin_file_path ) ) {
+				if ( 'Nginx Cache Controller on GitHub' != $plugin_name ) {
+					$this->amimoto_uninstalled_plugins[ $plugin_name ] = $plugin_url;
+				}
 				unset( $this->amimoto_plugins[ $plugin_name ] );
 				continue;
 			}
@@ -132,8 +137,65 @@ class Amimoto_Dash_Admin extends Amimoto_Dash_Component {
 			}
 			$html .= '</td></tr>';
 		}
+		$html .= $this->_get_uninstalled_amimoto_plugin_html();
 		$html .= '</tbody></table>';
 		return $html;
+	}
+
+	/**
+	 *  Get plugin list that uninstalled amimoto plugins
+	 *
+	 * @access private
+	 * @return string(html)
+	 * @since 0.0.1
+	 */
+	private function _get_uninstalled_amimoto_plugin_html() {
+		$html  = '';
+		foreach ( $this->amimoto_uninstalled_plugins as $plugin_name => $plugin_url ) {
+			if ( 'Nginx Cache Controller on WP.org' == $plugin_name ) {
+				if ( $this->is_activated_ncc() ) {
+					continue;
+				}
+				$plugin_name = 'Nginx Cache Controller';
+			}
+			$plugin_search_url = "plugin-install.php?tab=search&type=term&s=". urlencode( $plugin_name );
+			$description = $this->_get_amimoto_plugin_description( $plugin_name );
+			$html .= "<tr class='inactive'><td>";
+			$html .= "<h2>{$plugin_name}</h2>";
+			$html .= "<p>{$description}</p>";
+			$html .= "<a class='install-now button' href='{$plugin_search_url}' aria-label='Install {$plugin_name} now' data-name='{$plugin_name}'>Install Now</a>";
+			$html .= '</td></tr>';
+		}
+		return $html;
+	}
+
+	/**
+	 *  Get amimoto plugin description
+	 *
+	 * @access private
+	 * @param (string) $plugin_name
+	 * @return string
+	 * @since 0.0.1
+	 */
+	private function _get_amimoto_plugin_description( $plugin_name ) {
+		switch ( $plugin_name ) {
+			case 'Nginx Cache Controller':
+				$description = __( 'Provides some functions of controlling Nginx proxy server cache.', self::$text_domain );
+				break;
+
+			case 'Nephila clavata':
+				$description = __( 'Allows you to mirror your WordPress media uploads over to Amazon S3 for storage and delivery.', self::$text_domain );
+				break;
+
+			case 'C3 Cloudfront Cache Controller':
+				$description = __( "Controlle CloudFront's CDN server cache.", self::$text_domain );
+				break;
+
+			default:
+				$description = '';
+				break;
+		}
+		return $description;
 	}
 
 	/**
