@@ -1,6 +1,6 @@
 <?php
 /**
- * Amimoto_Dash_Ncc
+ * Amimoto_Ncc
  *
  * @author hideokamoto <hide.okamoto@digitalcube.jp>
  * @package Amimoto-plugin-dashboard
@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Controle Nginx Cache Controller Plugin
  *
- * @class Amimoto_Dash_Ncc
+ * @class Amimoto_Ncc
  * @since 0.0.1
  */
 class Amimoto_Ncc extends Amimoto_Dash_Base {
