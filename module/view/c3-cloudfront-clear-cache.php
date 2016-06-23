@@ -62,7 +62,6 @@ class Amimoto_Dash_Cloudfront extends Amimoto_Dash_Component {
 	public function get_content_html() {
 		$html = '';
 		$html .= $this->_get_cf_invalidation_form();
-		$html .= '<hr/>';
 		$html .= $this->_get_cf_setting_form();
 		if ( $this->is_activated_ncc() ) {
 			$html .= '<hr/>';
@@ -80,7 +79,11 @@ class Amimoto_Dash_Cloudfront extends Amimoto_Dash_Component {
 	 * @since 0.0.1
 	 */
 	private function _get_cf_invalidation_form() {
+		$c3_settings = get_option( 'c3_settings' );
 		$html = '';
+		if ( ! $c3_settings ) {
+			return $html;
+		}
 		$html .= "<form method='post' action=''>";
 		$html .= "<table class='wp-list-table widefat plugins'>";
 		$html .= '<thead>';
@@ -96,6 +99,7 @@ class Amimoto_Dash_Cloudfront extends Amimoto_Dash_Component {
 		$html .= '</tr>';
 		$html .= '</tbody></table>';
 		$html .= '</form>';
+		$html .= '<hr/>';
 		return $html;
 	}
 
