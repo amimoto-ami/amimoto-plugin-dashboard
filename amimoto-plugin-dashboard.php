@@ -117,6 +117,11 @@ class Amimoto_Dash {
 			$result = $c3->invalidation( $target );
 		}
 
+		if ( $this->is_trust_post_param( Amimoto_Dash_Base::CLOUDFRONT_UPDATE_NCC ) ) {
+			$c3 = Amimoto_C3::get_instance();
+			$result = $c3->overwrite_ncc_settings();
+		}
+
 		if ( ! is_wp_error( $result ) && $result ) {
 			if ( isset( $_POST['redirect_page'] ) && $_POST['redirect_page'] ) {
 				wp_safe_redirect( menu_page_url( $_POST['redirect_page'], false ) );

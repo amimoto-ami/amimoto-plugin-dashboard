@@ -34,6 +34,7 @@ class Amimoto_Dash_Base {
 	const PLUGIN_DEACTIVATION = 'amimoto_deactivation';
 	const CLOUDFRONT_SETTINGS = 'amimoto_cf_setting';
 	const CLOUDFRONT_INVALIDATION = 'amimoto_cf_invalidation';
+	const CLOUDFRONT_UPDATE_NCC = 'amimoto_cf_ncc_setting';
 
 	private function __construct() {
 	}
@@ -111,5 +112,22 @@ class Amimoto_Dash_Base {
 	 */
 	public function is_multisite() {
 		return function_exists('is_multisite') && is_multisite();
+	}
+
+	/**
+	 * Check is Nginx Cache Controller Activated
+	 *
+	 * @return boolean
+	 * @since 0.0.1
+	 * @access public
+	 */
+	public function is_activated_ncc() {
+		$amimoto_plugins = $this->get_amimoto_plugin_file_list();
+		$activate_plugins = get_option('active_plugins');
+		if ( array_search( $amimoto_plugins['Nginx Cache Controller on GitHub'], $activate_plugins ) ||
+			 array_search( $amimoto_plugins['Nginx Cache Controller on WP.org'], $activate_plugins ) ) {
+			return true;
+		}
+		return false;
 	}
 }

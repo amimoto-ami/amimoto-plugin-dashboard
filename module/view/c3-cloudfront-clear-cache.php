@@ -64,6 +64,10 @@ class Amimoto_Dash_Cloudfront extends Amimoto_Dash_Component {
 		$html .= $this->_get_cf_invalidation_form();
 		$html .= '<hr/>';
 		$html .= $this->_get_cf_setting_form();
+		if ( $this->is_activated_ncc() ) {
+			$html .= '<hr/>';
+			$html .= $this->_get_ncc_update_form();
+		}
 		return $html;
 	}
 
@@ -88,6 +92,35 @@ class Amimoto_Dash_Cloudfront extends Amimoto_Dash_Component {
 		$html .= "<input type='hidden' name='invalidation_target' value='all' />";
 		$html .= wp_nonce_field( self::CLOUDFRONT_INVALIDATION , self::CLOUDFRONT_INVALIDATION , true , false );
 		$html .= get_submit_button( __( 'Flush All Cache', self::$text_domain ) );
+		$html .= '</td>';
+		$html .= '</tr>';
+		$html .= '</tbody></table>';
+		$html .= '</form>';
+		return $html;
+	}
+
+	/**
+	 *  Update Nginx Cache Controller Setting for CDN
+	 *
+	 * @access private
+	 * @param none
+	 * @return string(HTML)
+	 * @since 0.0.1
+	 */
+	private function _get_ncc_update_form() {
+		$html = '';
+		$html .= "<form method='post' action=''>";
+		$html .= "<table class='wp-list-table widefat plugins'>";
+		$html .= '<thead>';
+		$html .= "<tr><th colspan='2'><h2>" . __( 'Nginx Cache Settings', self::$text_domain ). '</h2></th></tr>';
+		$html .= '</thead>';
+		$html .= '<tbody>';
+		$html .= '<tr><th><b>'. __( 'Change Nginx Cache Expires Shorten', self::$text_domain ). '</b>';
+		$html .= '<p>' . __( 'All Nginx Cache Expires change 30sec.', self::$text_domain ) . '</p></th>';
+		$html .= '<td>';
+		$html .= "<input type='hidden' name='invalidation_target' value='all' />";
+		$html .= wp_nonce_field( self::CLOUDFRONT_UPDATE_NCC , self::CLOUDFRONT_UPDATE_NCC , true , false );
+		$html .= get_submit_button( __( 'Change Expires', self::$text_domain ) );
 		$html .= '</td>';
 		$html .= '</tr>';
 		$html .= '</tbody></table>';
@@ -134,9 +167,11 @@ class Amimoto_Dash_Cloudfront extends Amimoto_Dash_Component {
 			$html .= "<td><input type='password' class='regular-text code' name='c3_settings[secret_key]' value='{$c3_settings['secret_key']}' /></td>";
 			$html .= '</tr>';
 		}
-		$html .= '</tbody></table>';
+		$html .= "<tr><td colspan='2'>";
 		$html .= wp_nonce_field( self::CLOUDFRONT_SETTINGS , self::CLOUDFRONT_SETTINGS , true , false );
 		$html .= get_submit_button( __( 'Update CloudFront Settings', self::$text_domain ) );
+		$html .= '</td></tr>';
+		$html .= '</tbody></table>';
 		$html .= '</form>';
 		return $html;
 	}

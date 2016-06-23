@@ -52,11 +52,32 @@ class Amimoto_C3 extends Amimoto_Dash_Base {
 		$plugin_file_path = path_join( ABSPATH . 'wp-content/plugins', $amimoto_plugins['C3 Cloudfront Cache Controller'] );
 		if ( file_exists( $plugin_file_path ) ) {
 			activate_plugin( $plugin_file_path, '', $this->is_multisite() );
+			$this->overwrite_ncc_settings();
 			return true;
 		}
 
 		$err = new WP_Error( 'AMIMOTO Dashboard Error', 'C3 Cloudfront Cache Controller Plugin does not exists' );
 		return $err;
+	}
+
+	/**
+	 *  Overwrite Nginx Cache Controller Settings
+	 *
+	 * @access public
+	 * @param none
+	 * @return boolean | WP_Error
+	 * @since 0.0.1
+	 */
+	public function overwrite_ncc_settings() {
+		if ( $this->is_activated_ncc() ) {
+			$expires = get_option( 'nginxchampuru-cache_expires' );
+			$updated_expires = array();
+			foreach ( $expires as $key => $value ) {
+				$updated_expires[ $key ] = 30;
+			}
+			update_option( 'nginxchampuru-cache_expires', $updated_expires );
+		}
+		return true;
 	}
 
 	/**
