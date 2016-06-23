@@ -75,7 +75,6 @@ class Amimoto_Dash {
 	 * @since 0.0.1
 	 */
 	public function update_settings() {
-		var_dump($_POST);
 		if ( empty( $_POST ) ) {
 			return;
 		}

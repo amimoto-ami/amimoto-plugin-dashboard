@@ -5,6 +5,7 @@ require_once( 'view/component.php' );
 // Model
 require_once( 'model/plugin_status.php' );
 require_once( 'model/ncc.php' );
+require_once( 'model/c3.php' );
 
 
 // View
