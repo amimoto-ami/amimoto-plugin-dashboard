@@ -87,7 +87,11 @@ class Amimoto_C3 extends Amimoto_Dash_Base {
 	 * @since 0.0.1
 	 */
 	public function update_setting() {
-		var_dump($_POST);
+		$updated_setting = array();
+		foreach ( $_POST['c3_settings'] as $key => $value ) {
+			$updated_setting[ $key ] = esc_attr( $value );
+		}
+		update_option( 'c3_settings', $updated_setting );
 		return true;
 	}
 

@@ -124,14 +124,14 @@ class Amimoto_Dash_Cloudfront extends Amimoto_Dash_Component {
 		$html .= '</thead>';
 		$html .= '<tbody>';
 		$html .= '<tr><th>'. __( 'CloudFront Distribution ID', self::$text_domain ). '</th>';
-		$html .= "<td><input type='text' class='regular-text code' nane='c3_settings[distribution_id]' value='{$c3_settings['distribution_id']}' /></td>";
+		$html .= "<td><input type='text' class='regular-text code' name='c3_settings[distribution_id]' value='{$c3_settings['distribution_id']}' /></td>";
 		$html .= '</tr>';
 		if ( ! $has_ec2_instance_role ) {
 			$html .= '<tr><th>'. __( 'AWS Access Key', self::$text_domain ). '</th>';
-			$html .= "<td><input type='text' class='regular-text code' nane='c3_settings[access_key]' value='{$c3_settings['access_key']}' /></td>";
+			$html .= "<td><input type='text' class='regular-text code' name='c3_settings[access_key]' value='{$c3_settings['access_key']}' /></td>";
 			$html .= '</tr>';
 			$html .= '<tr><th>'. __( 'AWS Secret Key', self::$text_domain ). '</th>';
-			$html .= "<td><input type='password' class='regular-text code' nane='c3_settings[access_key]' value='{$c3_settings['secret_key']}' /></td>";
+			$html .= "<td><input type='password' class='regular-text code' name='c3_settings[secret_key]' value='{$c3_settings['secret_key']}' /></td>";
 			$html .= '</tr>';
 		}
 		$html .= '</tbody></table>';
