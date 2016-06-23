@@ -48,19 +48,13 @@ class Amimoto_Dash_Ncc extends Amimoto_Dash_Component {
 	 * @since 0.0.1
 	 */
 	public function init_panel() {
-		$this->show_panel_html();
+		$plugin_file_path = path_join( ABSPATH , 'wp-content/plugins/nginx-champuru/includes/admin.class.php' );
+		if ( ! file_exists( $plugin_file_path ) ) {
+			$plugin_file_path = path_join( ABSPATH , 'wp-content/plugins/nginx-cache-controller/includes/admin.class.php' );
+		}
+		require_once( $plugin_file_path );
+		$nginxchampuru_admin = NginxChampuru_Admin::get_instance();
+		$nginxchampuru_admin->admin_panel();
 	}
 
-	/**
-	 *  Get admin page html content
-	 *
-	 * @access public
-	 * @param none
-	 * @return string(HTML)
-	 * @since 0.0.1
-	 */
-	public function get_content_html() {
-		$html = '';
-		return $html;
-	}
 }
