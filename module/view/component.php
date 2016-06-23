@@ -80,9 +80,45 @@ class Amimoto_Dash_Component extends Amimoto_Dash_Base {
 	public function get_layout_html( $content ) {
 		$html  = "<div class='wrap' id='amimoto-dashboard'>";
 		$html .= $this->_get_header();
-		$html .= '<h2>'. get_admin_page_title(). '</h2>';
+		$html .= "<div class='amimoto-dash-main'>";
 		$html .= $content;
-		//$html .= '</div>';
+		$html .= '</div>';
+		$html .= $this->_get_subcontent_html();
+		return $html;
+	}
+
+	/**
+	 *  Create AMIMOTO Dashboard's side content html
+	 *
+	 * @access private
+	 * @param none
+	 * @return string(HTML)
+	 * @since 0.0.1
+	 */
+	private function _get_subcontent_html() {
+		$html  = "<div class='amimoto-dash-side'>";
+		$html .= $this->_get_amimoto_logo();
+		$html .= '</div>';
+		return $html;
+	}
+
+	/**
+	 *  Create AMIMOTO LOGO Widget html
+	 *
+	 * @access private
+	 * @param none
+	 * @return string(HTML)
+	 * @since 0.0.1
+	 */
+	private function _get_amimoto_logo() {
+		$html  = '';
+		$logo_url = path_join( AMI_DASH_URL, 'assets/amimoto.png' );
+		$html .= "<div class='postbox'>";
+		$html .= "<div class='hndle'><h3 class='amimoto-logo-title'>". __( 'High Performance WordPress Cloud', self::$text_domain ). '</h3></div>';
+		$html .= "<div class='inside'>";
+		$html .= "<a href='https://amimoto-ami.com/' class='amimoto-logo-image'><img src={$logo_url} alt='Amimoto' ></a>";
+		$html .= '</div>';
+		$html .= '</div>';
 		return $html;
 	}
 }
