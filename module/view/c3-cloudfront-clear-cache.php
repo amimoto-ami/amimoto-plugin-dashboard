@@ -85,6 +85,7 @@ class Amimoto_Dash_Cloudfront extends Amimoto_Dash_Component {
 		$html .= '<tbody>';
 		$html .= '<tr><th>'. __( 'Flush All Cache', self::$text_domain ). '</th>';
 		$html .= '<td>';
+		$html .= "<input type='hidden' name='invalidation_target' value='all' />";
 		$html .= wp_nonce_field( self::CLOUDFRONT_INVALIDATION , self::CLOUDFRONT_INVALIDATION , true , false );
 		$html .= get_submit_button( __( 'Flush All Cache', self::$text_domain ) );
 		$html .= '</td>';

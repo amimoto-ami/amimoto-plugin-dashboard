@@ -78,4 +78,35 @@ class Amimoto_C3 extends Amimoto_Dash_Base {
 		return $err;
 	}
 
+	/**
+	 *  Update Plugin Setting
+	 *
+	 * @access public
+	 * @param none
+	 * @return boolean | WP_Error
+	 * @since 0.0.1
+	 */
+	public function update_setting() {
+		var_dump($_POST);
+		return true;
+	}
+
+	/**
+	 *  Invalidation
+	 *
+	 * @access public
+	 * @param (string) $target
+	 * @return boolean | WP_Error
+	 * @since 0.0.1
+	 */
+	public function invalidation( $target ) {
+		$plugin_file_path = path_join( ABSPATH , 'wp-content/plugins/c3-cloudfront-clear-cache/c3-cloudfront-clear-cache.php' );
+		require_once( $plugin_file_path );
+		if ( 'all' === $target ) {
+			$c3 = CloudFront_Clear_Cache::get_instance();
+			$result = $c3->c3_invalidation();
+		}
+		return true;
+	}
+
 }

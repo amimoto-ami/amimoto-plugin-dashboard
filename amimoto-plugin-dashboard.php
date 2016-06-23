@@ -95,6 +95,21 @@ class Amimoto_Dash {
 			}
 		}
 
+		if ( $this->is_trust_post_param( Amimoto_Dash_Base::CLOUDFRONT_SETTINGS ) ) {
+			$c3 = Amimoto_C3::get_instance();
+			$result = $c3->update_setting();
+		}
+
+		if ( $this->is_trust_post_param( Amimoto_Dash_Base::CLOUDFRONT_INVALIDATION ) ) {
+			$c3 = Amimoto_C3::get_instance();
+			if ( isset( $_POST['invalidation_target'] ) && $_POST['invalidation_target'] ) {
+				$target = $_POST['invalidation_target'];
+			} else {
+				$target = 'all';
+			}
+			$result = $c3->invalidation( $target );
+		}
+
 		if ( ! is_wp_error( $result ) && $result ) {
 			if ( isset( $_POST['redirect_page'] ) && $_POST['redirect_page'] ) {
 				wp_safe_redirect( menu_page_url( $_POST['redirect_page'], false ) );
