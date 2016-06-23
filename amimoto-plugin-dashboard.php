@@ -94,6 +94,12 @@ class Amimoto_Dash {
 				$result = $plugin_stat->deactivate( esc_attr( $_POST['plugin_type'] ) );
 			}
 		}
+
+		if ( ! is_wp_error( $result ) && $result ) {
+			if ( isset( $_POST['redirect_page'] ) && $_POST['redirect_page'] ) {
+				wp_safe_redirect( menu_page_url( $_POST['redirect_page'], false ) );
+			}
+		}
 	}
 
 	/**

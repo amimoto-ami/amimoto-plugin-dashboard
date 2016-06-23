@@ -55,6 +55,7 @@ class Amimoto_Dash_Admin extends Amimoto_Dash_Component {
 	 */
 	private function _get_activated_plugin_list() {
 		$active_plugin_urls = get_option( 'active_plugins' );
+		$plugins = array();
 		foreach ( $active_plugin_urls as $plugin_url ) {
 			if ( ! array_search( $plugin_url , $this->amimoto_plugins ) ) {
 				continue;
@@ -118,6 +119,8 @@ class Amimoto_Dash_Admin extends Amimoto_Dash_Component {
 			$html .= get_submit_button( $btn_text );
 			$html .= wp_nonce_field( $nonce , $nonce , true , false );
 			$html .= "<input type='hidden' name='plugin_type' value={$plugin_type} />";
+			$redirect_page = self::PANEL_ROOT;
+			$html .= "<input type='hidden' name='redirect_page' value={$redirect_page} />";
 			$html .= '</form>';
 			if ( 'active' === $stat ) {
 				$action = $this->_get_action_type( $plugin_type );
