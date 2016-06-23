@@ -117,9 +117,12 @@ class Amimoto_Dash_Admin extends Amimoto_Dash_Component {
 				$btn_text = __( 'Activate Plugin' , self::$text_domain );
 				$nonce = self::PLUGIN_ACTIVATION;
 			}
+			$for_use = $this->_get_amimoto_plugin_for_use( $plugin['Name'] );
 			$html .= "<tr class={$stat}><td>";
 			$html .= "<h2>{$plugin['Name']}</h2>";
-			$html .= "<p>{$plugin['Description']}</p>";
+			$html .= '<dl><dt><b>'. __( 'For use:', self::$text_domain ). "</b></dt><dd>{$for_use}</dd>";
+			$html .= '<dl><dt><b>'. __( 'Plugin Description:', self::$text_domain ). "</b></dt><dd>{$plugin['Description']}</dd>";
+			$html .= '</dl>';
 			$html .= "<form method='post' action=''>";
 			$html .= get_submit_button( $btn_text );
 			$html .= wp_nonce_field( $nonce , $nonce , true , false );
@@ -160,9 +163,12 @@ class Amimoto_Dash_Admin extends Amimoto_Dash_Component {
 			}
 			$plugin_install_url = "./plugin-install.php?tab=plugin-information&plugin=". urlencode( $plugin_name );
 			$description = $this->_get_amimoto_plugin_description( $plugin_name );
+			$for_use = $this->_get_amimoto_plugin_for_use( $plugin_name );
 			$html .= "<tr class='inactive'><td>";
 			$html .= "<h2>{$plugin_name}</h2>";
-			$html .= "<p>{$description}</p>";
+			$html .= '<dl><dt><b>'. __( 'For use:', self::$text_domain ). "</b></dt><dd>{$for_use}</dd>";
+			$html .= '<dl><dt><b>'. __( 'Plugin Description:', self::$text_domain ). "</b></dt><dd>{$description}</dd>";
+			$html .= '</dl>';
 			$html .= "<a class='install-now button' target='_blank' href='{$plugin_install_url}' aria-label='Install {$plugin_name} now' data-name='{$plugin_name}'>Install Now</a>";
 			$html .= '</td></tr>';
 		}
@@ -189,6 +195,35 @@ class Amimoto_Dash_Admin extends Amimoto_Dash_Component {
 
 			case 'C3 Cloudfront Cache Controller':
 				$description = __( "Controlle CloudFront's CDN server cache.", self::$text_domain );
+				break;
+
+			default:
+				$description = '';
+				break;
+		}
+		return $description;
+	}
+
+	/**
+	 *  Get amimoto plugin description for use
+	 *
+	 * @access private
+	 * @param (string) $plugin_name
+	 * @return string
+	 * @since 0.0.1
+	 */
+	private function _get_amimoto_plugin_for_use( $plugin_name ) {
+		switch ( $plugin_name ) {
+			case 'Nginx Cache Controller':
+				$description  = __( 'Nginx Reverse Proxy Cache', self::$text_domain );
+				break;
+
+			case 'Nephila clavata':
+				$description  = __( 'Amazon S3', self::$text_domain );
+				break;
+
+			case 'C3 Cloudfront Cache Controller':
+				$description  = __( 'Amazon CloudFront', self::$text_domain );
 				break;
 
 			default:
