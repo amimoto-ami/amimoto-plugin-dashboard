@@ -158,12 +158,12 @@ class Amimoto_Dash_Admin extends Amimoto_Dash_Component {
 				}
 				$plugin_name = 'Nginx Cache Controller';
 			}
-			$plugin_search_url = "plugin-install.php?tab=search&type=term&s=". urlencode( $plugin_name );
+			$plugin_install_url = "./plugin-install.php?tab=plugin-information&plugin=". urlencode( $plugin_name );
 			$description = $this->_get_amimoto_plugin_description( $plugin_name );
 			$html .= "<tr class='inactive'><td>";
 			$html .= "<h2>{$plugin_name}</h2>";
 			$html .= "<p>{$description}</p>";
-			$html .= "<a class='install-now button' href='{$plugin_search_url}' aria-label='Install {$plugin_name} now' data-name='{$plugin_name}'>Install Now</a>";
+			$html .= "<a class='install-now button' target='_blank' href='{$plugin_install_url}' aria-label='Install {$plugin_name} now' data-name='{$plugin_name}'>Install Now</a>";
 			$html .= '</td></tr>';
 		}
 		return $html;
