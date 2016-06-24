@@ -1,14 +1,14 @@
 <?php
 /**
- * Plugin Name: AMIMOTO Plugin Dashboard
+ * Plugin Name: AMIMOTO Dashboard
  * Version: 0.0.1
  * Description: Controle AMIMOTO helper plugins
  * Author: hideokamoto,amimotoami
  * Author URI: https://amimoto-ami.com
- * Plugin URI: https://github.com/amimoto-ami/amimoto-plugin-dashboard/
- * Text Domain: amimoto-plugin-dashboard
+ * Plugin URI: https://github.com/amimoto-ami/amimoto-dashboard/
+ * Text Domain: amimoto-dashboard
  * Domain Path: /languages
- * @package Amimoto-plugin-dashboard
+ * @package Amimoto-dashboard
  */
 if ( ! is_admin() ) {
 	return;
@@ -27,7 +27,7 @@ $amimoto_dash->init();
  * Root Class of this plugin
  *
  * @author hideokamoto <hide.okamoto@digitalcube.jp>
- * @package Amimoto-plugin-dashboard
+ * @package Amimoto-dashboard
  * @since 0.0.1
  */
 class Amimoto_Dash {

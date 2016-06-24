@@ -3,7 +3,7 @@
  * Amimoto_Dash_Component Class file
  *
  * @author hideokamoto <hide.okamoto@digitalcube.jp>
- * @package Amimoto-plugin-dashboard
+ * @package Amimoto-dashboard
  * @since 0.0.1
  */
 
