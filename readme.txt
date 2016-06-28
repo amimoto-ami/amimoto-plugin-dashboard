@@ -4,7 +4,7 @@ Donate link: https://amimoto-ami.com
 Tags: admin,amimoto
 Requires at least: 4.4.0
 Tested up to: 4.5.2
-Stable tag: 0.0.1
+Stable tag: 0.1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -28,10 +28,13 @@ b. Activate the plugin through the 'Plugins' menu in WordPress.
 
 == Changelog ==
 
+= 0.1.0 =
+* Add AMIMOTO News Widget
+
 = 0.0.1 =
 * Initial Release
 
 == Upgrade Notice ==
 
-= 0.0.1 =
-* Initial Release
+= 0.1.0 =
+* Add AMIMOTO News Widget

@@ -98,6 +98,8 @@ class Amimoto_Dash_Component extends Amimoto_Dash_Base {
 	private function _get_subcontent_html() {
 		$html  = "<div class='amimoto-dash-side'>";
 		$html .= $this->_get_amimoto_logo();
+		$html .= $this->_get_amimoto_api_widget( 16 );
+		$html .= $this->_get_amimoto_api_widget( 17 );
 		$html .= '</div>';
 		return $html;
 	}
@@ -121,4 +123,50 @@ class Amimoto_Dash_Component extends Amimoto_Dash_Base {
 		$html .= '</div>';
 		return $html;
 	}
+
+	/**
+	 *  Create AMIMOTO News Widget html
+	 *
+	 * @access private
+	 * @param none
+	 * @return string(HTML)
+	 * @since 0.1.0
+	 */
+	private function _get_amimoto_api_widget( $category_id = false ) {
+		$wp = Amimoto_WPAPI::get_instance();
+		$result = $wp->get_post( 5, $category_id );
+		if ( is_wp_error( $result ) ) {
+			return '';
+		}
+		switch ( $category_id ) {
+			case 16:
+				$title = __( 'Road to Becoming the AMIMOTO Master', self::$text_domain );
+				break;
+
+			case 17:
+				$title = __( 'AMIMOTO News', self::$text_domain );
+				break;
+
+			default:
+				$title = false;
+				break;
+		}
+		$html  = '';
+		$html .= "<div class='postbox'>";
+		if ( $title ) {
+			$html .= "<div class='hndle'><h3 class='amimoto-logo-title'>{$title}</h3></div>";
+		}
+		$html .= "<div class='inside'>";
+		foreach ( $result as $post ) {
+			$date = date( 'Y/m/d', strtotime( $post['date'] ) );
+			$html .= '<section>';
+			$html .= "<a href={$post['link']} target='_blank'>";
+			$html .= '<h4>'. esc_attr( $post['title']['rendered'] ). "<br/><small>{$date}</small></h4>";
+			$html .= '</a></section>';
+		}
+		$html .= '</div>';
+		$html .= '</div>';
+		return $html;
+	}
+
 }
