@@ -98,6 +98,7 @@ class Amimoto_Dash_Component extends Amimoto_Dash_Base {
 	private function _get_subcontent_html() {
 		$html  = "<div class='amimoto-dash-side'>";
 		$html .= $this->_get_amimoto_logo();
+		$html .= $this->_get_zendesk_search_form();
 		$html .= $this->_get_amimoto_api_widget( 16 );
 		$html .= $this->_get_amimoto_api_widget( 17 );
 		$html .= '</div>';
@@ -118,12 +119,33 @@ class Amimoto_Dash_Component extends Amimoto_Dash_Base {
 		$html .= "<div class='postbox'>";
 		$html .= "<div class='hndle'><h3 class='amimoto-logo-title'>". __( 'High Performance WordPress Cloud', self::$text_domain ). '</h3></div>';
 		$html .= "<div class='inside'>";
-		$html .= "<a href='https://amimoto-ami.com/' class='amimoto-logo-image'><img src={$logo_url} alt='Amimoto' ></a>";
+		$html .= "<a href='https://amimoto-ami.com/' class='amimoto-logo-image'><img src={$logo_url} alt='Amimoto' style='max-width:100%;height:auto;'></a>";
 		$html .= '</div>';
 		$html .= '</div>';
 		return $html;
 	}
 
+	/**
+	 * Search AMIMOTO FAQ (ZenDesk)
+	 *
+	 * @access private
+	 * @return string
+	 * @since 0.1.0
+	 **/
+	private function _get_zendesk_search_form() {
+		$html  = '';
+		$html .= "<div class='postbox'>";
+		$html .= "<div class='hndle'><h3 class='amimoto-logo-title'>". __( 'Search AMIMOTO FAQ', self::$text_domain ). '</h3></div>';
+		$html .= "<div class='inside'>";
+		$html .= "<form role='search' class='' data-search='' data-instant='true' autocomplete='off' action='https://amimoto.zendesk.com/hc/en-us/search' accept-charset='UTF-8' method='get'>";
+		$html .= "<input name='utf8' type='hidden' value='✓'>";
+		$html .= "<input type='search' name='query' id='query' placeholder='Search' autocomplete='off'>";
+		$html .= "<input type='submit' name='commit' class='button' value='Search'>";
+		$html .= "</form>";
+		$html .= '</div>';
+		$html .= '</div>';
+		return $html;
+	}
 	/**
 	 *  Create AMIMOTO News Widget html
 	 *

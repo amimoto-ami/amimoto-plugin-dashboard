@@ -263,7 +263,6 @@ class Amimoto_Dash_Admin extends Amimoto_Dash_Component {
 				break;
 		}
 		return $action;
-
 	}
 
 	/**
@@ -289,7 +288,6 @@ class Amimoto_Dash_Admin extends Amimoto_Dash_Component {
 	public function get_content_html() {
 		$html = '';
 		$html .= $this->_get_amimoto_plugin_html();
-		$activate_plugins = $this->_get_activated_plugin_list();
 		return $html;
 	}
 }
