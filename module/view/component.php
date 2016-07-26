@@ -130,7 +130,7 @@ class Amimoto_Dash_Component extends Amimoto_Dash_Base {
 	 *
 	 * @access private
 	 * @return string
-	 * @since 0.1.0
+	 * @since 0.2.0
 	 **/
 	private function _get_zendesk_search_form() {
 		$html  = '';
