@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: AMIMOTO Dashboard
+ * Plugin Name: AMIMOTO Plugin Dashboard
  * Version: 0.1.0
  * Description: Controle AMIMOTO helper plugins
  * Author: hideokamoto,amimotoami

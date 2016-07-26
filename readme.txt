@@ -1,4 +1,4 @@
-=== AMIMOTO Dashboard ===
+=== AMIMOTO Plugin Dashboard ===
 Contributors: hideokamoto,amimotoami
 Donate link: https://amimoto-ami.com
 Tags: admin,amimoto
