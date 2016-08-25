@@ -12,6 +12,7 @@ require_once( 'model/ncc.php' );
 require_once( 'model/c3.php' );
 require_once( 'model/nephila-clavata.php' );
 require_once( 'model/wpapi.php' );
+require_once( 'model/amimoto_patch.php' );
 
 
 // View

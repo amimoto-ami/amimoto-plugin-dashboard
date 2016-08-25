@@ -67,6 +67,9 @@ class Amimoto_Dash {
 		$menu->init();
 		add_action( 'admin_init',    array( $this, 'update_settings' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_theme_style' ) );
+
+		$patch = new Amimoto_patch();
+		$patch->register_patch();
 	}
 
 	public function admin_theme_style() {
