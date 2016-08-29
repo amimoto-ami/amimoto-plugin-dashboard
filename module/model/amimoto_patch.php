@@ -41,6 +41,6 @@ class Amimoto_patch {
 		if ( '_' === $_SERVER['SERVER_NAME'] ) {
 			$original_email_address = 'wordpress@' . parse_url( get_home_url( get_current_blog_id() ), PHP_URL_HOST );
 		}
-		return apply_filter( 'amimoto_patch_mailaddress', $original_email_address );
+		return apply_filters( 'amimoto_patch_mailaddress', $original_email_address );
 	}
 }
