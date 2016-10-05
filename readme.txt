@@ -3,8 +3,8 @@ Contributors: hideokamoto,amimotoami
 Donate link: https://amimoto-ami.com
 Tags: admin,amimoto
 Requires at least: 4.4.0
-Tested up to: 4.5.2
-Stable tag: 0.3.0
+Tested up to: 4.6.1
+Stable tag: 0.4.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -28,6 +28,9 @@ b. Activate the plugin through the 'Plugins' menu in WordPress.
 
 == Changelog ==
 
+= 0.4.0 =
+* Add  filter to add CloudFront content
+
 = 0.3.0 =
 * Add Email address patch (for using default.conf website)
 
@@ -42,5 +45,5 @@ b. Activate the plugin through the 'Plugins' menu in WordPress.
 
 == Upgrade Notice ==
 
-= 0.3.0 =
-* Add Email address patch (for using default.conf website)
+= 0.4.0 =
+* Add  filter to add CloudFront content

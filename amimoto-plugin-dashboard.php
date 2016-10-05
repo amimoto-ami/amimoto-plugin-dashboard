@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: AMIMOTO Plugin Dashboard
- * Version: 0.3.0
+ * Version: 0.4.0
  * Description: Controle AMIMOTO helper plugins
  * Author: hideokamoto,amimotoami
  * Author URI: https://amimoto-ami.com
