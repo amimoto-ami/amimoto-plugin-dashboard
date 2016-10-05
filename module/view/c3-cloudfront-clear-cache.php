@@ -67,7 +67,7 @@ class Amimoto_Dash_Cloudfront extends Amimoto_Dash_Component {
 			$html .= '<hr/>';
 			$html .= $this->_get_ncc_update_form();
 		}
-		return $html;
+		return apply_filters( 'amimoto_c3_add_settings', $html );
 	}
 
 	/**
