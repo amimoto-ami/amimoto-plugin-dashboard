@@ -4,7 +4,7 @@ Donate link: https://amimoto-ami.com
 Tags: admin,amimoto
 Requires at least: 4.4.0
 Tested up to: 4.6.1
-Stable tag: 0.4.0
+Stable tag: 0.4.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -45,5 +45,5 @@ b. Activate the plugin through the 'Plugins' menu in WordPress.
 
 == Upgrade Notice ==
 
-= 0.4.0 =
-* Add  filter to add CloudFront content
+= 0.4.1 =
+* Re-set c3_settings filter for old jinkei stack
