@@ -8,12 +8,13 @@ Stable tag: 0.4.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Controle AMIMOTO helper plugins
+Control AMIMOTO helper plugins
 
 == Description ==
 
-This plugin controlling AMIMOTO helper plugins. You can easy use AMIMOTO helper plguin in this plugin admin panel.
-Now supporded following plugins.
+This plugin handles AMIMOTO helper plugins.
+You can easy use AMIMOTO helper plugins in the plugin admin panel.
+Now supports the following plugins.
 
 - Nginx Cache Controller: Control Nginx reverse proxy cache.
 - C3 CloudFront Cache Controller: Control Amazon CloudFront.
@@ -21,10 +22,19 @@ Now supporded following plugins.
 
 == Installation ==
 
+Two ways to install this plugin
 You can two ways to install this plugin.
 
-a. Upload this directory to `/wp-content/plugins/` directory.
-b. Activate the plugin through the 'Plugins' menu in WordPress.
+A: Install through WordPress dashboard
+1. Go to Plugin page on your WordPress dashboard
+2. Click [Add New]
+3. Input amimoto dashboard into search form
+4. Click [Install Now]
+5. Click [Activate]
+
+B: Install through FTP or SFTP
+1. Upload the plugin folder to /wp-content/plugins/ directory on your server.
+2. Activate the plugin through the 'Plugins' menu in WordPress.
 
 == Changelog ==
 
