@@ -137,10 +137,9 @@ class Amimoto_Dash_Component extends Amimoto_Dash_Base {
 		$html .= "<div class='postbox'>";
 		$html .= "<div class='hndle'><h3 class='amimoto-logo-title'>". __( 'Search AMIMOTO FAQ', self::$text_domain ). '</h3></div>';
 		$html .= "<div class='inside'>";
-		$html .= "<form role='search' class='' data-search='' data-instant='true' autocomplete='off' action='https://amimoto.zendesk.com/hc/en-us/search' accept-charset='UTF-8' method='get'>";
-		$html .= "<input name='utf8' type='hidden' value='✓'>";
-		$html .= "<input type='search' name='query' id='query' placeholder='Search' autocomplete='off'>";
-		$html .= "<input type='submit' name='commit' class='button' value='Search'>";
+		$html .= "<form role='search' class='' action='https://support.amimoto-ami.com/' method='get'>";
+		$html .= "<input type='search' name='q' id='q' placeholder='Search' autocomplete='off'>";
+		$html .= "<input type='submit' class='button' value='Search'>";
 		$html .= "</form>";
 		$html .= '</div>';
 		$html .= '</div>';
