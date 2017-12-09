@@ -83,7 +83,6 @@ class Amimoto_Dash_Component extends Amimoto_Dash_Base {
 		$html .= "<div class='amimoto-dash-main'>";
 		$html .= $content;
 		$html .= '</div>';
-		$html .= $this->_get_subcontent_html();
 		return $html;
 	}
 
