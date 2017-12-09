@@ -163,6 +163,7 @@ class Amimoto_Dash_Admin extends Amimoto_Dash_Component {
 		$amimoto_installed = array_diff( $available_plugins_name, $amimoto_available);
 
 		$html .= '<header><h2>Installed</h2></header>';
+		// __( 'For use:', self::$text_domain )
 		$html .= '<div class="wp-list-table">';
 
 		foreach ($amimoto_plugins as $p) {
@@ -178,7 +179,7 @@ class Amimoto_Dash_Admin extends Amimoto_Dash_Component {
 
 		$html .= '</div>';
 
-		$html .= '<header><h2>Installed</h2></header>';
+		$html .= '<header><h2>Available</h2></header>';
 		$html .= '<div class="wp-list-table">';
 
 		foreach ($amimoto_plugins as $p) {
