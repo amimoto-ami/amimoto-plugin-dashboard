@@ -144,7 +144,7 @@ class Amimoto_Dash_Admin extends Amimoto_Dash_Component {
 	}
 
 	/**
-	 *  Create AMIMOTO Plugin List HTML
+	 *  Create AMIMOTO Plugin List
 	 *
 	 * @access private
 	 * @param none
@@ -155,16 +155,41 @@ class Amimoto_Dash_Admin extends Amimoto_Dash_Component {
 		$html = '';
 		$plugin_list_template = $this->_amimoto_plugin_list_template();
 		$amimoto_plugins = $this->_get_amimoto_plugin_list();
+		$available_plugins_name = array_column($amimoto_plugins, 'name');
+		$installed_plugins_name = array_column(get_plugins(), 'Name');
 
-		$html .= '<div>';
+		// Show Plugins available but not installed
+		$amimoto_available = array_diff( $available_plugins_name, $installed_plugins_name);
+		$amimoto_installed = array_diff( $available_plugins_name, $amimoto_available);
+
+		$html .= '<header><h2>Installed</h2></header>';
+		$html .= '<div class="wp-list-table">';
 
 		foreach ($amimoto_plugins as $p) {
-			$html .= $this->_amimoto_plugin_list_template(
-				$p['name'],
-				$p['thumbnail'],
-				$p['slug'],
-				$p['short_description']
-			);
+			if (in_array($p['name'], $amimoto_installed)) {
+				$html .= $this->_amimoto_plugin_list_template(
+					$p['name'],
+					$p['thumbnail'],
+					$p['slug'],
+					$p['short_description']
+				);
+			}
+		}
+
+		$html .= '</div>';
+
+		$html .= '<header><h2>Installed</h2></header>';
+		$html .= '<div class="wp-list-table">';
+
+		foreach ($amimoto_plugins as $p) {
+			if (in_array($p['name'], $amimoto_available)) {
+				$html .= $this->_amimoto_plugin_list_template(
+					$p['name'],
+					$p['thumbnail'],
+					$p['slug'],
+					$p['short_description']
+				);
+			}
 		}
 
 		$html .= '</div>';

@@ -35,3 +35,7 @@
 		margin-right: 0;
 	}
 }*/
+
+.amimoto-dash-main .wp-list-table {
+  float: left;
+}
