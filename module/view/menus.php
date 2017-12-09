@@ -169,10 +169,11 @@ class Amimoto_Dash_Menus extends Amimoto_Dash_Base {
 					__( 'Nginx Cache Controller', self::$text_domain ),
 					__( 'Nginx Reverse Proxy', self::$text_domain ),
 					'administrator',
-					self::PANEL_NCC,
+					self::PANEL_SUPPORT,
 					array( $nginxchampuru_admin, "admin_panel")
 				);
 			}
 		}
+
 	}
 }
