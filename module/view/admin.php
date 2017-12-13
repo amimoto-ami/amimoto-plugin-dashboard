@@ -112,12 +112,17 @@ class Amimoto_Dash_Admin extends Amimoto_Dash_Component {
 		wp_enqueue_style('thickbox');
 		wp_enqueue_script('thickbox');
 
+		$details_link = self_admin_url(
+				'plugin-install.php?tab=plugin-information&amp;plugin=' . $slug .
+				'&amp;TB_iframe=true&amp;width=600&amp;height=550'
+			);
+
 		$wp_plugin_html = '
 			<div class="plugin-card plugin-card-akismet">
 				<div class="plugin-card-top">
 					<div class="name column-name">
 						<h3>
-						<a href="'.get_admin_url('/').'plugin-install.php?tab=plugin-information&plugin='.$slug.'" class="thickbox open-plugin-details-modal">
+						<a href="'.esc_url( $details_link ).'" class="thickbox open-plugin-details-modal">
 							'.$title.'
 							<img src="'.$thumbnail.'" class="plugin-icon" alt="">
 						</a>
@@ -162,38 +167,27 @@ class Amimoto_Dash_Admin extends Amimoto_Dash_Component {
 		$amimoto_available = array_diff( $available_plugins_name, $installed_plugins_name);
 		$amimoto_installed = array_diff( $available_plugins_name, $amimoto_available);
 
+		$html .= '
+		<form id="plugin-filter" method="post">
+			<div class="wp-list-table widefat plugin-install">
+				<h2 class="screen-reader-text">AMIMOTO Plugins</h2>
+				<div id="the-list">';
+
 		$html .= '<header><h2>Installed</h2></header>';
-		// __( 'For use:', self::$text_domain )
 		$html .= '<div class="wp-list-table">';
 
 		foreach ($amimoto_plugins as $p) {
-			if (in_array($p['name'], $amimoto_installed)) {
-				$html .= $this->_amimoto_plugin_list_template(
-					$p['name'],
-					$p['thumbnail'],
-					$p['slug'],
-					$p['short_description']
-				);
-			}
+			$html .= $this->_amimoto_plugin_list_template(
+				$p['name'],
+				$p['thumbnail'],
+				$p['slug'],
+				$p['short_description']
+			);
 		}
 
 		$html .= '</div>';
 
-		$html .= '<header><h2>Available</h2></header>';
-		$html .= '<div class="wp-list-table">';
-
-		foreach ($amimoto_plugins as $p) {
-			if (in_array($p['name'], $amimoto_available)) {
-				$html .= $this->_amimoto_plugin_list_template(
-					$p['name'],
-					$p['thumbnail'],
-					$p['slug'],
-					$p['short_description']
-				);
-			}
-		}
-
-		$html .= '</div>';
+		$html .= '</div></div></form>';
 
 		return $html;
 	}
