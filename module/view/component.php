@@ -63,6 +63,7 @@ class Amimoto_Dash_Component extends Amimoto_Dash_Base {
 	 */
 	private function _get_header() {
 		$html  = '<header>';
+		$html .= $this->_get_support_search_form();
 		$html .= '<h1>' . __( 'AMIMOTO Plugin Dashboard', self::$text_domain ) . '</h1>';
 		$html .= '<hr/>';
 		$html .= '</header>';
@@ -96,7 +97,6 @@ class Amimoto_Dash_Component extends Amimoto_Dash_Base {
 	 */
 	private function _get_subcontent_html() {
 		$html  = "<div class='amimoto-dash-side'>";
-		$html .= $this->_get_support_search_form();
 		$html .= $this->_get_amimoto_api_widget( 16 );
 		$html .= $this->_get_amimoto_api_widget( 17 );
 		$html .= '</div>';
@@ -112,15 +112,13 @@ class Amimoto_Dash_Component extends Amimoto_Dash_Base {
 	 **/
 	private function _get_support_search_form() {
 		$html  = '';
-		$html .= "<div class='postbox'>";
-		$html .= "<div class='hndle'><h3 class='amimoto-logo-title'>". __( 'Search AMIMOTO FAQ', self::$text_domain ). '</h3></div>';
-		$html .= "<div class='inside'>";
 		$html .= "<form role='search' class='' action='https://support.amimoto-ami.com/' method='get'>";
-		$html .= "<input type='search' name='q' id='q' placeholder='Search' autocomplete='off'>";
-		$html .= "<input type='submit' class='button' value='Search'>";
+		$html .= '<p class="search-box">';
+		$html .= '<label class="screen-reader-text" for="amimoto-support-input">AMIMOTO Support Search:</label>';
+		$html .= '<input type="search" id="amimoto-support-input" name="q" value="">';
+		$html .= '<input type="submit" id="search-submit" class="button" value="Search AMIMOTO Support">';
+		$html .= '</p>';
 		$html .= "</form>";
-		$html .= '</div>';
-		$html .= '</div>';
 		return $html;
 	}
 	/**

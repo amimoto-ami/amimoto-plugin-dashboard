@@ -67,6 +67,35 @@ class Amimoto_Dash_Admin extends Amimoto_Dash_Component {
 	}
 
 	/**
+	 *  AMIMOTO Plugin API
+	 *
+	 *  Makeshift AMIMOTO Plugin API with a JSON Backup
+	 *
+	 * @access private
+	 * @param none
+	 * @return array
+	 * @since 0.0.1
+	 */
+	private function _get_amimoto_plugin_api() {
+		$url = 'https://amimoto-plugins.s3.amazonaws.com/amimoto-plugins.json';
+		$handle = curl_init($url);
+		curl_setopt($handle,  CURLOPT_RETURNTRANSFER, TRUE);
+		$response = curl_exec($handle);
+		$httpCode = curl_getinfo($handle, CURLINFO_HTTP_CODE);
+		if($httpCode != 200) {
+			$url = WP_PLUGIN_DIR . '/amimoto-plugin-dashboard/assets/amimoto-plugins.json';
+		}
+
+		curl_close($handle);
+
+
+		$content = file_get_contents($url);
+		$json = json_decode($content, true);
+
+		return $json;
+	}
+
+	/**
 	 *  Get Exists AMIMOTO Plugin list
 	 *
 	 *  Get exists plugin list that works for AMIMOTO AMI.
@@ -78,12 +107,9 @@ class Amimoto_Dash_Admin extends Amimoto_Dash_Component {
 	 */
 	private function _get_amimoto_plugin_list() {
 		$plugins = array();
+		$amimoto_plugins = $this->_get_amimoto_plugin_api();
 
-		$url = 'https://amimoto-plugins.s3.amazonaws.com/amimoto-plugins.json';
-		$content = file_get_contents($url);
-		$json = json_decode($content, true);
-
-		foreach($json as $item => $plugin) {
+		foreach($amimoto_plugins as $item => $plugin) {
 			$plugins[] = $plugin;
 		}
 
