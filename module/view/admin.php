@@ -113,9 +113,13 @@ class Amimoto_Dash_Admin extends Amimoto_Dash_Component {
 		wp_enqueue_script('thickbox');
 
 		$details_link = self_admin_url(
-				'plugin-install.php?tab=plugin-information&amp;plugin=' . $slug .
-				'&amp;TB_iframe=true&amp;width=600&amp;height=550'
-			);
+			'plugin-install.php?tab=plugin-information&amp;plugin=' . $slug .
+			'&amp;TB_iframe=true&amp;width=600&amp;height=550'
+		);
+
+		$actions_link = self_admin_url(
+			'update.php?action=install-plugin&plugin=c3-cloudfront-clear-cache&_wpnonce=19d34c3b3c'
+		);
 
 		$wp_plugin_html = '
 			<div class="plugin-card plugin-card-akismet">
@@ -131,7 +135,7 @@ class Amimoto_Dash_Admin extends Amimoto_Dash_Component {
 					<div class="action-links">
 						<ul class="plugin-action-buttons">
 							<li>
-								<a class="install-now button" data-slug="'.$slug.'" href="'.get_admin_url('/').'update.php?action=install-plugin&amp;plugin=bbpress&amp;_wpnonce=d55ae37dab" aria-label="Install bbPress 2.5.14 now" data-name="bbPress 2.5.14">Install Now</a>
+								<a class="install-now button" data-slug="'.$slug.'" href="'.$actions_link.'" aria-label="Install bbPress 2.5.14 now" data-name="bbPress 2.5.14">Install Now</a>
 							</li>
 							<li>
 								<a href="'.get_admin_url('/').'plugin-install.php?tab=plugin-information&amp;plugin='.$slug.'&amp;TB_iframe=true&amp;width=600&amp;height=550" class="thickbox open-plugin-details-modal" aria-label="More information about bbPress 2.5.14" data-title="bbPress 2.5.14">More Details</a>
@@ -173,7 +177,7 @@ class Amimoto_Dash_Admin extends Amimoto_Dash_Component {
 				<h2 class="screen-reader-text">AMIMOTO Plugins</h2>
 				<div id="the-list">';
 
-		$html .= '<header><h2>Installed</h2></header>';
+		$html .= '<header><h2>Available</h2></header>';
 		$html .= '<div class="wp-list-table">';
 
 		foreach ($amimoto_plugins as $p) {

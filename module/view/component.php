@@ -63,7 +63,7 @@ class Amimoto_Dash_Component extends Amimoto_Dash_Base {
 	 */
 	private function _get_header() {
 		$html  = '<header>';
-		$html .= '<h1>' . __( 'Overview', self::$text_domain ) . '</h1>';
+		$html .= '<h1>' . __( 'AMIMOTO Plugin Dashboard', self::$text_domain ) . '</h1>';
 		$html .= '<hr/>';
 		$html .= '</header>';
 		return $html;
