@@ -206,7 +206,6 @@ class Amimoto_Dash_Admin extends Amimoto_Dash_Component {
 				<h2 class="screen-reader-text">AMIMOTO Plugins</h2>
 				<div id="the-list">';
 
-		$html .= '<header><h2>Available</h2></header>';
 		$html .= '<div class="wp-list-table">';
 
 		foreach ($amimoto_plugins as $p) {
