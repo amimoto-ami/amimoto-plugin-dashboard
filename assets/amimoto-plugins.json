@@ -194,4 +194,92 @@
   },
   "donate_link": "http://wp-kyoto.net/",
   "contributors": []
+}, {
+  "name": "Nginx Cache Controller",
+  "thumbnail": "//placehold.it/128",
+  "slug": "nginx-champuru",
+  "version": "3.2.0",
+  "author": "<a href=\"http://ninjax.cc/\">Ninjax Team (Takayuki Miyauchi)</a>",
+  "author_profile": "https://profiles.wordpress.org/miyauchi",
+  "requires": "3.4",
+  "tested": "4.4.13",
+  "requires_php": false,
+  "compatibility": [],
+  "rating": 92,
+  "ratings": {
+    "1": 1,
+    "2": 0,
+    "3": 0,
+    "4": 1,
+    "5": 12
+  },
+  "num_ratings": 14,
+  "support_threads": 0,
+  "support_threads_resolved": 0,
+  "downloaded": 92063,
+  "last_updated": "2016-02-24 9:39am GMT",
+  "added": "2011-10-19",
+  "homepage": "https://github.com/megumiteam/nginx-cache-controller",
+  "sections": {
+    "description": "<p>This plugin provides some functions of controlling Nginx proxy server cache.</p>\n<h4>Security</h4>\n<ul>\n<li>Making comment authors&#8217; information ajaxed to prevent the information from caching.</li>\n<li>Send no-cache header on password protected posts to prevent the posts from caching.</li>\n<li>When a scheduled post is published, it will delete the cache through Ajax.</li>\n</ul>\n<h4>Controlling cache</h4>\n<ul>\n<li>Sending X-ACCEL-EXPIRES, you can specify the available period of the cache.</li>\n<li>When you save your post and someone post comments, the cache is deleted automatically.</li>\n<li>Add a menu on the admin bar to delete the cache.</li>\n</ul>\n<h4>Memo</h4>\n<ul>\n<li>Gets comment poster&#8217;s IP address by HTTP_X_FORWARDED_FOR header.</li>\n<li>Fixes the issue that the permanent link setting includes index.php.</li>\n<li>When the cache&#8217;s expiration period is more than 86400 sec, change the value of wp_verify_nonce() same as the period.</li>\n</ul>\n<h4>WP-CLI Support</h4>\n<p>Flush all proxy caches.<br />\n wp nginx flush</p>\n<p>Show list of all proxy caches.<br />\n wp nginx list &#8211;format=csv</p>\n<pre><code>wp nginx list --format=json\n</code></pre>\n<p>See help.<br />\n wp help nginx</p>\n<h4>Languages</h4>\n<ul>\n<li>English(en) &#8211; <a href=\"http://tekapo.com/\" rel=\"nofollow\">JOTAKI Taisuke</a></li>\n<li>Japanese(Ja) &#8211; <a href=\"http://tekapo.com/\" rel=\"nofollow\">JOTAKI Taisuke</a></li>\n<li>Vietnamese(vi) &#8211; <a href=\"http://bizover.net/\" rel=\"nofollow\">Trong</a></li>\n</ul>\n<h4>Contributor</h4>\n<ul>\n<li><a href=\"http://ninjax.cc/\" rel=\"nofollow\">Ninjax Team</a></li>\n<li><a href=\"https://profiles.wordpress.org/miyauchi/\" rel=\"nofollow\">miyauchi</a></li>\n<li><a href=\"https://profiles.wordpress.org/wokamoto/\" rel=\"nofollow\">wokamoto</a></li>\n<li><a href=\"https://profiles.wordpress.org/gatespace/\" rel=\"nofollow\">gatespace</a></li>\n</ul>\n<h3>Credits</h3>\n<p>This plug-in is not guaranteed though the user of WordPress can freely use this plug-in free of charge regardless of the purpose.<br />\nThe author must acknowledge the thing that the operation guarantee and the support in this plug-in use are not done at all beforehand.</p>\n<h3>Contact</h3>\n<ul>\n<li>https://github.com/miya0001/nginx-champuru</li>\n</ul>\n",
+    "installation": "<ul>\n<li>A plug-in installation screen is displayed on the WordPress admin panel.</li>\n<li>It installs it in <code>wp-content/plugins</code>.</li>\n<li>The plug-in is made effective.</li>\n</ul>\n<p>Example of Nginx settings:</p>\n<p>Allow X-ACCEL-EXPIRES for fastcgi.</p>\n<pre><code> location ~ \\.php$ {\n include /etc/nginx/fastcgi_params;\n fastcgi_pass unix:/tmp/php-fpm.sock;\n fastcgi_index index.php;\n fastcgi_param SCRIPT_FILENAME $vhost_root/$fastcgi_script_name;\n fastcgi_pass_header \"X-Accel-Redirect\";\n fastcgi_pass_header \"X-Accel-Expires\";\n }\n</code></pre>\n<p>Setting cache directory for reverse proxy.</p>\n<pre><code>proxy_cache_path /var/cache/nginx levels=1:2 keys_zone=czone:4m max_size=50m inactive=120m;\n</code></pre>\n<ul>\n<li>The default path is /var/cache/nginx.</li>\n<li>The default value of levels is 1:2.</li>\n<li>You can change the cache path at the admin panel.</li>\n</ul>\n<p>Setting the key for the reverse cache proxy.</p>\n<pre><code>proxy_cache_key \"$scheme://$host$request_uri\"\n</code></pre>\n<ul>\n<li>You can customize proxy_cache_key with <code>nginxchampuru_get_reverse_proxy_key</code> hook.</li>\n</ul>\n",
+    "changelog": "<h4>3.2.0</h4>\n<ul>\n<li>Bug fix for WP-CLI</li>\n</ul>\n<h4>3.1.1</h4>\n<ul>\n<li>Tested up to wp4.1</li>\n</ul>\n<h4>3.1.0</h4>\n<ul>\n<li>Add filter for WP-API</li>\n</ul>\n<p>https://github.com/megumiteam/nginx-cache-controller/compare/3.0.0&#8230;3.1.0</p>\n<h4>3.0.0</h4>\n<ul>\n<li>list sub command supported csv and json</li>\n</ul>\n<p>https://github.com/megumiteam/nginx-cache-controller/compare/2.9.0&#8230;3.0.0</p>\n<h4>2.9.0</h4>\n<ul>\n<li>Add feed features.</li>\n</ul>\n<p>https://github.com/megumiteam/nginx-cache-controller/compare/2.8.0&#8230;2.9.0</p>\n<h4>2.8.0</h4>\n<ul>\n<li>Don&#8217;t load wp-cron.php when DISABLE_WP_CRON is defined.</li>\n</ul>\n<p>https://github.com/megumiteam/nginx-cache-controller/compare/2.7.0&#8230;2.8.0</p>\n<h4>2.7.0</h4>\n<p>https://github.com/megumiteam/nginx-cache-controller/compare/2.6.0&#8230;2.7.0</p>\n<h4>2.6.0</h4>\n<ul>\n<li>refactoring</li>\n</ul>\n<p>https://github.com/megumiteam/nginx-cache-controller/compare/2.5.0&#8230;2.6.0</p>\n<h4>2.5.0</h4>\n<ul>\n<li>Up priority in the template_redirect hook</li>\n</ul>\n<p>https://github.com/megumiteam/nginx-cache-controller/compare/2.4.0&#8230;2.5.0</p>\n<h4>2.4.0</h4>\n<ul>\n<li>Bug fix. (SQL faild at RDS on the AWS.)</li>\n</ul>\n<p>https://github.com/megumiteam/nginx-cache-controller/compare/2.3.0&#8230;2.4.0</p>\n<h4>2.3.0</h4>\n<ul>\n<li>Bug fix. (Menu doen&#8217;t shown when DISALLOW_FILE_MODS is enabled.)</li>\n</ul>\n<p>https://github.com/megumiteam/nginx-cache-controller/compare/2.2.1&#8230;2.3.0</p>\n<h4>2.2.1</h4>\n<ul>\n<li>Add language Vietnamese (vi).</li>\n</ul>\n<h4>2.2.0</h4>\n<ul>\n<li>Add Grunt.</li>\n<li>Update admin interface.</li>\n</ul>\n<p>https://github.com/megumiteam/nginx-cache-controller/compare/2.1.0&#8230;2.2.0</p>\n<h4>2.1.0</h4>\n<ul>\n<li>Tested up to 3.8.</li>\n</ul>\n<h4>2.0.0</h4>\n<ul>\n<li><a href=\"https://github.com/megumiteam/nginx-cache-controller/compare/1.9.0...2.0.0\" rel=\"nofollow\">Bug fix</a></li>\n</ul>\n<h4>1.9.0</h4>\n<ul>\n<li>Add filter &#8220;nginxchampuru_db_cached_url&#8221;</li>\n</ul>\n<h4>1.8.0</h4>\n<ul>\n<li>Add WP-CLI Support</li>\n</ul>\n<h4>1.7.0</h4>\n<ul>\n<li>problem when redirect after clear cache fixed.</li>\n<li>Add filter hook to the HTTP responce header.</li>\n</ul>\n<h4>1.6.1</h4>\n<ul>\n<li>Bug on SSL fixed</li>\n</ul>\n<h4>1.2.0</h4>\n<ul>\n<li>fix large site issues.(timeout when too many urls)</li>\n<li>add like box to admin panel</li>\n</ul>\n<h4>1.0.0</h4>\n<ul>\n<li>Rename to &#8220;Nginx Cache Controller&#8221;</li>\n<li>Cache Controll</li>\n<li>Auto-Flush Cache</li>\n</ul>\n<h4>0.1.0</h4>\n<ul>\n<li>The first release.</li>\n</ul>\n",
+    "screenshots": "<ol><li><a href=\"https://ps.w.org/nginx-champuru/assets/screenshot-1.png?rev=1048196\"><img src=\"https://ps.w.org/nginx-champuru/assets/screenshot-1.png?rev=1048196\" alt=\"Admin Panel\"></a><p>Admin Panel</p></li><li><a href=\"https://ps.w.org/nginx-champuru/assets/screenshot-2.png?rev=1048196\"><img src=\"https://ps.w.org/nginx-champuru/assets/screenshot-2.png?rev=1048196\" alt=\"Adminbar\"></a><p>Adminbar</p></li></ol>"
+  },
+  "description": "<p>This plugin provides some functions of controlling Nginx proxy server cache.</p>\n<h4>Security</h4>\n<ul>\n<li>Making comment authors&#8217; information ajaxed to prevent the information from caching.</li>\n<li>Send no-cache header on password protected posts to prevent the posts from caching.</li>\n<li>When a scheduled post is published, it will delete the cache through Ajax.</li>\n</ul>\n<h4>Controlling cache</h4>\n<ul>\n<li>Sending X-ACCEL-EXPIRES, you can specify the available period of the cache.</li>\n<li>When you save your post and someone post comments, the cache is deleted automatically.</li>\n<li>Add a menu on the admin bar to delete the cache.</li>\n</ul>\n<h4>Memo</h4>\n<ul>\n<li>Gets comment poster&#8217;s IP address by HTTP_X_FORWARDED_FOR header.</li>\n<li>Fixes the issue that the permanent link setting includes index.php.</li>\n<li>When the cache&#8217;s expiration period is more than 86400 sec, change the value of wp_verify_nonce() same as the period.</li>\n</ul>\n<h4>WP-CLI Support</h4>\n<p>Flush all proxy caches.<br />\n wp nginx flush</p>\n<p>Show list of all proxy caches.<br />\n wp nginx list &#8211;format=csv</p>\n<pre><code>wp nginx list --format=json\n</code></pre>\n<p>See help.<br />\n wp help nginx</p>\n<h4>Languages</h4>\n<ul>\n<li>English(en) &#8211; <a href=\"http://tekapo.com/\" rel=\"nofollow\">JOTAKI Taisuke</a></li>\n<li>Japanese(Ja) &#8211; <a href=\"http://tekapo.com/\" rel=\"nofollow\">JOTAKI Taisuke</a></li>\n<li>Vietnamese(vi) &#8211; <a href=\"http://bizover.net/\" rel=\"nofollow\">Trong</a></li>\n</ul>\n<h4>Contributor</h4>\n<ul>\n<li><a href=\"http://ninjax.cc/\" rel=\"nofollow\">Ninjax Team</a></li>\n<li><a href=\"https://profiles.wordpress.org/miyauchi/\" rel=\"nofollow\">miyauchi</a></li>\n<li><a href=\"https://profiles.wordpress.org/wokamoto/\" rel=\"nofollow\">wokamoto</a></li>\n<li><a href=\"https://profiles.wordpress.org/gatespace/\" rel=\"nofollow\">gatespace</a></li>\n</ul>\n<h3>Credits</h3>\n<p>This plug-in is not guaranteed though the user of WordPress can freely use this plug-in free of charge regardless of the purpose.<br />\nThe author must acknowledge the thing that the operation guarantee and the support in this plug-in use are not done at all beforehand.</p>\n<h3>Contact</h3>\n<ul>\n<li>https://github.com/miya0001/nginx-champuru</li>\n</ul>\n",
+  "short_description": "Provides some functions of controlling Nginx proxy server cache.",
+  "download_link": "https://downloads.wordpress.org/plugin/nginx-champuru.3.2.0.zip",
+  "screenshots": {
+    "1": {
+      "src": "https://ps.w.org/nginx-champuru/assets/screenshot-1.png?rev=1048196",
+      "caption": "Admin Panel"
+    },
+    "2": {
+      "src": "https://ps.w.org/nginx-champuru/assets/screenshot-2.png?rev=1048196",
+      "caption": "Adminbar"
+    }
+  },
+  "tags": {
+    "cache": "cache",
+    "nginx": "nginx",
+    "reverse-proxy": "reverse proxy"
+  },
+  "versions": {
+    "0.2.0": "https://downloads.wordpress.org/plugin/nginx-champuru.0.2.0.zip",
+    "0.4.0": "https://downloads.wordpress.org/plugin/nginx-champuru.0.4.0.zip",
+    "1.1.0": "https://downloads.wordpress.org/plugin/nginx-champuru.1.1.0.zip",
+    "1.1.1": "https://downloads.wordpress.org/plugin/nginx-champuru.1.1.1.zip",
+    "1.1.2": "https://downloads.wordpress.org/plugin/nginx-champuru.1.1.2.zip",
+    "1.1.3": "https://downloads.wordpress.org/plugin/nginx-champuru.1.1.3.zip",
+    "1.1.4": "https://downloads.wordpress.org/plugin/nginx-champuru.1.1.4.zip",
+    "1.1.5": "https://downloads.wordpress.org/plugin/nginx-champuru.1.1.5.zip",
+    "1.2.1": "https://downloads.wordpress.org/plugin/nginx-champuru.1.2.1.zip",
+    "1.2.2": "https://downloads.wordpress.org/plugin/nginx-champuru.1.2.2.zip",
+    "1.3.0": "https://downloads.wordpress.org/plugin/nginx-champuru.1.3.0.zip",
+    "1.4.2": "https://downloads.wordpress.org/plugin/nginx-champuru.1.4.2.zip",
+    "1.5.0": "https://downloads.wordpress.org/plugin/nginx-champuru.1.5.0.zip",
+    "1.6.0": "https://downloads.wordpress.org/plugin/nginx-champuru.1.6.0.zip",
+    "1.6.1": "https://downloads.wordpress.org/plugin/nginx-champuru.1.6.1.zip",
+    "1.7.0": "https://downloads.wordpress.org/plugin/nginx-champuru.1.7.0.zip",
+    "1.8.0": "https://downloads.wordpress.org/plugin/nginx-champuru.1.8.0.zip",
+    "1.9.0": "https://downloads.wordpress.org/plugin/nginx-champuru.1.9.0.zip",
+    "2.0.0": "https://downloads.wordpress.org/plugin/nginx-champuru.2.0.0.zip",
+    "2.1.0": "https://downloads.wordpress.org/plugin/nginx-champuru.2.1.0.zip",
+    "2.2.0": "https://downloads.wordpress.org/plugin/nginx-champuru.2.2.0.zip",
+    "2.2.1": "https://downloads.wordpress.org/plugin/nginx-champuru.2.2.1.zip",
+    "2.3.0": "https://downloads.wordpress.org/plugin/nginx-champuru.2.3.0.zip",
+    "2.4.0": "https://downloads.wordpress.org/plugin/nginx-champuru.2.4.0.zip",
+    "2.5.0": "https://downloads.wordpress.org/plugin/nginx-champuru.2.5.0.zip",
+    "2.6.0": "https://downloads.wordpress.org/plugin/nginx-champuru.2.6.0.zip",
+    "2.7.0": "https://downloads.wordpress.org/plugin/nginx-champuru.2.7.0.zip",
+    "2.8.0": "https://downloads.wordpress.org/plugin/nginx-champuru.2.8.0.zip",
+    "2.9.0": "https://downloads.wordpress.org/plugin/nginx-champuru.2.9.0.zip",
+    "3.0.0": "https://downloads.wordpress.org/plugin/nginx-champuru.3.0.0.zip",
+    "3.1.0": "https://downloads.wordpress.org/plugin/nginx-champuru.3.1.0.zip",
+    "3.1.1": "https://downloads.wordpress.org/plugin/nginx-champuru.3.1.1.zip",
+    "3.2.0": "https://downloads.wordpress.org/plugin/nginx-champuru.3.2.0.zip",
+    "trunk": "https://downloads.wordpress.org/plugin/nginx-champuru.zip"
+  },
+  "donate_link": "http://ninjax.cc/",
+  "contributors": []
 }]

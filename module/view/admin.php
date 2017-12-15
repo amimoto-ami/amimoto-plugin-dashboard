@@ -134,7 +134,8 @@ class Amimoto_Dash_Admin extends Amimoto_Dash_Component {
 		'desc' => null
 	)) {
 
-		// Load WP Core Thickbox Scripts
+		// Plugin Install Scripts & Styles
+		wp_enqueue_script( 'plugin-install' );
 		wp_enqueue_style('thickbox');
 		wp_enqueue_script('thickbox');
 
@@ -143,33 +144,19 @@ class Amimoto_Dash_Admin extends Amimoto_Dash_Component {
 			'&amp;TB_iframe=true&amp;width=600&amp;height=550'
 		);
 
-		$actions_link = self_admin_url(
-			'update.php?action=install-plugin&plugin=c3-cloudfront-clear-cache&_wpnonce=19d34c3b3c'
-		);
-
 		// echo '<pre>' . print_r(get_plugins()) . '</pre>';
 		// echo '<pre>' . print_r(is_plugin_active('jetpack/jetpack.php')) . '</pre>';
 
 		$wp_plugin_html = '
 			<div class="plugin-card plugin-card-akismet">
 				<div class="plugin-card-top">
-					<div class="name column-name">
+					<div class="name column-name" style="margin-right: 0px;">
 						<h3>
 						<a href="'.esc_url( $details_link ).'" class="thickbox open-plugin-details-modal">
 							'.$args['title'].'
 							<img src="'.$args['thumbnail'].'" class="plugin-icon" alt="">
 						</a>
 					</h3>
-					</div>
-					<div class="action-links">
-						<ul class="plugin-action-buttons">
-							<li>
-								<a class="install-now button" data-slug="'.$args['slug'].'" href="'.$actions_link.'" aria-label="Install bbPress 2.5.14 now" data-name="bbPress 2.5.14">Install Now</a>
-							</li>
-							<li>
-								<a href="'.get_admin_url('/').'plugin-install.php?tab=plugin-information&amp;plugin='.$args['slug'].'&amp;TB_iframe=true&amp;width=600&amp;height=550" class="thickbox open-plugin-details-modal" aria-label="More information about bbPress 2.5.14" data-title="bbPress 2.5.14">More Details</a>
-							</li>
-						</ul>
 					</div>
 					<div class="desc column-description">
 						<p>'.$args['desc'].'</p>
