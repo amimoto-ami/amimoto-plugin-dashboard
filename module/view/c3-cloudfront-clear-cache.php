@@ -132,6 +132,27 @@ class Amimoto_Dash_Cloudfront extends Amimoto_Dash_Component {
 		return $html;
 	}
 
+	/**
+	 * Get CloudFront Distribution Id Form
+	 *
+	 * @params string $dist_id CloudFront Distribution Id
+	 * @return string HTML tag to show Distribution ID input form
+	 * @access private
+	 * @since 0.5.0
+	 */
+	private function __get_cf_dist_input( $dist_id ) {
+		$disabled = false;
+		if ( defined( 'AMIMOTO_CDN_ID' ) ) {
+			$disabled = true;
+			$dist_id = AMIMOTO_CDN_ID;
+		}
+		$html = '';
+		$html .= '<tr><th>'. __( 'CloudFront Distribution ID', self::$text_domain ). '</th>';
+		$html .= "<td><input type='text' class='regular-text code' name='c3_settings[distribution_id]' value='{$dist_id}' disabled='{$disabled}' /></td>";
+		$html .= '</tr>';
+		return $html;
+	}
+
 
 	/**
 	 *  Get CloudFront Setting Form html
@@ -164,9 +185,7 @@ class Amimoto_Dash_Cloudfront extends Amimoto_Dash_Component {
 		$html .= "<tr><th colspan='2'><h2>" . __( 'CloudFront Connection Settings', self::$text_domain ). '</h2></th></tr>';
 		$html .= '</thead>';
 		$html .= '<tbody>';
-		$html .= '<tr><th>'. __( 'CloudFront Distribution ID', self::$text_domain ). '</th>';
-		$html .= "<td><input type='text' class='regular-text code' name='c3_settings[distribution_id]' value='{$c3_settings['distribution_id']}' /></td>";
-		$html .= '</tr>';
+		$html .= $this->__get_cf_dist_input($c3_settings['distribution_id']);
 		if ( ! $has_ec2_instance_role ) {
 			$html .= '<tr><th>'. __( 'AWS Access Key', self::$text_domain ). '</th>';
 			$html .= "<td><input type='text' class='regular-text code' name='c3_settings[access_key]' value='{$c3_settings['access_key']}' /></td>";
