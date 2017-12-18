@@ -95,12 +95,26 @@ class Amimoto_Dash_Base {
 	 */
 	public function get_amimoto_plugin_file_list() {
 		$amimoto_plugins = array(
+			'Nephila clavata' => 'nephila-clavata/plugin.php',
 			'C3 Cloudfront Cache Controller' => 'c3-cloudfront-clear-cache/c3-cloudfront-clear-cache.php',
 			'Nephila clavata' => 'nephila-clavata/plugin.php',
 			'Nginx Cache Controller on GitHub' => 'nginx-cache-controller/nginx-champuru.php',
 			'Nginx Cache Controller on WP.org' => 'nginx-champuru/nginx-champuru.php',
 		);
 		return $amimoto_plugins;
+	}
+
+	/**
+	 * Check is AMIMOTO Managed mode
+	 *
+	 * @return bool
+	 * @since 0.5.0
+	 */
+	public static function is_amimoto_managed() {
+		if ( isset( $_SERVER['HTTP_X_AMIMOTO_MANAGED'] ) && $_SERVER['HTTP_X_AMIMOTO_MANAGED'] ){
+			return true;
+		}
+		return false;
 	}
 
 	/**

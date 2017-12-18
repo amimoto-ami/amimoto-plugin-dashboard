@@ -116,6 +116,7 @@ class Amimoto_Dash_Menus extends Amimoto_Dash_Base {
 	 * @since 0.0.1
 	 */
 	public function define_menus() {
+		$is_amimoto_managed = Amimoto_Dash_Base::is_amimoto_managed();
 		$base = Amimoto_Dash_Admin::get_instance();
 		add_menu_page(
 			__( 'Welcome to AMIMOTO Plugin Dashboard', self::$text_domain ),
@@ -126,52 +127,61 @@ class Amimoto_Dash_Menus extends Amimoto_Dash_Base {
 			'dashicons-admin-settings',
 			3
 		);
-		$amimoto_plugins = $this->get_amimoto_plugin_file_list();
-		$active_plugin_urls = get_option( 'active_plugins' );
-		if ( array_search( $amimoto_plugins['C3 Cloudfront Cache Controller'], $active_plugin_urls ) ) {
-			$c3 = Amimoto_Dash_Cloudfront::get_instance();
-			add_submenu_page(
-				self::PANEL_ROOT,
-				__( 'C3 Cloudfront Cache Controller', self::$text_domain ),
-				__( 'CloudFront', self::$text_domain ),
-				'administrator',
-				self::PANEL_C3,
-				array( $c3, 'init_panel' )
-			);
-		}
-
-		if ( array_search( $amimoto_plugins['Nephila clavata'], $active_plugin_urls ) ) {
-			$plugin_file_path = path_join( ABSPATH , 'wp-content/plugins/nephila-clavata/includes/class-NephilaClavata_Admin.php' );
-			require_once( $plugin_file_path );
-			$nephila_clavata_admin = NephilaClavata_Admin::get_instance();
-			add_submenu_page(
-				self::PANEL_ROOT,
-				__( 'Nephila clavata', self::$text_domain ),
-				__( 'Amazon S3', self::$text_domain ),
-				'administrator',
-				self::PANEL_S3,
-				array( $nephila_clavata_admin, 'options_page' )
-			);
-			add_filter('nephila_clavata_admin_url',function(){ return 'admin.php'; } );
-		}
-
-		if ( array_search( $amimoto_plugins['Nginx Cache Controller on GitHub'], $active_plugin_urls ) ||
-			 array_search( $amimoto_plugins['Nginx Cache Controller on WP.org'], $active_plugin_urls ) ) {
-			$plugin_file_path = path_join( ABSPATH , 'wp-content/plugins/nginx-champuru/includes/admin.class.php' );
-			if ( ! file_exists( $plugin_file_path ) ) {
-				$plugin_file_path = path_join( ABSPATH , 'wp-content/plugins/nginx-cache-controller/includes/admin.class.php' );
-			}
-			if ( file_exists( $plugin_file_path ) ) {
-				require_once( $plugin_file_path );
-				$nginxchampuru_admin = NginxChampuru_Admin::get_instance();
+		if ( ! $is_amimoto_managed ) {
+			$amimoto_plugins = $this->get_amimoto_plugin_file_list();
+			$active_plugin_urls = get_option( 'active_plugins' );
+			if ( array_search( $amimoto_plugins['C3 Cloudfront Cache Controller'], $active_plugin_urls ) ) {
+				$menu_label = __( 'CloudFront', self::$text_domain );
+				if ( $is_amimoto_managed ) {
+					$menu_label = __('CDN Cache', self::$text_domain );
+				}
+				$c3 = Amimoto_Dash_Cloudfront::get_instance();
 				add_submenu_page(
 					self::PANEL_ROOT,
-					__( 'Nginx Cache Controller', self::$text_domain ),
-					__( 'Nginx Reverse Proxy', self::$text_domain ),
+					__( 'C3 Cloudfront Cache Controller', self::$text_domain ),
+					$menu_label,
 					'administrator',
-					self::PANEL_NCC,
-					array( $nginxchampuru_admin, "admin_panel")
+					self::PANEL_C3,
+					array( $c3, 'init_panel' )
 				);
+			}
+
+			if ( array_search( $amimoto_plugins['Nephila clavata'], $active_plugin_urls ) ) {
+				$plugin_file_path = path_join( ABSPATH, 'wp-content/plugins/nephila-clavata/includes/class-NephilaClavata_Admin.php' );
+				require_once( $plugin_file_path );
+				$nephila_clavata_admin = NephilaClavata_Admin::get_instance();
+				add_submenu_page(
+					self::PANEL_ROOT,
+					__( 'Nephila clavata', self::$text_domain ),
+					__( 'Amazon S3', self::$text_domain ),
+					'administrator',
+					self::PANEL_S3,
+					array( $nephila_clavata_admin, 'options_page' )
+				);
+				add_filter( 'nephila_clavata_admin_url', function () {
+					return 'admin.php';
+				} );
+			}
+
+			if ( array_search( $amimoto_plugins['Nginx Cache Controller on GitHub'], $active_plugin_urls ) ||
+			     array_search( $amimoto_plugins['Nginx Cache Controller on WP.org'], $active_plugin_urls )
+			) {
+				$plugin_file_path = path_join( ABSPATH, 'wp-content/plugins/nginx-champuru/includes/admin.class.php' );
+				if ( ! file_exists( $plugin_file_path ) ) {
+					$plugin_file_path = path_join( ABSPATH, 'wp-content/plugins/nginx-cache-controller/includes/admin.class.php' );
+				}
+				if ( file_exists( $plugin_file_path ) ) {
+					require_once( $plugin_file_path );
+					$nginxchampuru_admin = NginxChampuru_Admin::get_instance();
+					add_submenu_page(
+						self::PANEL_ROOT,
+						__( 'Nginx Cache Controller', self::$text_domain ),
+						__( 'Nginx Reverse Proxy', self::$text_domain ),
+						'administrator',
+						self::PANEL_NCC,
+						array( $nginxchampuru_admin, "admin_panel" )
+					);
+				}
 			}
 		}
 	}

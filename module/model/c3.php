@@ -61,6 +61,26 @@ class Amimoto_C3 extends Amimoto_Dash_Base {
 	}
 
 	/**
+	 * Update Nginx cache config for AMIMOTO Managed
+	 *
+	 * @access public
+	 * @param none
+	 * @return bool | WP_Error
+	 * @since 0.5.0
+	 */
+	public function update_ncc_settings_for_managed() {
+		if ( ! $this->is_activated_ncc() ) {
+			return new WP_Error( 'AMIMOTO Dashboard Error', 'Nginx Cache Controller Plugin is not activated.' );
+		}
+		$this->overwrite_ncc_settings();
+		update_option( 'nginxchampuru-cache_levels', '1:2');
+		update_option( 'nginxchampuru-cache_dir', '/var/cache/nginx/proxy_cache');
+		update_option( 'nginxchampuru-comment', 'single');
+		update_option( 'nginxchampuru-publish', 'almost');
+		update_option( 'nginxchampuru-enable_flush', 1);
+	}
+
+	/**
 	 *  Overwrite Nginx Cache Controller Settings
 	 *
 	 * @access public
@@ -69,14 +89,15 @@ class Amimoto_C3 extends Amimoto_Dash_Base {
 	 * @since 0.0.1
 	 */
 	public function overwrite_ncc_settings() {
-		if ( $this->is_activated_ncc() ) {
-			$expires = get_option( 'nginxchampuru-cache_expires' );
-			$updated_expires = array();
-			foreach ( $expires as $key => $value ) {
-				$updated_expires[ $key ] = 30;
-			}
-			update_option( 'nginxchampuru-cache_expires', $updated_expires );
+		if ( ! $this->is_activated_ncc() ) {
+			return new WP_Error( 'AMIMOTO Dashboard Error', 'Nginx Cache Controller Plugin is not activated.' );
 		}
+		$expires = get_option( 'nginxchampuru-cache_expires' );
+		$updated_expires = array();
+		foreach ( $expires as $key => $value ) {
+			$updated_expires[ $key ] = 30;
+		}
+		update_option( 'nginxchampuru-cache_expires', $updated_expires );
 		return true;
 	}
 

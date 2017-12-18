@@ -77,8 +77,18 @@ class Amimoto_Dash_Admin extends Amimoto_Dash_Component {
 	 * @since 0.0.1
 	 */
 	private function _get_amimoto_plugin_list() {
+		$is_amimoto_managed = $this->is_amimoto_managed();
 		$plugins = array();
 		foreach ( $this->amimoto_plugins as $plugin_name => $plugin_url ) {
+			if ( $is_amimoto_managed ) {
+				if (
+					$plugin_name === 'C3 Cloudfront Cache Controller' ||
+					$plugin_name === 'Nginx Cache Controller on GitHub' ||
+					$plugin_name === 'Nginx Cache Controller on WP.org'
+				) {
+					continue;
+				}
+			}
 			$plugin_file_path = path_join( ABSPATH . 'wp-content/plugins', $plugin_url );
 			if ( ! file_exists( $plugin_file_path ) ) {
 				if ( 'Nginx Cache Controller on GitHub' != $plugin_name ) {
@@ -105,6 +115,9 @@ class Amimoto_Dash_Admin extends Amimoto_Dash_Component {
 		$plugins = $this->_get_amimoto_plugin_list();
 		$active_plugin_urls = $this->_get_activated_plugin_list();
 		$html .= "<table class='wp-list-table widefat plugins'>";
+		$html .= '<thead>';
+		$html .= "<tr><th colspan='2'><h2>" . __( 'AMIMOTO support plugins', self::$text_domain ). '</h2></th></tr>';
+		$html .= '</thead>';
 		$html .= '<tbody>';
 		foreach ( $plugins as $plugin_url => $plugin ) {
 			$plugin_type = $plugin['TextDomain'];
@@ -287,6 +300,10 @@ class Amimoto_Dash_Admin extends Amimoto_Dash_Component {
 	 */
 	public function get_content_html() {
 		$html = '';
+		if ( $this->is_amimoto_managed() ) {
+			$html .= $this->_get_amimoto_managed_cache_control_form();
+			$html .= '<hr/>';
+		}
 		$html .= $this->_get_amimoto_plugin_html();
 		return $html;
 	}
