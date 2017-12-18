@@ -130,11 +130,15 @@ class Amimoto_Dash_Menus extends Amimoto_Dash_Base {
 		$amimoto_plugins = $this->get_amimoto_plugin_file_list();
 		$active_plugin_urls = get_option( 'active_plugins' );
 		if ( array_search( $amimoto_plugins['C3 Cloudfront Cache Controller'], $active_plugin_urls ) ) {
+			$menu_label = __( 'CloudFront', self::$text_domain );
+			if ( $is_amimoto_managed ) {
+				$menu_label = __('CDN Cache', self::$text_domain );
+			}
 			$c3 = Amimoto_Dash_Cloudfront::get_instance();
 			add_submenu_page(
 				self::PANEL_ROOT,
 				__( 'C3 Cloudfront Cache Controller', self::$text_domain ),
-				__( 'CloudFront', self::$text_domain ),
+				$menu_label,
 				'administrator',
 				self::PANEL_C3,
 				array( $c3, 'init_panel' )
