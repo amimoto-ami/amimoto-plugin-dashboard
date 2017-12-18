@@ -18,6 +18,20 @@ define( 'AMI_DASH_PATH', plugin_dir_path( __FILE__ ) );
 define( 'AMI_DASH_URL', plugin_dir_url( __FILE__ ) );
 define( 'AMI_DASH_ROOT', __FILE__ );
 
+register_activation_hook( __FILE__, 'initializing_amimoto_managed' );
+
+function initializing_amimoto_managed() {
+	$base = Amimoto_Dash_Base::get_instance();
+	if (!$base->is_amimoto_managed()) {
+		return;
+	}
+	$c3 = Amimoto_C3::get_instance();
+	$result = $c3->update_ncc_settings_for_managed();
+	if ( is_wp_error( $result ) ) {
+		error_log( print_r( $result, true ) );
+	}
+}
+
 $amimoto_dash = Amimoto_Dash::get_instance();
 $amimoto_dash->init();
 
@@ -92,7 +106,7 @@ class Amimoto_Dash {
 		// For Nginx Cache Controller
 		if ( isset( $_POST['expires'] ) && $_POST['expires'] ) {
 			wp_redirect( admin_url( 'admin.php?page=nginx-champuru&message=true' ) );
-		}
+        }
 
 		$result = false;
 		$plugin_stat = Amimoto_Dash_Stat::get_instance();
