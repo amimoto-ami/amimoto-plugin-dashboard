@@ -132,11 +132,75 @@ class Amimoto_Dash {
 			$result = $c3->overwrite_ncc_settings();
 		}
 
-		if ( ! is_wp_error( $result ) && $result ) {
-			if ( isset( $_POST['redirect_page'] ) && $_POST['redirect_page'] ) {
+		if ( $result ) {
+			if ( is_wp_error( $result ) ) {
+				$this->_show_error( $result );
+			} else if ( isset( $_POST['redirect_page'] ) && $_POST['redirect_page'] ) {
 				wp_safe_redirect( menu_page_url( $_POST['redirect_page'], false ) );
+			} else {
+				$this->_show_result( $result );
 			}
 		}
+
+		if ( ! is_wp_error( $result ) && $result ) {
+
+		}
+
+	}
+	/**
+	 * Show Constole result on wp-admin
+	 *
+	 * @access private
+	 * @param {array} $messages - Result messages.
+	 * @since 0.0.1
+	 **/
+	private function _show_result( $messages ) {
+		if ( ! is_array( $messages ) ) {
+			$messages = array(
+				$messages,
+			);
+		}
+		$default_message = esc_html( __( 'Update completed', 'amimoto-dashboard' ) );
+		if ( empty( $messages ) ) {
+			$messages[] = $default_message;
+		}
+		if ( count($messages) === 1 && ! is_string( $messages[0] ) ) {
+			$messages = array( $default_message );
+		}
+		?>
+		<div class='notice updated'><ul>
+				<?php foreach ( $messages as $key => $message ) : ?>
+					<li>
+						<?php
+							echo esc_html( $message );
+						?>
+					</li>
+				<?php endforeach; ?>
+			</ul></div>
+		<?php
+	}
+
+	/**
+	 * Show error message on wp-admin
+	 *
+	 * @access private
+	 * @param WP_Error $error Wp_error object.
+	 * @since 4.4.0
+	 **/
+	private function _show_error( WP_Error $error ) {
+		$messages = $error->get_error_messages();
+		$codes = $error->get_error_codes();
+		$code = esc_html( $codes[0] );
+		?>
+		<div class='error'><ul>
+				<?php foreach ( $messages as $key => $message ) : ?>
+					<li>
+						<b><?php echo esc_html( $code );?></b>
+						: <?php echo esc_html( $message );?>
+					</li>
+				<?php endforeach; ?>
+			</ul></div>
+		<?php
 	}
 
 	/**
