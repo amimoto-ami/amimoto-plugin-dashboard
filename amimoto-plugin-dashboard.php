@@ -73,7 +73,7 @@ class Amimoto_Dash {
 	}
 
 	public function admin_theme_style() {
-		wp_enqueue_style( 'amimoto-admin-style',  path_join( AMI_DASH_URL, 'assets/admin.css' ) , array() , '2016062301' );
+		wp_enqueue_style( 'amimoto-admin-style', path_join( AMI_DASH_URL, 'assets/admin.css' ) , array() , '2016062301' );
 	}
 
 	/**
@@ -129,7 +129,11 @@ class Amimoto_Dash {
 
 		if ( $this->is_trust_post_param( Amimoto_Dash_Base::CLOUDFRONT_UPDATE_NCC ) ) {
 			$c3 = Amimoto_C3::get_instance();
-			$result = $c3->overwrite_ncc_settings();
+			if ( Amimoto_Dash_Base::is_amimoto_managed() ) {
+				$result = $c3->update_ncc_settings_for_managed();
+            } else {
+				$result = $c3->overwrite_ncc_settings();
+            }
 		}
 
 		if ( $result ) {
