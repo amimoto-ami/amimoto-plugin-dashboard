@@ -105,6 +105,9 @@ class Amimoto_Dash_Admin extends Amimoto_Dash_Component {
 		$plugins = $this->_get_amimoto_plugin_list();
 		$active_plugin_urls = $this->_get_activated_plugin_list();
 		$html .= "<table class='wp-list-table widefat plugins'>";
+		$html .= '<thead>';
+		$html .= "<tr><th colspan='2'><h2>" . __( 'AMIMOTO support plugins', self::$text_domain ). '</h2></th></tr>';
+		$html .= '</thead>';
 		$html .= '<tbody>';
 		foreach ( $plugins as $plugin_url => $plugin ) {
 			$plugin_type = $plugin['TextDomain'];
@@ -287,6 +290,10 @@ class Amimoto_Dash_Admin extends Amimoto_Dash_Component {
 	 */
 	public function get_content_html() {
 		$html = '';
+		if ( $this->is_amimoto_managed() ) {
+			$html .= $this->_get_amimoto_managed_cache_control_form();
+			$html .= '<hr/>';
+		}
 		$html .= $this->_get_amimoto_plugin_html();
 		return $html;
 	}

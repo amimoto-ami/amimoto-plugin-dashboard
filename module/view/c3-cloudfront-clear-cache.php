@@ -75,48 +75,6 @@ class Amimoto_Dash_Cloudfront extends Amimoto_Dash_Component {
 	}
 
 	/**
-	 *  Get AMIMOTO Managed cache control HTML
-	 *
-	 * @access private
-	 * @param none
-	 * @return string HTML tag to show cache control form
-	 * @since 0.5.0
-	 */
-	private function _get_amimoto_managed_cache_control_form() {
-		$html = '';
-		if ( ! $this->is_amimoto_managed() ) {
-			return $html;
-		}
-		$html .= "<table class='wp-list-table widefat plugins'>";
-		$html .= '<thead>';
-		$html .= "<tr><th colspan='2'><h2>" . __( 'AMIMOTO Cache Control', self::$text_domain ). '</h2></th></tr>';
-		$html .= '</thead>';
-		$html .= '<tbody>';
-		$html .= '<tr><th><b>'. __( 'Flush All CDN Cache', self::$text_domain ). '</b>';
-		$html .= '<p></p></th>';
-		$html .= '<td>';
-		$html .= "<form method='post' action=''>";
-		$html .= "<input type='hidden' name='invalidation_target' value='all' />";
-		$html .= wp_nonce_field( self::CLOUDFRONT_INVALIDATION , self::CLOUDFRONT_INVALIDATION , true , false );
-		$html .= get_submit_button( __( 'Flush All CDN Cache', self::$text_domain ) );
-		$html .= '</form>';
-		$html .= '</td>';
-		$html .= '</tr>';
-		$html .= '<tr><th><b>'. __( 'Reset Nginx Cache Setting', self::$text_domain ). '</b>';
-		$html .= '<p>' . __( 'All Nginx Cache Expires change 30sec.', self::$text_domain ) . '</p></th>';
-		$html .= '<td>';
-		$html .= "<form method='post' action=''>";
-		$html .= "<input type='hidden' name='invalidation_target' value='all' />";
-		$html .= wp_nonce_field( self::CLOUDFRONT_UPDATE_NCC , self::CLOUDFRONT_UPDATE_NCC , true , false );
-		$html .= get_submit_button( __( 'Reset Nginx Cache Setting', self::$text_domain ) );
-		$html .= '</form>';
-		$html .= '</td>';
-		$html .= '</tr>';
-		$html .= '</tbody></table>';
-		return $html;
-	}
-
-	/**
 	 *  Get CloudFront Invalidation Form html
 	 *
 	 * @access private
