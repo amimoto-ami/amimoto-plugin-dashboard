@@ -23,7 +23,7 @@ class Amimoto_Dash_Base {
 	private static $version;
 
 	//Panel key
-	const PANEL_ROOT = 'amimoto_dash_root';
+	const PANEL_ROOT = 'amimoto';
 	const PANEL_C3 = 'amimoto_dash_c3';
 	const PANEL_S3 = 'nephila-clavata';
 	const PANEL_NCC = 'nginx-champuru';

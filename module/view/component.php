@@ -63,6 +63,7 @@ class Amimoto_Dash_Component extends Amimoto_Dash_Base {
 	 */
 	private function _get_header() {
 		$html  = '<header>';
+		$html .= $this->_get_support_search_form();
 		$html .= '<h1>' . __( 'AMIMOTO Plugin Dashboard', self::$text_domain ) . '</h1>';
 		$html .= '<hr/>';
 		$html .= '</header>';
@@ -83,7 +84,6 @@ class Amimoto_Dash_Component extends Amimoto_Dash_Base {
 		$html .= "<div class='amimoto-dash-main'>";
 		$html .= $content;
 		$html .= '</div>';
-		$html .= $this->_get_subcontent_html();
 		return $html;
 	}
 
@@ -97,30 +97,8 @@ class Amimoto_Dash_Component extends Amimoto_Dash_Base {
 	 */
 	private function _get_subcontent_html() {
 		$html  = "<div class='amimoto-dash-side'>";
-		$html .= $this->_get_amimoto_logo();
-		$html .= $this->_get_zendesk_search_form();
 		$html .= $this->_get_amimoto_api_widget( 16 );
 		$html .= $this->_get_amimoto_api_widget( 17 );
-		$html .= '</div>';
-		return $html;
-	}
-
-	/**
-	 *  Create AMIMOTO LOGO Widget html
-	 *
-	 * @access private
-	 * @param none
-	 * @return string(HTML)
-	 * @since 0.0.1
-	 */
-	private function _get_amimoto_logo() {
-		$html  = '';
-		$logo_url = path_join( AMI_DASH_URL, 'assets/amimoto.png' );
-		$html .= "<div class='postbox'>";
-		$html .= "<div class='hndle'><h3 class='amimoto-logo-title'>". __( 'High Performance WordPress Cloud', self::$text_domain ). '</h3></div>';
-		$html .= "<div class='inside'>";
-		$html .= "<a href='https://amimoto-ami.com/' class='amimoto-logo-image'><img src={$logo_url} alt='Amimoto' style='max-width:100%;height:auto;'></a>";
-		$html .= '</div>';
 		$html .= '</div>';
 		return $html;
 	}
@@ -132,18 +110,15 @@ class Amimoto_Dash_Component extends Amimoto_Dash_Base {
 	 * @return string
 	 * @since 0.2.0
 	 **/
-	private function _get_zendesk_search_form() {
+	private function _get_support_search_form() {
 		$html  = '';
-		$html .= "<div class='postbox'>";
-		$html .= "<div class='hndle'><h3 class='amimoto-logo-title'>". __( 'Search AMIMOTO FAQ', self::$text_domain ). '</h3></div>';
-		$html .= "<div class='inside'>";
-		$html .= "<form role='search' class='' data-search='' data-instant='true' autocomplete='off' action='https://amimoto.zendesk.com/hc/en-us/search' accept-charset='UTF-8' method='get'>";
-		$html .= "<input name='utf8' type='hidden' value='✓'>";
-		$html .= "<input type='search' name='query' id='query' placeholder='Search' autocomplete='off'>";
-		$html .= "<input type='submit' name='commit' class='button' value='Search'>";
+		$html .= "<form role='search' class='' action='https://support.amimoto-ami.com/' method='get'>";
+		$html .= '<p class="search-box">';
+		$html .= '<label class="screen-reader-text" for="amimoto-support-input">AMIMOTO Support Search:</label>';
+		$html .= '<input type="search" id="amimoto-support-input" name="q" value="">';
+		$html .= '<input type="submit" id="search-submit" class="button" value="Search AMIMOTO Support">';
+		$html .= '</p>';
 		$html .= "</form>";
-		$html .= '</div>';
-		$html .= '</div>';
 		return $html;
 	}
 	/**

@@ -67,6 +67,35 @@ class Amimoto_Dash_Admin extends Amimoto_Dash_Component {
 	}
 
 	/**
+	 *  AMIMOTO Plugin API
+	 *
+	 *  Makeshift AMIMOTO Plugin API with a JSON Backup
+	 *
+	 * @access private
+	 * @param none
+	 * @return array
+	 * @since 0.0.1
+	 */
+	private function _get_amimoto_plugin_api() {
+		$url = 'https://amimoto-plugins.s3.amazonaws.com/amimoto-plugins.json';
+		$handle = curl_init($url);
+		curl_setopt($handle,  CURLOPT_RETURNTRANSFER, TRUE);
+		$response = curl_exec($handle);
+		$httpCode = curl_getinfo($handle, CURLINFO_HTTP_CODE);
+		if($httpCode != 200) {
+			$url = WP_PLUGIN_DIR . '/amimoto-plugin-dashboard/assets/amimoto-plugins.json';
+		}
+
+		curl_close($handle);
+
+
+		$content = file_get_contents($url);
+		$json = json_decode($content, true);
+
+		return $json;
+	}
+
+	/**
 	 *  Get Exists AMIMOTO Plugin list
 	 *
 	 *  Get exists plugin list that works for AMIMOTO AMI.
@@ -78,22 +107,69 @@ class Amimoto_Dash_Admin extends Amimoto_Dash_Component {
 	 */
 	private function _get_amimoto_plugin_list() {
 		$plugins = array();
-		foreach ( $this->amimoto_plugins as $plugin_name => $plugin_url ) {
-			$plugin_file_path = path_join( ABSPATH . 'wp-content/plugins', $plugin_url );
-			if ( ! file_exists( $plugin_file_path ) ) {
-				if ( 'Nginx Cache Controller on GitHub' != $plugin_name ) {
-					$this->amimoto_uninstalled_plugins[ $plugin_name ] = $plugin_url;
-				}
-				unset( $this->amimoto_plugins[ $plugin_name ] );
-				continue;
-			}
-			$plugins[ $plugin_url ] = get_plugin_data( $plugin_file_path, false );
+		$amimoto_plugins = $this->_get_amimoto_plugin_api();
+
+		foreach($amimoto_plugins as $item => $plugin) {
+			$plugins[] = $plugin;
 		}
+
 		return $plugins;
 	}
 
+
 	/**
-	 *  Create AMIMOTO Plugin List HTML
+	 *  AMIMOTO Plugin List
+	 *
+	 *  Build list of AMIMOTO Plugins
+	 *
+	 * @access private
+	 * @param none
+	 * @return array
+	 * @since 0.0.1
+	 */
+	private function _amimoto_plugin_list_template( $args = array(
+		'slug' => null,
+		'title' => null,
+		'thumbnail' => null,
+		'desc' => null
+	)) {
+
+		// Plugin Install Scripts & Styles
+		wp_enqueue_script( 'plugin-install' );
+		wp_enqueue_style('thickbox');
+		wp_enqueue_script('thickbox');
+
+		$details_link = self_admin_url(
+			'plugin-install.php?tab=plugin-information&amp;plugin=' . $args['slug'] .
+			'&amp;TB_iframe=true&amp;width=600&amp;height=550'
+		);
+
+		// echo '<pre>' . print_r(get_plugins()) . '</pre>';
+		// echo '<pre>' . print_r(is_plugin_active('jetpack/jetpack.php')) . '</pre>';
+
+		$wp_plugin_html = '
+			<div class="plugin-card plugin-card-akismet">
+				<div class="plugin-card-top">
+					<div class="name column-name" style="margin-right: 0px;">
+						<h3>
+						<a href="'.esc_url( $details_link ).'" class="thickbox open-plugin-details-modal">
+							'.$args['title'].'
+							<img src="'.$args['thumbnail'].'" class="plugin-icon" alt="">
+						</a>
+					</h3>
+					</div>
+					<div class="desc column-description">
+						<p>'.$args['desc'].'</p>
+					</div>
+				</div>
+			</div>
+			';
+
+		return $wp_plugin_html;
+	}
+
+	/**
+	 *  Create AMIMOTO Plugin List
 	 *
 	 * @access private
 	 * @param none
@@ -102,138 +178,38 @@ class Amimoto_Dash_Admin extends Amimoto_Dash_Component {
 	 */
 	private function _get_amimoto_plugin_html() {
 		$html = '';
-		$plugins = $this->_get_amimoto_plugin_list();
-		$active_plugin_urls = $this->_get_activated_plugin_list();
-		$html .= "<table class='wp-list-table widefat plugins'>";
-		$html .= '<tbody>';
-		foreach ( $plugins as $plugin_url => $plugin ) {
-			$plugin_type = $plugin['TextDomain'];
-			if ( array_search( $plugin_url, $active_plugin_urls ) !== false ) {
-				$stat = 'active';
-				$btn_text = __( 'Deactivate Plugin' , self::$text_domain );
-				$nonce = self::PLUGIN_DEACTIVATION;
-			} else {
-				$stat = 'inactive';
-				$btn_text = __( 'Activate Plugin' , self::$text_domain );
-				$nonce = self::PLUGIN_ACTIVATION;
-			}
-			$for_use = $this->_get_amimoto_plugin_for_use( $plugin['TextDomain'] );
-			$html .= "<tr class={$stat}><td>";
-			$html .= "<h2>{$plugin['Name']}</h2>";
-			$html .= '<dl><dt><b>'. __( 'For use:', self::$text_domain ). "</b></dt><dd>{$for_use}</dd>";
-			$html .= '<dl><dt><b>'. __( 'Plugin Description:', self::$text_domain ). "</b></dt><dd>{$plugin['Description']}</dd>";
-			$html .= '</dl>';
-			$html .= "<form method='post' action='' class='btn'>";
-			$html .= get_submit_button( $btn_text, 'primary large' );
-			$html .= wp_nonce_field( $nonce , $nonce , true , false );
-			$html .= "<input type='hidden' name='plugin_type' value={$plugin_type} />";
-			$redirect_page = self::PANEL_ROOT;
-			$html .= "<input type='hidden' name='redirect_page' value={$redirect_page} />";
-			$html .= '</form>';
-			if ( 'active' === $stat ) {
-				$action = $this->_get_action_type( $plugin_type );
-				$html .= "<form method='post' action='./admin.php?page={$action}' class='btn'>";
-				$html .= get_submit_button( __( 'Setting Plugin' , self::$text_domain ), 'primary large' );
-				$html .= wp_nonce_field( self::PLUGIN_SETTING , self::PLUGIN_SETTING , true , false );
-				$html .= "<input type='hidden' name='plugin_type' value={$plugin_type} />";
-				$html .= '</form>';
-			}
-			$html .= '</td></tr>';
+		$plugin_list_template = $this->_amimoto_plugin_list_template();
+		$amimoto_plugins = $this->_get_amimoto_plugin_list();
+		$available_plugins_name = array_column($amimoto_plugins, 'name');
+		$installed_plugins_name = array_column(get_plugins(), 'Name');
+
+		// Show Plugins available but not installed
+		$amimoto_available = array_diff( $available_plugins_name, $installed_plugins_name);
+		$amimoto_installed = array_diff( $available_plugins_name, $amimoto_available);
+
+		$html .= '
+		<form id="plugin-filter" method="post">
+			<div class="wp-list-table widefat plugin-install">
+				<h2 class="screen-reader-text">AMIMOTO Plugins</h2>
+				<div id="the-list">';
+
+		$html .= '<div class="wp-list-table">';
+
+		foreach ($amimoto_plugins as $p) {
+			$args = array(
+				'title' => $p['name'],
+				'desc' => $p['short_description'],
+				'thumbnail' => $p['thumbnail'],
+				'slug' => $p['slug']
+			);
+			$html .= $this->_amimoto_plugin_list_template($args);
 		}
-		$html .= $this->_get_uninstalled_amimoto_plugin_html();
-		$html .= '</tbody></table>';
+
+		$html .= '</div>';
+
+		$html .= '</div></div></form>';
+
 		return $html;
-	}
-
-	/**
-	 *  Get plugin list that uninstalled amimoto plugins
-	 *
-	 * @access private
-	 * @return string(html)
-	 * @since 0.0.1
-	 */
-	private function _get_uninstalled_amimoto_plugin_html() {
-		$html  = '';
-		foreach ( $this->amimoto_uninstalled_plugins as $plugin_name => $plugin_url ) {
-			if ( 'Nginx Cache Controller on WP.org' == $plugin_name ) {
-				if ( $this->is_exists_ncc() ) {
-					continue;
-				}
-				$plugin_name = 'Nginx Cache Controller';
-			}
-			$plugin_install_url = "./plugin-install.php?tab=search&type=term&s=". urlencode( $plugin_name );
-			$description = $this->_get_amimoto_plugin_description( $plugin_name );
-			$for_use = $this->_get_amimoto_plugin_for_use( $plugin_name );
-			$html .= "<tr class='inactive'><td>";
-			$html .= "<h2>{$plugin_name}</h2>";
-			$html .= '<dl><dt><b>'. __( 'For use:', self::$text_domain ). "</b></dt><dd>{$for_use}</dd>";
-			$html .= '<dl><dt><b>'. __( 'Plugin Description:', self::$text_domain ). "</b></dt><dd>{$description}</dd>";
-			$html .= '</dl>';
-			$html .= "<a class='install-now button' href='{$plugin_install_url}' aria-label='Install {$plugin_name} now' data-name='{$plugin_name}'>Install Now</a>";
-			$html .= '</td></tr>';
-		}
-		return $html;
-	}
-
-	/**
-	 *  Get amimoto plugin description
-	 *
-	 * @access private
-	 * @param (string) $plugin_name
-	 * @return string
-	 * @since 0.0.1
-	 */
-	private function _get_amimoto_plugin_description( $plugin_name ) {
-		switch ( $plugin_name ) {
-			case 'Nginx Cache Controller':
-				$description = __( 'Provides some functions of controlling Nginx proxy server cache.', self::$text_domain );
-				break;
-
-			case 'Nephila clavata':
-				$description = __( 'Allows you to mirror your WordPress media uploads over to Amazon S3 for storage and delivery.', self::$text_domain );
-				break;
-
-			case 'C3 Cloudfront Cache Controller':
-				$description = __( "Controlle CloudFront's CDN server cache.", self::$text_domain );
-				break;
-
-			default:
-				$description = '';
-				break;
-		}
-		return $description;
-	}
-
-	/**
-	 *  Get amimoto plugin description for use
-	 *
-	 * @access private
-	 * @param (string) $plugin_name
-	 * @return string
-	 * @since 0.0.1
-	 */
-	private function _get_amimoto_plugin_for_use( $plugin_name ) {
-		switch ( $plugin_name ) {
-			case 'nginxchampuru':
-			case 'Nginx Cache Controller':
-				$description  = __( 'Nginx Reverse Proxy Cache', self::$text_domain );
-				break;
-
-			case 'nephila-clavata':
-			case 'Nephila clavata':
-				$description  = __( 'Amazon S3', self::$text_domain );
-				break;
-
-			case 'c3-cloudfront-clear-cache':
-			case 'C3 Cloudfront Cache Controller':
-				$description  = __( 'Amazon CloudFront', self::$text_domain );
-				break;
-
-			default:
-				$description = '';
-				break;
-		}
-		return $description;
 	}
 
 	/**
@@ -256,6 +232,10 @@ class Amimoto_Dash_Admin extends Amimoto_Dash_Component {
 
 			case 'nginxchampuru':
 				$action = self::PANEL_NCC;
+				break;
+
+			case 'support':
+				$action = self::PANEL_SUPPORT;
 				break;
 
 			default:
