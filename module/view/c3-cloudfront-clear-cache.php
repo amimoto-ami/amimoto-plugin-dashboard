@@ -142,7 +142,7 @@ class Amimoto_Dash_Cloudfront extends Amimoto_Dash_Component {
 	 */
 	private function __get_cf_dist_input( $dist_id ) {
 		$disabled = false;
-		if ( defined( 'AMIMOTO_CDN_ID' ) ) {
+		if ( $this->is_amimoto_managed() && defined( 'AMIMOTO_CDN_ID' ) ) {
 			$disabled = true;
 			$dist_id = AMIMOTO_CDN_ID;
 		}
