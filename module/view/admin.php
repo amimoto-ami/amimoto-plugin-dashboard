@@ -77,8 +77,18 @@ class Amimoto_Dash_Admin extends Amimoto_Dash_Component {
 	 * @since 0.0.1
 	 */
 	private function _get_amimoto_plugin_list() {
+		$is_amimoto_managed = $this->is_amimoto_managed();
 		$plugins = array();
 		foreach ( $this->amimoto_plugins as $plugin_name => $plugin_url ) {
+			if ( $is_amimoto_managed ) {
+				if (
+					$plugin_name === 'C3 Cloudfront Cache Controller' ||
+					$plugin_name === 'Nginx Cache Controller on GitHub' ||
+					$plugin_name === 'Nginx Cache Controller on WP.org'
+				) {
+					continue;
+				}
+			}
 			$plugin_file_path = path_join( ABSPATH . 'wp-content/plugins', $plugin_url );
 			if ( ! file_exists( $plugin_file_path ) ) {
 				if ( 'Nginx Cache Controller on GitHub' != $plugin_name ) {
