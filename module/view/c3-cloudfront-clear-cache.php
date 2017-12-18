@@ -154,7 +154,7 @@ class Amimoto_Dash_Cloudfront extends Amimoto_Dash_Component {
 			$c3_settings['secret_key'] = '';
 		}
 		$c3_settings = apply_filters( 'c3_settings', $c3_settings );
-		if ( ( ! isset( $c3_settings['access_key'] ) || ! $c3_settings['access_key'] ) && ( ! isset( $c3_settings['secret_key'] ) || ! $c3_settings['secret_key'] ) ) {
+		if ( ! isset( $c3_settings['access_key'] ) && ! isset( $c3_settings['secret_key'] ) ) {
 			$has_ec2_instance_role = true;
 		}
 		$html = '';
