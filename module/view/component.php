@@ -98,9 +98,9 @@ class Amimoto_Dash_Component extends Amimoto_Dash_Base {
 	private function _get_subcontent_html() {
 		$html  = "<div class='amimoto-dash-side'>";
 		$html .= $this->_get_amimoto_logo();
-		$html .= $this->_get_zendesk_search_form();
+		$html .= $this->_get_support_search_form();
 		$html .= $this->_get_amimoto_api_widget( 16 );
-		$html .= $this->_get_amimoto_api_widget( 17 );
+		$html .= $this->_get_amimoto_api_widget( 5 );
 		$html .= '</div>';
 		return $html;
 	}
@@ -126,21 +126,23 @@ class Amimoto_Dash_Component extends Amimoto_Dash_Base {
 	}
 
 	/**
-	 * Search AMIMOTO FAQ (ZenDesk)
+	 * Search AMIMOTO FAQ (Intercom)
 	 *
 	 * @access private
 	 * @return string
-	 * @since 0.2.0
+	 * @since 0.5.0
 	 **/
-	private function _get_zendesk_search_form() {
+	private function _get_support_search_form() {
 		$html  = '';
 		$html .= "<div class='postbox'>";
 		$html .= "<div class='hndle'><h3 class='amimoto-logo-title'>". __( 'Search AMIMOTO FAQ', self::$text_domain ). '</h3></div>';
 		$html .= "<div class='inside'>";
-		$html .= "<form role='search' class='' data-search='' data-instant='true' autocomplete='off' action='https://amimoto.zendesk.com/hc/en-us/search' accept-charset='UTF-8' method='get'>";
-		$html .= "<input name='utf8' type='hidden' value='✓'>";
-		$html .= "<input type='search' name='query' id='query' placeholder='Search' autocomplete='off'>";
-		$html .= "<input type='submit' name='commit' class='button' value='Search'>";
+		$html .= "<form role='search' class='' action='https://support.amimoto-ami.com/' method='get'>";
+		$html .= '<p class="">';
+		$html .= '<label class="screen-reader-text" for="amimoto-support-input">AMIMOTO Support Search:</label>';
+		$html .= '<input type="search" id="amimoto-support-input" name="q" value="" placeholder="Search">';
+		$html .= '<input type="submit" id="search-submit" class="button" value="Search">';
+		$html .= '</p>';
 		$html .= "</form>";
 		$html .= '</div>';
 		$html .= '</div>';
@@ -162,10 +164,10 @@ class Amimoto_Dash_Component extends Amimoto_Dash_Base {
 		}
 		switch ( $category_id ) {
 			case 16:
-				$title = __( 'Road to Becoming the AMIMOTO Master', self::$text_domain );
+				$title = __( 'AMIMOTO Essential Training', self::$text_domain );
 				break;
 
-			case 17:
+			case 5:
 				$title = __( 'AMIMOTO News', self::$text_domain );
 				break;
 
