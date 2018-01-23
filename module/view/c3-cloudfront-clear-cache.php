@@ -145,14 +145,14 @@ class Amimoto_Dash_Cloudfront extends Amimoto_Dash_Component {
 	 * @since 0.5.0
 	 */
 	private function __get_cf_dist_input( $dist_id ) {
-		$disabled = false;
+		$disabled = '';
 		if ( $this->is_amimoto_managed() && defined( 'AMIMOTO_CDN_ID' ) ) {
-			$disabled = true;
+			$disabled = 'disabled';
 			$dist_id = AMIMOTO_CDN_ID;
 		}
 		$html = '';
 		$html .= '<tr><th>'. __( 'CloudFront Distribution ID', self::$text_domain ). '</th>';
-		$html .= "<td><input type='text' class='regular-text code' name='c3_settings[distribution_id]' value='{$dist_id}' disabled='{$disabled}' /></td>";
+		$html .= "<td><input type='text' class='regular-text code' name='c3_settings[distribution_id]' value='{$dist_id}' $disabled /></td>";
 		$html .= '</tr>';
 		return $html;
 	}
