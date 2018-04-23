@@ -1,11 +1,11 @@
 <?php
 /**
  * Plugin Name: AMIMOTO Plugin Dashboard
- * Version: 0.5.1
+ * Version: 0.5.2
  * Description: Control AMIMOTO helper plugins
  * Author: hideokamoto,amimotoami
  * Author URI: https://amimoto-ami.com
- * Plugin URI: https://github.com/amimoto-ami/amimoto-dashboard/
+ * Plugin URI: https://github.com/amimoto-ami/amimoto-plugin-dashboard
  * Text Domain: amimoto-dashboard
  * Domain Path: /languages
  * @package Amimoto-dashboard

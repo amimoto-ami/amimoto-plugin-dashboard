@@ -3,8 +3,8 @@ Contributors: hideokamoto,amimotoami
 Donate link: https://amimoto-ami.com
 Tags: admin,amimoto
 Requires at least: 4.4.0
-Tested up to: 4.9.2
-Stable tag: 0.5.1
+Tested up to: 4.9.5
+Stable tag: 0.5.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -38,6 +38,9 @@ B: Install through FTP or SFTP
 
 == Changelog ==
 
+= 0.5.2 =
+* Fix small bug
+
 = 0.5.1 =
 * Fix distirbution id bug
 
@@ -65,5 +68,5 @@ B: Install through FTP or SFTP
 
 == Upgrade Notice ==
 
-= 0.5.1 =
-* Fix distirbution id bug
+= 0.5.2 =
+* Fix small bug
