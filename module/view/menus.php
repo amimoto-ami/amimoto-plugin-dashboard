@@ -47,7 +47,7 @@ class Amimoto_Dash_Menus extends Amimoto_Dash_Base {
 	}
 
 	/**
-	 *  Init plugin menu.
+	 * Init plugin menu.
 	 *
 	 * @access public
 	 * @param none
@@ -59,7 +59,7 @@ class Amimoto_Dash_Menus extends Amimoto_Dash_Base {
 	}
 
 	/**
-	 *  Remove AMIMOTO's plugin default menus controller
+	 * Remove AMIMOTO's plugin default menus controller
 	 *
 	 * @access public
 	 * @param none
@@ -71,7 +71,7 @@ class Amimoto_Dash_Menus extends Amimoto_Dash_Base {
 	}
 
 	/**
-	 *  Remove AMIMOTO's plugin default submenu
+	 * Remove AMIMOTO's plugin default submenu
 	 *
 	 * @access private
 	 * @param none
@@ -79,6 +79,9 @@ class Amimoto_Dash_Menus extends Amimoto_Dash_Base {
 	 */
 	private function _remove_submenu() {
 		global $submenu;
+		if ( ! isset( $submenu['options-general.php'] ) ) {
+			return;
+		}
 		foreach ( (array) $submenu['options-general.php'] as $key => $array ) {
 			foreach ( $this->amimoto_plugin_submenu as $plugin ) {
 				if ( array_search( $plugin, $array ) ) {
@@ -90,7 +93,7 @@ class Amimoto_Dash_Menus extends Amimoto_Dash_Base {
 	}
 
 	/**
-	 *  Remove AMIMOTO's plugin default menu
+	 * Remove AMIMOTO's plugin default menu
 	 *
 	 * @access private
 	 * @param none
@@ -98,6 +101,9 @@ class Amimoto_Dash_Menus extends Amimoto_Dash_Base {
 	 */
 	private function _remove_top_menu() {
 		global $menu;
+		if ( ! isset( $menu ) ) {
+			return;
+		}
 		foreach ( (array) $menu as $key => $array ) {
 			foreach ( $this->amimoto_plugin_menu as $plugin ) {
 				if ( array_search( $plugin, $array ) ) {
@@ -109,7 +115,7 @@ class Amimoto_Dash_Menus extends Amimoto_Dash_Base {
 	}
 
 	/**
-	 *  Define AMIMOTO Dashboard plugin menus
+	 * Define AMIMOTO Dashboard plugin menus
 	 *
 	 * @access public
 	 * @param none
@@ -164,7 +170,7 @@ class Amimoto_Dash_Menus extends Amimoto_Dash_Base {
 			}
 
 			if ( array_search( $amimoto_plugins['Nginx Cache Controller on GitHub'], $active_plugin_urls ) ||
-			     array_search( $amimoto_plugins['Nginx Cache Controller on WP.org'], $active_plugin_urls )
+					array_search( $amimoto_plugins['Nginx Cache Controller on WP.org'], $active_plugin_urls )
 			) {
 				$plugin_file_path = path_join( ABSPATH, 'wp-content/plugins/nginx-champuru/includes/admin.class.php' );
 				if ( ! file_exists( $plugin_file_path ) ) {
