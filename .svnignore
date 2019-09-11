@@ -18,3 +18,4 @@ package.json
 phpunit.xml
 phpunit.xml.dist
 tests
+.idea/
