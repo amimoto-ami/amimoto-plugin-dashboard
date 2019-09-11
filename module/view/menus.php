@@ -27,9 +27,6 @@ class Amimoto_Dash_Menus extends Amimoto_Dash_Base {
 		'c3-admin-menu',
 		'nginx-champuru',
 	);
-	private $amimoto_plugin_submenu = array(
-		'nephila-clavata',
-	);
 
 	/**
 	 * Get Instance Class
@@ -152,22 +149,6 @@ class Amimoto_Dash_Menus extends Amimoto_Dash_Base {
 				);
 			}
 
-			if ( array_search( $amimoto_plugins['Nephila clavata'], $active_plugin_urls ) ) {
-				$plugin_file_path = path_join( ABSPATH, 'wp-content/plugins/nephila-clavata/includes/class-NephilaClavata_Admin.php' );
-				require_once( $plugin_file_path );
-				$nephila_clavata_admin = NephilaClavata_Admin::get_instance();
-				add_submenu_page(
-					self::PANEL_ROOT,
-					__( 'Nephila clavata', self::$text_domain ),
-					__( 'Amazon S3', self::$text_domain ),
-					'administrator',
-					self::PANEL_S3,
-					array( $nephila_clavata_admin, 'options_page' )
-				);
-				add_filter( 'nephila_clavata_admin_url', function () {
-					return 'admin.php';
-				} );
-			}
 
 			if ( array_search( $amimoto_plugins['Nginx Cache Controller on GitHub'], $active_plugin_urls ) ||
 					array_search( $amimoto_plugins['Nginx Cache Controller on WP.org'], $active_plugin_urls )

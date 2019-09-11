@@ -202,10 +202,6 @@ class Amimoto_Dash_Admin extends Amimoto_Dash_Component {
 				$description = __( 'Provides some functions of controlling Nginx proxy server cache.', self::$text_domain );
 				break;
 
-			case 'Nephila clavata':
-				$description = __( 'Allows you to mirror your WordPress media uploads over to Amazon S3 for storage and delivery.', self::$text_domain );
-				break;
-
 			case 'C3 Cloudfront Cache Controller':
 				$description = __( "Controlle CloudFront's CDN server cache.", self::$text_domain );
 				break;
@@ -232,11 +228,6 @@ class Amimoto_Dash_Admin extends Amimoto_Dash_Component {
 				$description  = __( 'Nginx Reverse Proxy Cache', self::$text_domain );
 				break;
 
-			case 'nephila-clavata':
-			case 'Nephila clavata':
-				$description  = __( 'Amazon S3', self::$text_domain );
-				break;
-
 			case 'c3-cloudfront-clear-cache':
 			case 'C3 Cloudfront Cache Controller':
 				$description  = __( 'Amazon CloudFront', self::$text_domain );
@@ -261,10 +252,6 @@ class Amimoto_Dash_Admin extends Amimoto_Dash_Component {
 		switch ( $plugin_type ) {
 			case 'c3-cloudfront-clear-cache':
 				$action = self::PANEL_C3;
-				break;
-
-			case 'nephila-clavata':
-				$action = self::PANEL_S3;
 				break;
 
 			case 'nginxchampuru':

@@ -57,11 +57,6 @@ class Amimoto_Dash_Stat extends Amimoto_Dash_Base {
 				$result = $c3->activate( $this->amimoto_plugins );
 				break;
 
-			case 'nephila-clavata':
-				$s3 = Amimoto_S3::get_instance();
-				$result = $s3->activate( $this->amimoto_plugins );
-				break;
-
 			case 'nginxchampuru':
 				$ncc = Amimoto_Ncc::get_instance();
 				$result = $ncc->activate( $this->amimoto_plugins );
@@ -87,11 +82,6 @@ class Amimoto_Dash_Stat extends Amimoto_Dash_Base {
 			case 'c3-cloudfront-clear-cache':
 				$c3 = Amimoto_C3::get_instance();
 				$result = $c3->deactivate( $this->amimoto_plugins );
-				break;
-
-			case 'nephila-clavata':
-				$s3 = Amimoto_S3::get_instance();
-				$result = $s3->deactivate( $this->amimoto_plugins );
 				break;
 
 			case 'nginxchampuru':

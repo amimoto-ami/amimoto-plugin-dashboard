@@ -25,7 +25,6 @@ class Amimoto_Dash_Base {
 	//Panel key
 	const PANEL_ROOT = 'amimoto_dash_root';
 	const PANEL_C3 = 'amimoto_dash_c3';
-	const PANEL_S3 = 'nephila-clavata';
 	const PANEL_NCC = 'nginx-champuru';
 
 	// Action key
@@ -95,9 +94,7 @@ class Amimoto_Dash_Base {
 	 */
 	public function get_amimoto_plugin_file_list() {
 		$amimoto_plugins = array(
-			'Nephila clavata' => 'nephila-clavata/plugin.php',
 			'C3 Cloudfront Cache Controller' => 'c3-cloudfront-clear-cache/c3-cloudfront-clear-cache.php',
-			'Nephila clavata' => 'nephila-clavata/plugin.php',
 			'Nginx Cache Controller on GitHub' => 'nginx-cache-controller/nginx-champuru.php',
 			'Nginx Cache Controller on WP.org' => 'nginx-champuru/nginx-champuru.php',
 		);
