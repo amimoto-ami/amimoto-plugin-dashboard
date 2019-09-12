@@ -27,6 +27,7 @@ class Amimoto_Dash_Menus extends Amimoto_Dash_Base {
 		'c3-admin-menu',
 		'nginx-champuru',
 	);
+	private $amimoto_plugin_submenu = array();
 
 	/**
 	 * Get Instance Class

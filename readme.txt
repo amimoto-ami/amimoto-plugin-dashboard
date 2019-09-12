@@ -4,7 +4,7 @@ Donate link: https://amimoto-ami.com
 Tags: admin,amimoto
 Requires at least: 4.4.0
 Tested up to: 5.2.3
-Stable tag: 0.6.0
+Stable tag: 0.6.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -36,6 +36,9 @@ B: Install through FTP or SFTP
 2. Activate the plugin through the 'Plugins' menu in WordPress.
 
 == Changelog ==
+
+= 0.6.1 =
+* Fix  bug
 
 = 0.6.0 =
 * Nephila Clavata has been retired
@@ -73,5 +76,5 @@ B: Install through FTP or SFTP
 
 == Upgrade Notice ==
 
-= 0.5.2 =
-* Fix small bug
+= 0.6.1 =
+* Fix  bug
