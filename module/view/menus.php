@@ -134,7 +134,7 @@ class Amimoto_Dash_Menus extends Amimoto_Dash_Base {
 		if ( ! $is_amimoto_managed ) {
 			$amimoto_plugins = $this->get_amimoto_plugin_file_list();
 			$active_plugin_urls = get_option( 'active_plugins' );
-			if ( array_search( $amimoto_plugins['C3 Cloudfront Cache Controller'], $active_plugin_urls ) ) {
+			if ( array_search( $amimoto_plugins['C3 Cloudfront Cache Controller'], $active_plugin_urls, true ) > -1 ) {
 				$menu_label = __( 'CloudFront', self::$text_domain );
 				if ( $is_amimoto_managed ) {
 					$menu_label = __('CDN Cache', self::$text_domain );
@@ -151,8 +151,8 @@ class Amimoto_Dash_Menus extends Amimoto_Dash_Base {
 			}
 
 
-			if ( array_search( $amimoto_plugins['Nginx Cache Controller on GitHub'], $active_plugin_urls ) ||
-					array_search( $amimoto_plugins['Nginx Cache Controller on WP.org'], $active_plugin_urls )
+			if ( array_search( $amimoto_plugins['Nginx Cache Controller on GitHub'], $active_plugin_urls ) > -1 ||
+					array_search( $amimoto_plugins['Nginx Cache Controller on WP.org'], $active_plugin_urls ) > -1
 			) {
 				$plugin_file_path = path_join( ABSPATH, 'wp-content/plugins/nginx-champuru/includes/admin.class.php' );
 				if ( ! file_exists( $plugin_file_path ) ) {
