@@ -11,8 +11,8 @@ class Plugins_Test extends \WP_UnitTestCase {
     public function test_is_activated_ncc( $active_plugins, $expected ) {
 
         update_option( 'active_plugins', $active_plugins );
-
-        $result = Plugins::is_activated_ncc();
+        $plugin = new Plugins();
+        $result = $plugin->is_activated_ncc();
         $this->assertEquals( $expected, $result );
 
         delete_option( 'active_plugins' );
@@ -56,7 +56,8 @@ class Plugins_Test extends \WP_UnitTestCase {
     public function test_list_amimoto_activated_plugins( $active_plugins, $expected ) {
         if ( isset( $active_plugins ) ) update_option( 'active_plugins', $active_plugins );
 
-        $result = Plugins::list_amimoto_activated_plugins();
+        $plugin = new Plugins();
+        $result = $plugin->list_amimoto_activated_plugins();
         $this->assertEquals( $expected, $result );
 
         if ( isset( $active_plugins ) ) delete_option( 'active_plugins' );
