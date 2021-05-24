@@ -15,9 +15,9 @@
   },
 	"autoload": {
 		"psr-4": {
-			"C3_CloudFront_Cache_Controller\\" : "classes/",
-			"C3_CloudFront_Cache_Controller\\WP\\" : "classes/WP/",
-			"C3_CloudFront_Cache_Controller\\Test\\" : "tests/"
+			"AMIMOTO_Dashboard\\" : "classes/",
+			"AMIMOTO_Dashboard\\WP\\" : "classes/WP/",
+			"AMIMOTO_Dashboard\\Tests\\" : "tests/"
 		}
 	},
 	"scripts": {

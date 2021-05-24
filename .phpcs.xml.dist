@@ -32,13 +32,13 @@
     <rule ref="WordPress.NamingConventions.PrefixAllGlobals">
         <properties>
             <!-- Value: replace the function, class, and variable prefixes used. Separate multiple prefixes with a comma. -->
-            <property name="prefixes" type="array" value="C3_CloudFront_Cache_Controller"/>
+            <property name="prefixes" type="array" value="AMIMOTO_DASHBOARD"/>
         </properties>
     </rule>
     <rule ref="WordPress.WP.I18n">
         <properties>
             <!-- Value: replace the text domain used. -->
-            <property name="text_domain" type="array" value="c3-cloudfront-clear-cache"/>
+            <property name="text_domain" type="array" value="amimoto-dashboard"/>
         </properties>
     </rule>
     <rule ref="WordPress.WhiteSpace.ControlStructureSpacing">
