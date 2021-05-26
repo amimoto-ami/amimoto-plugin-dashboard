@@ -17,6 +17,7 @@ class NCC_Service {
 	public function __construct( ...$args ) {
 		$this->plugin = new Plugins();
 		$this->notice = new Admin_Notice();
+        $this->env = new Environment();
 		if ( $args && ! empty( $args ) ) {
 			foreach ( $args as $key => $value ) {
 				if ( $value instanceof Environment ) {
