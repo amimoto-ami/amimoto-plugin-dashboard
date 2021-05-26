@@ -48,7 +48,7 @@ $redirect_page = Constants::PANEL_ROOT;
                         <dd><?php echo esc_attr( $plugin['Description'] ); ?></dd>
                         <form method='post' action='' class='btn'>
                             <?php submit_button( $btn_text, 'primary large' ); ?>
-                            <?php wp_nonce_field( $nonce , $nonce , true , false ); ?>
+                            <?php echo wp_nonce_field( $nonce , $nonce , true , false ); ?>
                             <input type='hidden' name='plugin_type' value="<?php echo esc_attr( $plugin_type ); ?>" />
                             <input type='hidden' name='redirect_page' value="<?php echo esc_attr( $redirect_page ); ?>" />
                         </form>
@@ -56,7 +56,7 @@ $redirect_page = Constants::PANEL_ROOT;
                             $action = $plugins->get_action_type( $plugin_type );?>
                             <form method='post' action='./admin.php?page=<?php echo esc_attr( $action ); ?>' class='btn'>
                                 <?php submit_button( __( 'Setting Plugin' , $text_domain ), 'primary large' ); ?>
-                                <?php wp_nonce_field( Constants::PLUGIN_SETTING , Constants::PLUGIN_SETTING , true , false ); ?>
+                                <?php echo wp_nonce_field( Constants::PLUGIN_SETTING , Constants::PLUGIN_SETTING , true , false ); ?>
                                 <input type='hidden' name='plugin_type' value="<?php echo esc_attr( $plugin_type ); ?>" />
                             </form>
                         <?php } ?>

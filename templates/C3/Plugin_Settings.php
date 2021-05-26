@@ -80,7 +80,7 @@ if ( defined( 'AMIMOTO_CDN_ID' ) ) {
             <?php } ?>
             <tr>
                 <td colspan='2'>
-                    <?php wp_nonce_field( Constants::CLOUDFRONT_SETTINGS , Constants::CLOUDFRONT_SETTINGS , true , false ); ?>
+                    <?php echo wp_nonce_field( Constants::CLOUDFRONT_SETTINGS , Constants::CLOUDFRONT_SETTINGS , true , false ); ?>
                     <?php submit_button( __( 'Update CloudFront Settings', $text_domain ) );?>
                 </td>
             </tr>

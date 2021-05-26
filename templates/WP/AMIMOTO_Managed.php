@@ -26,7 +26,7 @@ if ( ! $env->is_amimoto_managed() ) {
             <td>
                 <form method='post' action=''>
                     <input type='hidden' name='invalidation_target' value='all' />
-                    <?php wp_nonce_field( Constants::CLOUDFRONT_INVALIDATION , Constants::CLOUDFRONT_INVALIDATION , true , false ); ?>
+                    <?php echo wp_nonce_field( Constants::CLOUDFRONT_INVALIDATION , Constants::CLOUDFRONT_INVALIDATION , true , false ); ?>
                     <?php submit_button( __( 'Flush All CDN Cache', $text_domain ) );?>
                 </form>
             </td>
@@ -38,7 +38,7 @@ if ( ! $env->is_amimoto_managed() ) {
                 <td>
                 <form method='post' action=''>
                     <input type='hidden' name='invalidation_target' value='all' />
-                    <?php wp_nonce_field( Constants::CLOUDFRONT_UPDATE_NCC , Constants::CLOUDFRONT_UPDATE_NCC , true , false );?>
+                    <?php echo wp_nonce_field( Constants::CLOUDFRONT_UPDATE_NCC , Constants::CLOUDFRONT_UPDATE_NCC , true , false );?>
                     <?php submit_button( __( 'Reset Nginx Cache Setting', $text_domain ) );?>
                 </form>
             </td>

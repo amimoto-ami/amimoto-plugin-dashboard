@@ -22,7 +22,7 @@ if ( ! apply_filters( 'amimoto_show_invalidation_form', true ) ) {
                     <?php _e( 'Flush All Cache', $text_domain ); ?></th>
                 <td>
                 <input type='hidden' name='invalidation_target' value='all' />
-                    <?php wp_nonce_field( Constants::CLOUDFRONT_INVALIDATION , Constants::CLOUDFRONT_INVALIDATION , true , false ); ?>
+                    <?php echo wp_nonce_field( Constants::CLOUDFRONT_INVALIDATION , Constants::CLOUDFRONT_INVALIDATION , true , false ); ?>
                     <?php submit_button( __( 'Flush All Cache', $text_domain ) );?>
                 </td>
             </tr>

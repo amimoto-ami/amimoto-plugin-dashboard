@@ -23,7 +23,7 @@ if ( ! apply_filters( 'amimoto_show_ncc_setting_form', true ) ) {
                 </th>
                 <td>
                     <input type='hidden' name='invalidation_target' value='all' />
-                    <?php wp_nonce_field( Constants::CLOUDFRONT_UPDATE_NCC , Constants::CLOUDFRONT_UPDATE_NCC , true , false ); ?>
+                    <?php echo wp_nonce_field( Constants::CLOUDFRONT_UPDATE_NCC , Constants::CLOUDFRONT_UPDATE_NCC , true , false ); ?>
                     <?php submit_button( __( 'Change Expires', $text_domain ) ); ?>
                 </td>
             </tr>
