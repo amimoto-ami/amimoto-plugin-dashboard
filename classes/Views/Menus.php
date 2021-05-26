@@ -84,8 +84,12 @@ class Menus {
 	 */
 	public function remove_top_menus() {
 		global $menu;
+		$menu = $this->drop_amimoto_plugin_menus( $menu );
+	}
+
+	public function drop_amimoto_plugin_menus( $menu ) {
 		if ( ! isset( $menu ) ) {
-			return;
+			return $menu;
 		}
 		foreach ( (array) $menu as $key => $array ) {
 			foreach ( $this->amimoto_plugin_menu as $plugin ) {
@@ -96,6 +100,8 @@ class Menus {
 				}
 			}
 		}
+		return $menu;
+
 	}
 
 	public function render_html() {

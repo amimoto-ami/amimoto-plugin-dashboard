@@ -43,29 +43,24 @@ class Menus_Test extends \WP_UnitTestCase {
     }
 
     /**
-     * @dataProvider provide_test_remove_top_menu_test_case
+     * @dataProvider provide_test_drop_amimoto_plugin_menus_test_case
      */
-    public function test_remove_top_menu( $expected, $provided_menus ) {
+    public function test_drop_amimoto_plugin_menus( $expected, $menus ) {
         $target = new Menus();
 
-        // set menu before run testing taget method
-        foreach ( $provided_menus as $menu ) {
-            add_menu_page( $menu[0], $menu[1], $menu[2], $menu[3], $menu[4] );
-        }
-        
-        $target->remove_top_menus( $global_menus );
+        $result = $target->drop_amimoto_plugin_menus( $menus );
 
         // Load current status
-		global $menu;
-        $this->assertEquals( $expected, $menu );
-
-        // Teardown
-        $menu = array();
+        $this->assertEquals( $expected, $result );
     }
-    public function provide_test_remove_top_menu_test_case() {
+    public function provide_test_drop_amimoto_plugin_menus_test_case() {
         return [
             [
                 null,
+                null,
+            ],
+            [
+                array(),
                 array(),
             ],
             [
@@ -81,7 +76,15 @@ class Menus_Test extends \WP_UnitTestCase {
                     )
                 ),
                 array(
-                    array( 'Test Toplevel', 'Test Toplevel', 'manage_options', 'mt-top-level-handle', 'mt_toplevel_page' ),
+                    array(
+                        'Test Toplevel',
+                        'manage_options',
+                        'mt-top-level-handle',
+                        'Test Toplevel',
+                        'menu-top menu-icon-generic toplevel_page_mt-top-level-handle',
+                        'toplevel_page_mt-top-level-handle',
+                        'dashicons-admin-generic',
+                    )
                 ),
             ],
             [
@@ -106,9 +109,33 @@ class Menus_Test extends \WP_UnitTestCase {
                     )
                 ),
                 array(
-                    array( 'Test Toplevel', 'Test Toplevel', 'manage_options', 'mt-top-level-handle', 'mt_toplevel_page' ),
-                    array( "Nginx Cache", "Nginx Cache",'administrator', "nginx-champuru", "toplevel_page_nginx-champuru" ),
-                    array( 'Welcome to AMIMOTO Plugin Dashboard', "AMIMOTO", 'administrator', "amimoto_dash_root", "toplevel_page_amimoto_dash_root" ),
+                    array(
+                        'Test Toplevel',
+                        'manage_options',
+                        'mt-top-level-handle',
+                        'Test Toplevel',
+                        'menu-top menu-icon-generic toplevel_page_mt-top-level-handle',
+                        'toplevel_page_mt-top-level-handle',
+                        'dashicons-admin-generic',
+                    ),
+                    array(
+                        'Nginx Cache',
+                        'administrator',
+                        'nginx-champuru',
+                        'Nginx Cache',
+                        'menu-top menu-icon-generic toplevel_page_nginx-champuru',
+                        'toplevel_page_nginx-champuru',
+                        'dashicons-admin-generic',
+                    ),
+                    array(
+                        "AMIMOTO",
+                         "administrator",
+                         "amimoto_dash_root",
+                         "Welcome to AMIMOTO Plugin Dashboard",
+                         'menu-top menu-icon-generic toplevel_page_amimoto_dash_root',
+                         "toplevel_page_amimoto_dash_root",
+                         'dashicons-admin-generic'
+                    )
                 ),
             ],
         ];
