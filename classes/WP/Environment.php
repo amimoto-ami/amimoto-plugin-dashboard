@@ -14,8 +14,10 @@ class Environment {
 	 * @access public
 	 */
 	public function is_amimoto_managed( $server = null ) {
-        if ( ! isset( $server ) ) $server = $_SERVER;
-		if ( isset( $server['HTTP_X_AMIMOTO_MANAGED'] ) && $server['HTTP_X_AMIMOTO_MANAGED'] ){
+		if ( ! isset( $server ) ) {
+			$server = $_SERVER;
+		}
+		if ( isset( $server['HTTP_X_AMIMOTO_MANAGED'] ) && $server['HTTP_X_AMIMOTO_MANAGED'] ) {
 			return true;
 		}
 		return false;
@@ -28,7 +30,7 @@ class Environment {
 	 * @access public
 	 */
 	public function is_multisite() {
-		return function_exists('is_multisite') && is_multisite();
+		return function_exists( 'is_multisite' ) && is_multisite();
 	}
 
 }

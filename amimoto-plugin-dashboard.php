@@ -8,6 +8,7 @@
  * Plugin URI: https://github.com/amimoto-ami/amimoto-plugin-dashboard
  * Text Domain: amimoto-dashboard
  * Domain Path: /languages
+ *
  * @package Amimoto-dashboard
  */
 if ( ! is_admin() ) {
@@ -36,7 +37,7 @@ function initializing_amimoto_managed() {
 	if ( ! $env->is_amimoto_managed() ) {
 		return;
 	}
-	$ncc = new AMIMOTO_Dashboard\NCC_Service();
+	$ncc    = new AMIMOTO_Dashboard\NCC_Service();
 	$result = $ncc->update_ncc_plugin_settings();
 	if ( is_wp_error( $result ) ) {
 		error_log( print_r( $result, true ) );
