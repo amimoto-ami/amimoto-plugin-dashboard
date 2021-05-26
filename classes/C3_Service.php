@@ -152,7 +152,13 @@ class C3_Service {
 		require_once( $plugin_file_path );
         $c3 = \CloudFront_Clear_Cache::get_instance();
         $result = $c3->c3_invalidation();
-		return $result;
+        if ( isset( $result ) ) {
+		    return $result;
+        }
+        return array(
+			'type'    => 'Success',
+			'message' => 'Invalidation has been succeeded, please wait a few minutes to remove the cache.',
+		);
     }
 
     public function get_plugin_options() {
