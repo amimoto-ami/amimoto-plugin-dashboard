@@ -110,6 +110,9 @@ class C3_Service {
 			$target = $_POST['invalidation_target'];
 		}
 		$result = $this->invalidation( $target );
+		if ( ! isset( $result ) ) {
+			return;
+		}
 		if ( is_wp_error( $result ) ) {
 			$this->notice->show_admin_error( $result );
 		} else {
@@ -158,7 +161,7 @@ class C3_Service {
 		require_once( $plugin_file_path );
 		$c3     = \CloudFront_Clear_Cache::get_instance();
 		$result = $c3->c3_invalidation();
-		if ( isset( $result ) ) {
+		if ( is_wp_error( $result ) ) {
 			return $result;
 		}
 		return array(

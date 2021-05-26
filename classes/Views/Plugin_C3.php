@@ -71,7 +71,9 @@ class Plugin_C3 {
 			if ( $this->plugins->is_activated_ncc() ) {
 				require_once( AMI_DASH_PATH . 'templates/NCC/Plugin_Settings.php' );
 			}
-		}
+		} else {
+			require_once( AMI_DASH_PATH . 'templates/C3/Invalidation_Form.php' );
+        }
 		$additional_html = apply_filters( 'amimoto_c3_add_settings', '' );
 		if ( isset( $additional_html ) ) {
 			echo $additional_html;
