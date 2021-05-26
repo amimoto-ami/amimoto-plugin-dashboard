@@ -148,7 +148,7 @@ class C3_Service {
 	 * @return boolean | WP_Error
 	 */
 	public function invalidation( $target = 'all' ) {
-		$plugin_file_path = get_plugin_file_path_by_name( 'C3 Cloudfront Cache Controller' );
+		$plugin_file_path = Plugins::get_plugin_file_path_by_name( 'C3 Cloudfront Cache Controller' );
 		require_once( $plugin_file_path );
         $c3 = \CloudFront_Clear_Cache::get_instance();
         $result = $c3->c3_invalidation();
