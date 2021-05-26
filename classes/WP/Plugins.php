@@ -19,6 +19,9 @@ class Plugins {
 	}
 
 	public static function get_plugin_slug_by_name( string $plugin_name ) {
+        if ( ! isset( Constants::AMIMOTO_PLUGINS[ $plugin_name ] ) ) {
+            return null;
+        }
 		return Constants::AMIMOTO_PLUGINS[ $plugin_name ];
 	}
 
