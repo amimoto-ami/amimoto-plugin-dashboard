@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: AMIMOTO Plugin Dashboard
- * Version: 0.6.1
+ * Version: 1.0.0
  * Description: Control AMIMOTO helper plugins
  * Author: hideokamoto,amimotoami
  * Author URI: https://amimoto-ami.com
@@ -11,6 +11,7 @@
  *
  * @package Amimoto-dashboard
  */
+
 if ( ! is_admin() ) {
 	return;
 }
@@ -31,8 +32,8 @@ function amimoto_init() {
 }
 add_action( 'plugins_loaded', 'amimoto_init' );
 
-register_activation_hook( __FILE__, 'initializing_amimoto_managed' );
-function initializing_amimoto_managed() {
+register_activation_hook( __FILE__, 'amimoto_initializing_for_managed' );
+function amimoto_initializing_for_managed() {
 	$env = new \AMIMOTO_Dashboard\WP\Environment();
 	if ( ! $env->is_amimoto_managed() ) {
 		return;

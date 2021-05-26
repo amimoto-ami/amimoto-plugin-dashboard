@@ -66,7 +66,9 @@ $redirect_page       = Constants::PANEL_ROOT;
 					</dl>
 				</td>
 			</tr>
-		<?php } ?>
+			<?php
+		}//end foreach
+		?>
 		<?php
 		foreach ( $uninstalled_plugins as $plugin_name => $plugin_url ) {
 			if ( 'Nginx Cache Controller on WP.org' == $plugin_name ) {
@@ -96,6 +98,8 @@ $redirect_page       = Constants::PANEL_ROOT;
 					>Install Now</a>
 				</td>
 			</tr>
-		<?php } ?>
+			<?php
+		}//end foreach
+		?>
 	</tbody>
 </table>

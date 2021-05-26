@@ -5,7 +5,8 @@ use AMIMOTO_Dashboard\Views\Menus;
 use AMIMOTO_Dashboard\Views\Plugin_C3;
 use AMIMOTO_Dashboard\Views\Plugin_NCC;
 if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
+	exit;
+	// Exit if accessed directly
 }
 
 class Views {

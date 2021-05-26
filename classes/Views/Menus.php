@@ -4,7 +4,8 @@ use AMIMOTO_Dashboard\Constants;
 use AMIMOTO_Dashboard\WP\Environment;
 use AMIMOTO_Dashboard\WP\Plugins;
 if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
+	exit;
+	// Exit if accessed directly
 }
 
 class Menus {
@@ -101,7 +102,6 @@ class Menus {
 			}
 		}
 		return $menu;
-
 	}
 
 	public function render_html() {

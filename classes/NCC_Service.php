@@ -2,7 +2,8 @@
 namespace AMIMOTO_Dashboard;
 
 if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
+	exit;
+	// Exit if accessed directly
 }
 use AMIMOTO_Dashboard\WP\Plugins;
 use AMIMOTO_Dashboard\Constants;

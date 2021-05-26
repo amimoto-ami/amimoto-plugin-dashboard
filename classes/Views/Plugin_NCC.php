@@ -4,7 +4,8 @@ use AMIMOTO_Dashboard\Constants;
 use AMIMOTO_Dashboard\WP\Environment;
 use AMIMOTO_Dashboard\WP\Plugins;
 if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
+	exit;
+	// Exit if accessed directly
 }
 
 class Plugin_NCC {

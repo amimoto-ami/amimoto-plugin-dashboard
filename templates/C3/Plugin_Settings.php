@@ -77,7 +77,9 @@ if ( defined( 'AMIMOTO_CDN_ID' ) ) {
 						/>
 					</td>
 				</tr>
-			<?php } ?>
+				<?php
+			}//end if
+			?>
 			<tr>
 				<td colspan='2'>
 					<?php echo wp_nonce_field( Constants::CLOUDFRONT_SETTINGS, Constants::CLOUDFRONT_SETTINGS, true, false ); ?>

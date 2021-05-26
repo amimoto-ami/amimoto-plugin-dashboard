@@ -2,7 +2,8 @@
 namespace AMIMOTO_Dashboard\WP;
 use AMIMOTO_Dashboard\Constants;
 if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
+	exit;
+	// Exit if accessed directly
 }
 
 class Environment {

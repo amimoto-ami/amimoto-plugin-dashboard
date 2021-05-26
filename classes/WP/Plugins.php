@@ -2,7 +2,8 @@
 namespace AMIMOTO_Dashboard\WP;
 
 if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
+	exit;
+	// Exit if accessed directly
 }
 use AMIMOTO_Dashboard\Constants;
 use AMIMOTO_Dashboard\WP\Environment;
@@ -19,9 +20,9 @@ class Plugins {
 	}
 
 	public static function get_plugin_slug_by_name( string $plugin_name ) {
-        if ( ! isset( Constants::AMIMOTO_PLUGINS[ $plugin_name ] ) ) {
-            return null;
-        }
+		if ( ! isset( Constants::AMIMOTO_PLUGINS[ $plugin_name ] ) ) {
+			return null;
+		}
 		return Constants::AMIMOTO_PLUGINS[ $plugin_name ];
 	}
 
