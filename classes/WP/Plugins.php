@@ -237,7 +237,7 @@ class Plugins {
         $text_domain = Constants::text_domain();
 		switch ( $plugin_name ) {
 			case 'Nginx Cache Controller':
-				$description = __( 'Provides some functions of controlling Nginx proxy server cache.', self::$text_domain );
+				$description = __( 'Provides some functions of controlling Nginx proxy server cache.', $text_domain );
 				break;
 
 			case 'C3 Cloudfront Cache Controller':
