@@ -65,12 +65,16 @@ class C3_Service {
         $result;
 		if ( isset( $_POST[ Constants::PLUGIN_ACTIVATION ] ) && $_POST[ Constants::PLUGIN_ACTIVATION ] ) {
             if ( check_admin_referer( Constants::PLUGIN_ACTIVATION, Constants::PLUGIN_ACTIVATION ) ) {
-                $result = $this->activate_c3_plugin();
+                if ( isset( $_POST[ 'plugin_type' ] ) && 'c3-cloudfront-clear-cache' === $_POST[ 'plugin_type' ] ) {
+                    $result = $this->activate_c3_plugin();
+                }
             }
 		}
 		if ( isset( $_POST[ Constants::PLUGIN_DEACTIVATION ] ) && $_POST[ Constants::PLUGIN_DEACTIVATION ] ) {
             if ( check_admin_referer( Constants::PLUGIN_DEACTIVATION, Constants::PLUGIN_DEACTIVATION ) ) {
-                $result = $this->deactivate_c3_plugin();
+                if ( isset( $_POST[ 'plugin_type' ] ) && 'c3-cloudfront-clear-cache' === $_POST[ 'plugin_type' ] ) {
+                    $result = $this->deactivate_c3_plugin();
+                }
             }
 		}
         if ( ! isset( $result ) ) {
