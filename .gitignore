@@ -1,4 +1,9 @@
+vendor/
 .DS_Store
+phpcs.xml
+Thumbs.db
+wp-cli.local.yml
 node_modules/
-.todo
-.idea/
+*.sql
+*.tar.gz
+*.zip
