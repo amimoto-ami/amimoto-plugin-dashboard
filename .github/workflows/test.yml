@@ -19,9 +19,9 @@ jobs:
     strategy:
       matrix:
         include:
-          #- php: 8.0
-          #  wp: trunk
-          #  experimental: true
+          - php: 8.0
+            wp: trunk
+            experimental: true
           - php: 7.4
             wp: trunk
             experimental: true
@@ -73,5 +73,9 @@ jobs:
       
       - name: phpunit tests
         run: |
-          phpunit
-          WP_MULTISITE=1 phpunit
+          phpunit --debug
+          WP_MULTISITE=1 phpunit --debug
+          
+      - name: Check MySQL errors
+        if: ${{ always() }}
+        run: sudo cat /var/log/mysql/error.log || true
