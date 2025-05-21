@@ -50,7 +50,7 @@ class Plugins {
 		$amimoto_plugins  = Constants::AMIMOTO_PLUGINS;
 		$activate_plugins = self::_get_active_plugins();
 		if (
-			array_search( $amimoto_plugins['C3 Cloudfront Cache Controller'], $activate_plugins, true ) > -1
+			array_search( $amimoto_plugins['C3 Cloudfront Cache Controller'], $activate_plugins, true ) !== false
 		) {
 			return true;
 		}
@@ -82,8 +82,8 @@ class Plugins {
 		$amimoto_plugins  = Constants::AMIMOTO_PLUGINS;
 		$activate_plugins = self::_get_active_plugins();
 		if (
-			array_search( $amimoto_plugins['Nginx Cache Controller on GitHub'], $activate_plugins, true ) > -1 ||
-			array_search( $amimoto_plugins['Nginx Cache Controller on WP.org'], $activate_plugins, true ) > -1
+			array_search( $amimoto_plugins['Nginx Cache Controller on GitHub'], $activate_plugins, true ) !== false ||
+			array_search( $amimoto_plugins['Nginx Cache Controller on WP.org'], $activate_plugins, true ) !== false
 		) {
 			return true;
 		}

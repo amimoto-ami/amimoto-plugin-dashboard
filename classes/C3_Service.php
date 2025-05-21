@@ -67,7 +67,7 @@ class C3_Service {
 		if ( empty( $_POST ) ) {
 			return;
 		}
-		$result;
+		$result = null;
 		if ( isset( $_POST[ Constants::PLUGIN_ACTIVATION ] ) && $_POST[ Constants::PLUGIN_ACTIVATION ] ) {
 			if ( check_admin_referer( Constants::PLUGIN_ACTIVATION, Constants::PLUGIN_ACTIVATION ) ) {
 				if ( isset( $_POST['plugin_type'] ) && 'c3-cloudfront-clear-cache' === $_POST['plugin_type'] ) {
@@ -107,7 +107,7 @@ class C3_Service {
 		}
 		$target = 'all';
 		if ( isset( $_POST['invalidation_target'] ) && $_POST['invalidation_target'] ) {
-			$target = $_POST['invalidation_target'];
+			$target = sanitize_text_field( $_POST['invalidation_target'] );
 		}
 		$result = $this->invalidation( $target );
 		if ( ! isset( $result ) ) {
