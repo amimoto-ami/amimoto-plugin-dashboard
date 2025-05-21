@@ -1,4 +1,4 @@
-<?
+<?php
 namespace AMIMOTO_Dashboard\Tests\WP;
 
 use AMIMOTO_Dashboard\WP\Mail_Fixtures;

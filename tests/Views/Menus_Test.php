@@ -1,4 +1,4 @@
-<?
+<?php
 namespace AMIMOTO_Dashboard\Tests\Views;
 
 use AMIMOTO_Dashboard\Views\Menus;

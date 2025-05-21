@@ -1,4 +1,4 @@
-<?
+<?php
 namespace AMIMOTO_Dashboard\Tests;
 
 use AMIMOTO_Dashboard\WP\Environment;
