@@ -61,7 +61,7 @@ class NCC_Service {
 		if ( empty( $_POST ) ) {
 			return;
 		}
-		$result;
+		$result = null;
 		if ( isset( $_POST[ Constants::PLUGIN_ACTIVATION ] ) && $_POST[ Constants::PLUGIN_ACTIVATION ] ) {
 			if ( check_admin_referer( Constants::PLUGIN_ACTIVATION, Constants::PLUGIN_ACTIVATION ) ) {
 				if ( isset( $_POST['plugin_type'] ) && 'nginxchampuru' === $_POST['plugin_type'] ) {
