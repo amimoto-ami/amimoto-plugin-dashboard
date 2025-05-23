@@ -31,13 +31,10 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '22'
+          cache: 'yarn'
           
       - name: Ensure Yarn is installed
         run: |
-          if ! command -v yarn &> /dev/null; then
-            echo "Yarn not found, installing..."
-            npm install -g yarn
-          fi
           yarn --version
           
       - name: Install plugin dependencies for PHP 7.4
@@ -53,12 +50,6 @@ jobs:
         run: |
           composer install --optimize-autoloader --prefer-dist
           
-      - name: Start WP-ENV
-        uses: godaddy-wordpress/setup-wp-env@v1
-        with:
-          core: 'WordPress/WordPress#${{ matrix.wp }}'
-          phpVersion: '${{ matrix.php }}'
-        
       - name: Cache Composer packages
         uses: actions/cache@v3
         with:
@@ -66,6 +57,12 @@ jobs:
           key: ${{ runner.os }}-php-${{ matrix.php }}-${{ hashFiles('**/composer.lock') }}
           restore-keys: |
             ${{ runner.os }}-php-${{ matrix.php }}-
+            
+      - name: Start WP-ENV
+        uses: godaddy-wordpress/setup-wp-env@v1
+        with:
+          core: 'WordPress/WordPress#${{ matrix.wp }}'
+          phpVersion: '${{ matrix.php }}'
       
       - name: Run tests with PHPUnit 
         run: |
