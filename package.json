@@ -14,6 +14,11 @@
     "dev": "wp-env start",
     "wpenv": "wp-env"
   },
+  "wp-env": {
+    "plugin-dir": "amimoto-plugin-dashboard",
+    "plugin-name": "amimoto-plugin-dashboard",
+    "welcome-build-command": "npm run dev"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/amimoto-ami/amimoto-plugin-dashboard.git"
