@@ -3,15 +3,15 @@
   "version": "0.0.0",
   "type": "wordpress-plugin",
   "require": {
-    "php": ">=7.4"
+    "php": ">=5.5"
   },
   "require-dev": {
 		"dealerdirect/phpcodesniffer-composer-installer": "*",
 		"phpcompatibility/phpcompatibility-wp": "*",
 		"squizlabs/php_codesniffer": "*",
 		"wp-coding-standards/wpcs": "*",
-		"wp-phpunit/wp-phpunit": "*",
-		"phpunit/phpunit": "^9.5.10",
+		"wp-phpunit/wp-phpunit": "^5.4",
+		"phpunit/phpunit": "^7.5.20",
 		"yoast/phpunit-polyfills": "^1.0.1"
   },
 	"autoload": {

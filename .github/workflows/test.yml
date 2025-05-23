@@ -1,74 +1,72 @@
 name: Test plugin
-on:
-  push
+on: [push, pull_request]
 
 jobs:
-  tag:
+  test:
     name: PHP ${{ matrix.php }} / WP ${{ matrix.wp }} Test
     runs-on: ubuntu-latest
-    services:
-      mysql:
-        image: mysql:5.7
-        env:
-          MYSQL_ALLOW_EMPTY_PASSWORD: true
-          MYSQL_ROOT_PASSWORD: root
-          MYSQL_DATABASE: wordpress_test
-        ports:
-          - 3306:3306
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
     strategy:
       matrix:
         include:
-          #- php: 8.0
-          #  wp: trunk
-          #  experimental: true
           - php: 7.4
-            wp: trunk
-            experimental: true
-          - php: 7.4
-            wp: latest
-          - php: 7.3
-            wp: trunk
-            experimental: true
-          - php: 7.3
-            wp: latest
-          - php: 7.2
-            wp: trunk
-            experimental: true
-          - php: 7.2
-            wp: latest
+            wp: 6.7
+            composer_file: composer-php7.json
+          - php: 8.2
+            wp: 6.7
+            composer_file: composer.json
     steps:
       - name: Checkout
         uses: actions/checkout@master
-      - name: PHP ${{ matrix.php }} / WP ${{ matrix.wp }} Test
+        
+      - name: PHP ${{ matrix.php }} Test
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
-          extensions: mbstring, intl , mysqli
-          ini-values: post_max_size=256M, short_open_tag=On #optional, setup php.ini configuration
-          coverage: xdebug #optional, setup coverage driver
-
-      - name: Check PHP Version
-        run: php -v
-
-      - name: Install phpunit global
+          extensions: mbstring, intl, mysqli
+          ini-values: post_max_size=256M, short_open_tag=On
+          coverage: xdebug
+          tools: composer:v2
+          
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '22'
+          
+      - name: Ensure Yarn is installed
         run: |
-          composer global require "phpunit/phpunit=5.7.*|6.*.*|7.*.*"
-          phpunit --version
-
-      - name: Cache composer packages
-        uses: actions/cache@v2
+          if ! command -v yarn &> /dev/null; then
+            echo "Yarn not found, installing..."
+            npm install -g yarn
+          fi
+          yarn --version
+          
+      - name: Install plugin dependencies for PHP 7.4
+        if: ${{ matrix.php == '7.4' }}
+        run: |
+          if [ -f "${{ matrix.composer_file }}" ]; then
+            cp ${{ matrix.composer_file }} composer.json
+          fi
+          composer update --optimize-autoloader --prefer-dist
+          
+      - name: Install plugin dependencies for PHP 8.2
+        if: ${{ matrix.php == '8.2' }}
+        run: |
+          composer install --optimize-autoloader --prefer-dist
+          
+      - name: Start WP-ENV
+        uses: godaddy-wordpress/setup-wp-env@v1
+        with:
+          core: 'WordPress/WordPress#${{ matrix.wp }}'
+          phpVersion: '${{ matrix.php }}'
+        
+      - name: Cache Composer packages
+        uses: actions/cache@v3
         with:
           path: vendor
-          key: composer-${{ hashFiles('composer.lock') }}
-
-      - name: Composer install
-        run: composer install --optimize-autoloader --prefer-dist
-
-      - name: Install WP Tests
-        run: bash bin/install-wp-tests.sh wordpress_test root root 127.0.0.1 ${{ matrix.wp }} true
+          key: ${{ runner.os }}-php-${{ matrix.php }}-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php-${{ matrix.php }}-
       
-      - name: phpunit tests
+      - name: Run tests with PHPUnit 
         run: |
-          phpunit
-          WP_MULTISITE=1 phpunit
+          yarn test
