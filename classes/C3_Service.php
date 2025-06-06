@@ -53,8 +53,14 @@ class C3_Service {
 		}
 		try {
 			$updated_setting = array();
-			foreach ( $_POST['c3_settings'] as $key => $value ) {
-				$updated_setting[ $key ] = esc_attr( $value );
+			if ( isset( $_POST['c3_settings'] ) && is_array( $_POST['c3_settings'] ) ) {
+				foreach ( $_POST['c3_settings'] as $setting_key => $setting_value ) {
+					$sanitized_key = sanitize_key( $setting_key );
+					$sanitized_value = sanitize_text_field( wp_unslash( $setting_value ) );
+					if ( ! empty( $sanitized_key ) && ! empty( $sanitized_value ) ) {
+						$updated_setting[ $sanitized_key ] = $sanitized_value;
+					}
+				}
 			}
 			update_option( 'c3_settings', $updated_setting );
 			$this->notice->show_admin_success( 'Update CloudFront cache settings', 'Success' );
@@ -70,14 +76,16 @@ class C3_Service {
 		$result = null;
 		if ( isset( $_POST[ Constants::PLUGIN_ACTIVATION ] ) && $_POST[ Constants::PLUGIN_ACTIVATION ] ) {
 			if ( check_admin_referer( Constants::PLUGIN_ACTIVATION, Constants::PLUGIN_ACTIVATION ) ) {
-				if ( isset( $_POST['plugin_type'] ) && 'c3-cloudfront-clear-cache' === $_POST['plugin_type'] ) {
+				$plugin_type = isset( $_POST['plugin_type'] ) ? sanitize_text_field( wp_unslash( $_POST['plugin_type'] ) ) : '';
+				if ( 'c3-cloudfront-clear-cache' === $plugin_type ) {
 					$result = $this->activate_c3_plugin();
 				}
 			}
 		}
 		if ( isset( $_POST[ Constants::PLUGIN_DEACTIVATION ] ) && $_POST[ Constants::PLUGIN_DEACTIVATION ] ) {
 			if ( check_admin_referer( Constants::PLUGIN_DEACTIVATION, Constants::PLUGIN_DEACTIVATION ) ) {
-				if ( isset( $_POST['plugin_type'] ) && 'c3-cloudfront-clear-cache' === $_POST['plugin_type'] ) {
+				$plugin_type = isset( $_POST['plugin_type'] ) ? sanitize_text_field( wp_unslash( $_POST['plugin_type'] ) ) : '';
+				if ( 'c3-cloudfront-clear-cache' === $plugin_type ) {
 					$result = $this->deactivate_c3_plugin();
 				}
 			}
@@ -106,8 +114,8 @@ class C3_Service {
 			return;
 		}
 		$target = 'all';
-		if ( isset( $_POST['invalidation_target'] ) && $_POST['invalidation_target'] ) {
-			$target = sanitize_text_field( $_POST['invalidation_target'] );
+		if ( isset( $_POST['invalidation_target'] ) && ! empty( $_POST['invalidation_target'] ) ) {
+			$target = sanitize_text_field( wp_unslash( $_POST['invalidation_target'] ) );
 		}
 		$result = $this->invalidation( $target );
 		if ( ! isset( $result ) ) {

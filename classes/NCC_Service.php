@@ -64,14 +64,16 @@ class NCC_Service {
 		$result = null;
 		if ( isset( $_POST[ Constants::PLUGIN_ACTIVATION ] ) && $_POST[ Constants::PLUGIN_ACTIVATION ] ) {
 			if ( check_admin_referer( Constants::PLUGIN_ACTIVATION, Constants::PLUGIN_ACTIVATION ) ) {
-				if ( isset( $_POST['plugin_type'] ) && 'nginxchampuru' === $_POST['plugin_type'] ) {
+				$plugin_type = isset( $_POST['plugin_type'] ) ? sanitize_text_field( wp_unslash( $_POST['plugin_type'] ) ) : '';
+				if ( 'nginxchampuru' === $plugin_type ) {
 					$result = $this->activate_ncc_plugin();
 				}
 			}
 		}
 		if ( isset( $_POST[ Constants::PLUGIN_DEACTIVATION ] ) && $_POST[ Constants::PLUGIN_DEACTIVATION ] ) {
 			if ( check_admin_referer( Constants::PLUGIN_DEACTIVATION, Constants::PLUGIN_DEACTIVATION ) ) {
-				if ( isset( $_POST['plugin_type'] ) && 'nginxchampuru' === $_POST['plugin_type'] ) {
+				$plugin_type = isset( $_POST['plugin_type'] ) ? sanitize_text_field( wp_unslash( $_POST['plugin_type'] ) ) : '';
+				if ( 'nginxchampuru' === $plugin_type ) {
 					$result = $this->deactivate_ncc_plugin();
 				}
 			}
