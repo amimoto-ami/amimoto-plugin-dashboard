@@ -43,7 +43,7 @@ class NCC_Service {
 			return;
 		}
 
-		if ( ! check_admin_referer( $key, $key ) ) {
+		if ( ! isset( $_POST[ $key ] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST[ $key ] ) ), $key ) ) {
 			return;
 		}
 		try {
@@ -63,14 +63,16 @@ class NCC_Service {
 		}
 		$result = null;
 		if ( isset( $_POST[ Constants::PLUGIN_ACTIVATION ] ) && $_POST[ Constants::PLUGIN_ACTIVATION ] ) {
-			if ( check_admin_referer( Constants::PLUGIN_ACTIVATION, Constants::PLUGIN_ACTIVATION ) ) {
+			$nonce_field = Constants::PLUGIN_ACTIVATION;
+			if ( isset( $_POST[ $nonce_field ] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST[ $nonce_field ] ) ), $nonce_field ) ) {
 				if ( isset( $_POST['plugin_type'] ) && 'nginxchampuru' === $_POST['plugin_type'] ) {
 					$result = $this->activate_ncc_plugin();
 				}
 			}
 		}
 		if ( isset( $_POST[ Constants::PLUGIN_DEACTIVATION ] ) && $_POST[ Constants::PLUGIN_DEACTIVATION ] ) {
-			if ( check_admin_referer( Constants::PLUGIN_DEACTIVATION, Constants::PLUGIN_DEACTIVATION ) ) {
+			$nonce_field = Constants::PLUGIN_DEACTIVATION;
+			if ( isset( $_POST[ $nonce_field ] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST[ $nonce_field ] ) ), $nonce_field ) ) {
 				if ( isset( $_POST['plugin_type'] ) && 'nginxchampuru' === $_POST['plugin_type'] ) {
 					$result = $this->deactivate_ncc_plugin();
 				}
