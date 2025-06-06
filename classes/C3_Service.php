@@ -154,16 +154,39 @@ class C3_Service {
 	 *
 	 * @access public
 	 * @param (string) $target
-	 * @return boolean | WP_Error
+	 * @return array | WP_Error
 	 */
 	public function invalidation( $target = 'all' ) {
-		$plugin_file_path = Plugins::get_plugin_file_path_by_name( 'C3 Cloudfront Cache Controller' );
-		require_once( $plugin_file_path );
-		$c3     = \CloudFront_Clear_Cache::get_instance();
+		// Check if C3 plugin is activated before attempting to use it
+		if ( ! $this->plugin->is_activated_c3() ) {
+			return new \WP_Error( 
+				'AMIMOTO Dashboard Error', 
+				'C3 Cloudfront Cache Controller Plugin is not activated.' 
+			);
+		}
+
+		// Check if the CloudFront_Clear_Cache class exists (plugin is properly loaded)
+		if ( ! class_exists( '\CloudFront_Clear_Cache' ) ) {
+			return new \WP_Error( 
+				'AMIMOTO Dashboard Error', 
+				'C3 Cloudfront Cache Controller Plugin class not found.' 
+			);
+		}
+
+		// Use the plugin's API safely
+		$c3 = \CloudFront_Clear_Cache::get_instance();
+		if ( ! $c3 || ! method_exists( $c3, 'c3_invalidation' ) ) {
+			return new \WP_Error( 
+				'AMIMOTO Dashboard Error', 
+				'C3 Cloudfront Cache Controller Plugin method not available.' 
+			);
+		}
+
 		$result = $c3->c3_invalidation();
 		if ( is_wp_error( $result ) ) {
 			return $result;
 		}
+		
 		return array(
 			'type'    => 'Success',
 			'message' => 'Invalidation has been succeeded, please wait a few minutes to remove the cache.',

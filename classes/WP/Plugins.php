@@ -29,6 +29,7 @@ class Plugins {
 	/**
 	 * Get the plugin path to control it
 	 *
+	 * @param string $plugin_name The name of the plugin
 	 * @return string | null
 	 * @access public
 	 */
@@ -38,6 +39,12 @@ class Plugins {
 			return null;
 		}
 		$plugin_file_path = self::get_plugin_file_path( $plugin_slug );
+		
+		// Additional security check: ensure the file exists and is readable
+		if ( ! file_exists( $plugin_file_path ) || ! is_readable( $plugin_file_path ) ) {
+			return null;
+		}
+		
 		return $plugin_file_path;
 	}
 	/**
@@ -131,12 +138,13 @@ class Plugins {
 	 * Activate plugin by name.
 	 * Only allowed AMIMOTO plugins
 	 *
+	 * @param string $plugin_name The name of the plugin to activate
 	 * @return void | WP_Error
 	 * @access public
 	 */
 	public static function activate( string $plugin_name ) {
 		$plugin_file_path = self::get_plugin_file_path_by_name( $plugin_name );
-		if ( ! file_exists( $plugin_file_path ) ) {
+		if ( ! $plugin_file_path || ! file_exists( $plugin_file_path ) ) {
 			return new \WP_Error( 'AMIMOTO Dashboard Error', $plugin_name . ' Plugin does not exists' );
 		}
 		\activate_plugins( $plugin_file_path, '', Environment::is_multisite() );
@@ -146,12 +154,13 @@ class Plugins {
 	 * Deactivate plugin by name
 	 * Only allowed AMIMOTO plugins
 	 *
+	 * @param string $plugin_name The name of the plugin to deactivate
 	 * @return void | WP_Error
 	 * @access public
 	 */
 	public static function deactivate( string $plugin_name ) {
 		$plugin_file_path = self::get_plugin_file_path_by_name( $plugin_name );
-		if ( ! file_exists( $plugin_file_path ) ) {
+		if ( ! $plugin_file_path || ! file_exists( $plugin_file_path ) ) {
 			return new \WP_Error( 'AMIMOTO Dashboard Error', $plugin_name . ' Plugin does not exists' );
 		}
 		\deactivate_plugins( $plugin_file_path, '', Environment::is_multisite() );
