@@ -138,4 +138,28 @@ class Plugins_Test extends \WP_UnitTestCase {
             [ 'Nginx Cache Controller on WP.org', ABSPATH . 'wp-content/plugins/nginx-champuru/nginx-champuru.php' ],
         ];
     }
+
+    /**
+     * Test case overview: Verify that activate() method can be called without Fatal Error
+     * Expected behavior: The method should execute without throwing a Fatal Error about static method calls
+     * Test methodology: Call Plugins::activate() with a non-existent plugin and verify it returns WP_Error without fataling
+     */
+    public function test_activate_does_not_fatal_on_static_method_call() {
+        $result = Plugins::activate( 'C3 Cloudfront Cache Controller' );
+        
+        $this->assertInstanceOf( 'WP_Error', $result );
+        $this->assertEquals( 'AMIMOTO Dashboard Error', $result->get_error_code() );
+    }
+
+    /**
+     * Test case overview: Verify that deactivate() method can be called without Fatal Error
+     * Expected behavior: The method should execute without throwing a Fatal Error about static method calls
+     * Test methodology: Call Plugins::deactivate() with a non-existent plugin and verify it returns WP_Error without fataling
+     */
+    public function test_deactivate_does_not_fatal_on_static_method_call() {
+        $result = Plugins::deactivate( 'C3 Cloudfront Cache Controller' );
+        
+        $this->assertInstanceOf( 'WP_Error', $result );
+        $this->assertEquals( 'AMIMOTO Dashboard Error', $result->get_error_code() );
+    }
 }
