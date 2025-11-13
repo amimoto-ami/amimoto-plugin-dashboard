@@ -139,7 +139,8 @@ class Plugins {
 		if ( ! file_exists( $plugin_file_path ) ) {
 			return new \WP_Error( 'AMIMOTO Dashboard Error', $plugin_name . ' Plugin does not exists' );
 		}
-		\activate_plugins( $plugin_file_path, '', Environment::is_multisite() );
+		$env = new Environment();
+		\activate_plugins( $plugin_file_path, '', $env->is_multisite() );
 	}
 
 	/**
@@ -154,7 +155,8 @@ class Plugins {
 		if ( ! file_exists( $plugin_file_path ) ) {
 			return new \WP_Error( 'AMIMOTO Dashboard Error', $plugin_name . ' Plugin does not exists' );
 		}
-		\deactivate_plugins( $plugin_file_path, '', Environment::is_multisite() );
+		$env = new Environment();
+		\deactivate_plugins( $plugin_file_path, '', $env->is_multisite() );
 	}
 
 	public function list_amimoto_plugins() {
