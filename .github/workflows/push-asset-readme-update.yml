@@ -3,6 +3,10 @@ on:
   push:
     branches:
     - master
+    paths:
+    - 'assets/**'
+    - 'readme.txt'
+    - '.wordpress-org/**'
 jobs:
   master:
     name: Push to master
