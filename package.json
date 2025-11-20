@@ -1,7 +1,7 @@
 {
   "devDependencies": {
     "@wordpress/env": "^10.35.0",
-    "inquirer": "^8.2.6",
+    "inquirer": "^13.0.0",
     "semver": "^7.5.0",
     "simple-git": "^3.20.0"
   },
