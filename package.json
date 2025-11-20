@@ -1,6 +1,9 @@
 {
   "devDependencies": {
-    "@wordpress/env": "8.2.0"
+    "@wordpress/env": "8.2.0",
+    "inquirer": "^8.2.6",
+    "semver": "^7.5.0",
+    "simple-git": "^3.20.0"
   },
   "name": "trunk",
   "version": "1.0.0",
@@ -12,7 +15,8 @@
   "scripts": {
     "test": "wp-env run --env-cwd='wp-content/plugins/amimoto-plugin-dashboard' tests-wordpress vendor/bin/phpunit -c phpunit.xml --verbose",
     "dev": "wp-env start",
-    "wpenv": "wp-env"
+    "wpenv": "wp-env",
+    "version": "node scripts/version.js"
   },
   "wp-env": {
     "plugin-dir": "amimoto-plugin-dashboard",
