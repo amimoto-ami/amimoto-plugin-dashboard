@@ -3,9 +3,9 @@ Contributors: hideokamoto,amimotoami
 Donate link: https://amimoto-ami.com
 Tags: admin,amimoto
 Requires at least: 4.4.0
-Tested up to: 6.7.2
+Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -37,6 +37,10 @@ B: Install through FTP or SFTP
 2. Activate the plugin through the 'Plugins' menu in WordPress.
 
 == Changelog ==
+
+= 1.0.3 =
+* Fixed PHP 8.4 deprecation: explicit nullable parameter types in Admin_Notice
+* Declared minimum PHP version (Requires PHP: 7.4)
 
 = 1.0.2 =
 * Version bump from 1.0.1 to 1.0.2
