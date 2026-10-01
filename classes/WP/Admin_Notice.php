@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 class Admin_Notice {
-	public function echo_success_message( string $message, string $code = null ) {
+	public function echo_success_message( string $message, ?string $code = null ) {
 		?>
 		<div class='notice notice-success is-dismissible'>
 			<p>
@@ -22,7 +22,7 @@ class Admin_Notice {
 		</div>
 		<?php
 	}
-	public function show_admin_success( string $message, string $code = null ) {
+	public function show_admin_success( string $message, ?string $code = null ) {
 		add_action(
 			'admin_notices',
 			function () use ( $message, $code ) {

@@ -6,18 +6,32 @@ on:
   pull_request:
 
 jobs:
+  wp-versions:
+    name: Resolve WordPress versions
+    runs-on: ubuntu-latest
+    outputs:
+      versions: ${{ steps.resolve.outputs.versions }}
+    steps:
+      # 最新の WordPress とその 2 つ前のメジャーバージョンまでをテスト対象とする
+      - name: Fetch latest 3 major versions from api.wordpress.org
+        id: resolve
+        run: |
+          versions=$(curl -fsSL https://api.wordpress.org/core/version-check/1.7/ \
+            | jq -c '[.offers[].version | split(".")[0:2] | join(".")]
+              | unique_by(split(".") | map(tonumber))
+              | sort_by(split(".") | map(tonumber)) | reverse | .[0:3]')
+          echo "WordPress versions: ${versions}"
+          echo "versions=${versions}" >> "$GITHUB_OUTPUT"
+
   test:
+    needs: wp-versions
     name: PHP ${{ matrix.php }} / WP ${{ matrix.wp }} Test
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
-        include:
-          - php: 7.4
-            wp: 6.7
-            composer_file: composer-php7.json
-          - php: 8.2
-            wp: 6.7
-            composer_file: composer.json
+        php: ['7.4', '8.2', '8.3', '8.4']
+        wp: ${{ fromJSON(needs.wp-versions.outputs.versions) }}
     steps:
       - name: Checkout
         uses: actions/checkout@master
@@ -47,20 +61,18 @@ jobs:
       - name: Install plugin dependencies for PHP 7.4
         if: ${{ matrix.php == '7.4' }}
         run: |
-          if [ -f "${{ matrix.composer_file }}" ]; then
-            cp ${{ matrix.composer_file }} composer.json
-          fi
+          cp composer-php7.json composer.json
           composer update --optimize-autoloader --prefer-dist
           
-      - name: Install plugin dependencies for PHP 8.2
-        if: ${{ matrix.php == '8.2' }}
+      - name: Install plugin dependencies for PHP 8.x
+        if: ${{ matrix.php != '7.4' }}
         run: |
           composer install --optimize-autoloader --prefer-dist
           
       - name: Start WP-ENV
         uses: godaddy-wordpress/setup-wp-env@v1
         with:
-          core: 'WordPress/WordPress#${{ matrix.wp }}'
+          core: 'WordPress/WordPress#${{ matrix.wp }}-branch'
           phpVersion: '${{ matrix.php }}'
         
       - name: Cache Composer packages

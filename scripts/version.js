@@ -67,17 +67,6 @@ function updatePhpVersion(oldVersion, newVersion) {
   console.log(`✓ amimoto-plugin-dashboard.phpのバージョンを ${oldVersion} → ${newVersion} に更新しました`);
 }
 
-// git tagを作成
-async function createGitTag(version) {
-  try {
-    await git.addTag(`v${version}`);
-    console.log(`✓ git tag v${version} を作成しました`);
-  } catch (error) {
-    console.error(`✗ git tagの作成に失敗しました: ${error.message}`);
-    throw error;
-  }
-}
-
 // git logからCHANGELOG.mdを生成
 async function generateChangelog(newVersion) {
   try {
@@ -208,9 +197,6 @@ async function main() {
     updateReadmeVersion(currentVersion, newVersion);
     updatePhpVersion(currentVersion, newVersion);
     
-    // git tagを作成
-    await createGitTag(newVersion);
-    
     // CHANGELOG.mdを生成
     await generateChangelog(newVersion);
     
@@ -218,7 +204,9 @@ async function main() {
     console.log(`\n次のステップ:`);
     console.log(`  1. git add .`);
     console.log(`  2. git commit -m "chore: bump version to ${newVersion}"`);
-    console.log(`  3. git push origin main --tags`);
+    console.log(`  3. PR を作成して master へマージ`);
+    console.log(`  4. マージ後の master で git tag v${newVersion} && git push origin v${newVersion}`);
+    console.log(`     (タグはバージョン更新コミットを含む master に打つこと。先に打つと古い版数のまま配布される)`);
     
   } catch (error) {
     console.error(`\n✗ エラーが発生しました: ${error.message}`);
